@@ -39,7 +39,7 @@ import re
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime as email_parse_date
 from pathlib import Path
 from typing import Optional
@@ -50,6 +50,7 @@ import requests
 import yaml
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
+from icalendar import Calendar, Event as ICalEvent, vText
 from openai import OpenAI
 
 load_dotenv()
@@ -707,23 +708,97 @@ class EventRadarAgent:
 
         logger.info(f"[Phase 6] 完成: 新建={created} 更新={updated} 失败={failed}")
 
-    # ── Phase 7: .ics 日历生成 [STUB] ────────────────────
+    # ── Phase 7: .ics 日历生成 ───────────────────────────
 
-    def _generate_ics(self) -> None:
-        """
-        TODO: 密钥/托管平台就绪后实现。
-        所需依赖: icalendar（pip install icalendar）
-        逻辑:
-          1. 遍历 self._events，按 start_date/end_date/timezone 生成 VEVENT
-          2. 写入 OUTPUT_ICS_PATH
-          3. 上传至云端（S3/OSS/GitHub Pages）实现高管端订阅链接
-        """
-        # TODO: [credential] 云端托管 bucket/access key
+    def _generate_ics(self) -> Optional[str]:
+        """生成 ICS 日历文件，返回文件路径。失败或空事件时返回 None。"""
         if not self._events:
-            return
-        logger.info(f"[Phase 7] .ics 生成: {len(self._events)} 个事件 → {OUTPUT_ICS_PATH}")
-        # --- 实现占位 ---
-        logger.info("[Phase 7] .ics 生成模块待实现，跳过。")
+            return None
+
+        cal = Calendar()
+        cal.add("prodid", "-//ESG Event Radar//esg_event_radar//EN")
+        cal.add("version", "2.0")
+        cal.add("calscale", "GREGORIAN")
+        cal.add("method", "PUBLISH")
+        cal.add("x-wr-calname", "ESG 全球会议日历")
+        cal.add("x-wr-caldesc", "自动扫描全球 ESG 与可持续发展会议，高管参会决策参考")
+
+        added = 0
+        for ev in self._events:
+            try:
+                ical = ICalEvent()
+                ical.add("summary", ev.name)
+                ical.add("uid", f"{ev.event_id}@esg-event-radar")
+
+                # 解析日期
+                dt_start = self._parse_ics_date(ev.start_date)
+                dt_end = self._parse_ics_date(ev.end_date) if ev.end_date != ev.start_date else dt_start
+
+                if dt_start is None:
+                    # 日期未知的活动仍写入，但不设 DTSTART
+                    ical.add("description", self._build_ics_description(ev))
+                    cal.add_component(ical)
+                    added += 1
+                    continue
+
+                ical.add("dtstart", dt_start)
+                ical.add("dtend", dt_end)
+
+                # 地点
+                location_parts = [p for p in [ev.city, ev.country, ev.venue] if p]
+                if location_parts:
+                    ical.add("location", ", ".join(location_parts))
+
+                # 描述
+                ical.add("description", self._build_ics_description(ev))
+
+                # 报名链接
+                if ev.registration_url and "news.google.com" not in ev.registration_url:
+                    ical.add("url", ev.registration_url)
+
+                # 分类
+                if ev.topics:
+                    ical.add("categories", [t[:50] for t in ev.topics[:5]])
+
+                cal.add_component(ical)
+                added += 1
+            except Exception as exc:
+                logger.debug(f"[Phase 7] 事件 {ev.name[:40]} 写入失败: {exc}")
+
+        try:
+            OUTPUT_ICS_PATH.write_bytes(cal.to_ical())
+            logger.info(f"[Phase 7] .ics 生成完成: {added}/{len(self._events)} 个事件 → {OUTPUT_ICS_PATH}")
+            return str(OUTPUT_ICS_PATH)
+        except Exception as exc:
+            logger.error(f"[Phase 7] .ics 写入失败: {exc}")
+            return None
+
+    @staticmethod
+    def _parse_ics_date(date_str: str) -> Optional[date]:
+        """将 YYYY-MM-DD 字符串转为 date 对象。"""
+        if not date_str or date_str in ("unknown", ""):
+            return None
+        try:
+            return date.fromisoformat(date_str)
+        except (ValueError, TypeError):
+            return None
+
+    @staticmethod
+    def _build_ics_description(ev: "EventItem") -> str:
+        parts = [
+            f"主办方: {ev.organizer}",
+            f"形式: {ev.format}",
+        ]
+        if ev.fee_tier:
+            parts.append(f"费用: {ev.fee_tier}")
+        if ev.agenda_highlights:
+            parts.append(f"议程: {ev.agenda_highlights}")
+        parts.append(f"高管价值: {'★' * ev.exec_value_score}{'☆' * (5 - ev.exec_value_score)}")
+        parts.append(f"评分依据: {ev.exec_value_rationale}")
+        if ev.registration_url:
+            parts.append(f"报名: {ev.registration_url}")
+        parts.append(f"来源: {ev.source_url}")
+        return "\n".join(parts)
 
     # ── Phase 8: 钉钉精简卡片推送 ────────────────────────
 

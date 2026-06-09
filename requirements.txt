@@ -18,8 +18,8 @@ openai>=1.65.4
 # 数据模型
 pydantic>=2.10.6
 
-# 日历生成（Phase 7 就绪后启用）
-# icalendar>=5.0.0
+# 日历生成（Phase 7）
+icalendar>=5.0.0
 
 # Notion REST API（Phase 6 — raw requests，无需 SDK）
 # notion-client>=2.2.0  # 已改用 requests 直连，此行保留备注
