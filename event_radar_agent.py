@@ -224,7 +224,7 @@ class NewsFetcher:
 class ContentExtractor:
     """向原始 URL 发送 GET，提取正文前 300 字纯文本（会议页正文比新闻短，适当放宽）。"""
 
-    TIMEOUT = 5
+    TIMEOUT = 3  # 降低超时：正文提取非关键路径，快速失败即可
     MAX_CHARS = 300
     _SEMANTIC_RE = re.compile(r"article|content|post|story|body|main|event", re.I)
 
@@ -319,7 +319,7 @@ class EventRadarAgent:
         self._sources = [s for s in data.get("sources", []) if s.get("active", True)]
         logger.info(f"[源清单] 已加载 {len(self._sources)} 条活跃源")
 
-    # ── Phase 1: 垂直 RSS 抓取 ────────────────────────────
+    # ── Phase 1: 垂直 RSS 抓取（并发） ─────────────────────
 
     def _fetch_all_sources(self) -> None:
         from datetime import timedelta
@@ -329,48 +329,68 @@ class EventRadarAgent:
         active = [s for s in self._sources if s.get("active", True)]
         rss_sources = [s for s in active if s.get("type") in ("rss", "google_news")]
 
-        for idx, src in enumerate(rss_sources, 1):
+        logger.info(f"[Phase 1] 并发抓取 {len(rss_sources)} 个源（max_workers=8）")
+
+        def _fetch_one(idx: int, src: dict) -> tuple[int, int, list[dict]]:
+            """返回 (index, injected_count, raw_items)"""
             src_type = src.get("type", "rss")
             is_google = src_type == "google_news"
             url = src["url"]
-            logger.info(
-                f"[{idx:>2}/{len(rss_sources)}] [{src_type}] {src['name']} ({url[:65]})"
-            )
-
-            # Google News URL 解密在 Phase 1 会大幅拖慢速度（每条 HEAD 请求 ~1s）
-            # 改为：Phase 1 保留原始 Google News URL，仅在输出层（Notion/DingTalk）按需解密
             raw_items = NewsFetcher.fetch(url, resolve_google=False)
-
             cutoff = cutoff_gnews if is_google else cutoff_rss
 
             injected = 0
+            results: list[dict] = []
             for item in raw_items:
-                if item["url"] in self._seen_urls:
-                    continue
-                title_key = item["title"].strip().lower()
-                if title_key in self._seen_titles:
-                    continue
-
-                parsed_date = parse_rss_date(item["date"])
-                if parsed_date and parsed_date < cutoff:
-                    continue
-
-                self._seen_urls.add(item["url"])
-                self._seen_titles.add(title_key)
-                self._raw_items.append({
+                item_with_meta = {
                     **item,
                     "source_org": src.get("org", src["name"]),
                     "source_tags": src.get("tags", []),
                     "source_tier": src.get("tier", 3),
-                    "parsed_date": parsed_date,
-                })
+                    "parsed_date": parse_rss_date(item["date"]),
+                }
+                results.append(item_with_meta)
                 injected += 1
 
-            logger.info(f"  → 注入 {injected} 条（本源共 {len(raw_items)} 条）")
-            # Google News 查询间隔稍长，避免限流
-            time.sleep(1.5 if is_google else 0.8)
+            return (idx, injected, results)
 
-        logger.info(f"[Phase 1] 完成。共收集 {len(self._raw_items)} 条原始条目")
+        with ThreadPoolExecutor(max_workers=8) as pool:
+            futures = {
+                pool.submit(_fetch_one, idx, src): idx
+                for idx, src in enumerate(rss_sources, 1)
+            }
+            # 按提交顺序收集，但合并时需加锁去重
+            import threading
+            lock = threading.Lock()
+            for fut in as_completed(futures):
+                try:
+                    idx, injected, results = fut.result()
+                    with lock:
+                        for item in results:
+                            if item["url"] in self._seen_urls:
+                                continue
+                            title_key = item["title"].strip().lower()
+                            if title_key in self._seen_titles:
+                                continue
+                            # 日期过滤
+                            is_google = any(
+                                s.get("url") == item["url"] or True
+                                for s in rss_sources if s.get("type") == "google_news"
+                            )
+                            cutoff = cutoff_gnews if "news.google.com" in item["url"] else cutoff_rss
+                            if item["parsed_date"] and item["parsed_date"] < cutoff:
+                                continue
+                            self._seen_urls.add(item["url"])
+                            self._seen_titles.add(title_key)
+                            self._raw_items.append(item)
+                    logger.info(
+                        f"  [{idx:>2}/{len(rss_sources)}] {injected} 条 | "
+                        f"{rss_sources[idx-1]['name']}"
+                    )
+                except Exception as exc:
+                    logger.debug(f"  源 {idx} 抓取异常: {exc}")
+
+        logger.info(f"[Phase 1] 完成。共收集 {len(self._raw_items)} 条原始条目 (并发)")
 
     # ── Phase 3: 深度正文提取（并发） ────────────────────────
 
@@ -486,10 +506,10 @@ class EventRadarAgent:
             self._raw_items[i: i + LLM_BATCH_SIZE]
             for i in range(0, len(self._raw_items), LLM_BATCH_SIZE)
         ]
-        logger.info(f"[Phase 4] LLM 提取: {len(self._raw_items)} 条 → {len(batches)} 批")
+        logger.info(f"[Phase 4] LLM 提取: {len(self._raw_items)} 条 → {len(batches)} 批 (并发×3)")
 
-        for batch_idx, batch in enumerate(batches, 1):
-            logger.info(f"  批次 {batch_idx}/{len(batches)} ({len(batch)} 条)...")
+        def _process_batch(batch_idx: int, batch: list[dict]) -> tuple[int, int]:
+            """返回 (batch_idx, extracted_count)"""
             prompt = self._build_extraction_prompt(batch)
             try:
                 resp = self._llm.chat.completions.create(
@@ -499,20 +519,17 @@ class EventRadarAgent:
                     max_tokens=8192,
                 )
                 raw_json = resp.choices[0].message.content.strip()
-                # 剥除可能的 markdown 代码块包装
                 raw_json = re.sub(r"^```(?:json)?\s*", "", raw_json)
                 raw_json = re.sub(r"\s*```$", "", raw_json)
 
                 parsed: list[dict] = json.loads(raw_json)
+                extracted = 0
                 for obj in parsed:
-                    # 用真实算法覆盖 LLM 生成的 event_id
                     obj["event_id"] = make_event_id(
                         obj.get("name", ""), obj.get("start_date", "")
                     )
-                    # 容错：确保必填 int 字段有效
                     score = obj.get("exec_value_score", 3)
                     obj["exec_value_score"] = max(1, min(5, int(score)))
-                    # 容错：确保必填 str 字段不为 None（LLM 偶尔返回 null）
                     obj["source_url"] = obj.get("source_url") or obj.get("registration_url") or ""
                     obj["source_org"] = obj.get("source_org") or "Unknown"
                     obj["organizer"] = obj.get("organizer") or obj.get("source_org") or "Unknown"
@@ -523,16 +540,36 @@ class EventRadarAgent:
                             logger.debug(f"  低分过滤（{event.exec_value_score}分）: {event.name}")
                             continue
                         self._events.append(event)
+                        extracted += 1
                     except Exception as val_err:
                         logger.warning(f"  EventItem 校验失败（跳过）: {val_err} | {obj.get('name')}")
 
-                logger.info(f"  批次 {batch_idx} 提取 {len(parsed)} 个事件")
+                logger.info(f"  批次 {batch_idx}/{len(batches)} 提取 {extracted} 个事件")
+                return (batch_idx, extracted)
 
             except json.JSONDecodeError as e:
                 logger.error(f"  批次 {batch_idx} JSON 解析失败: {e}")
+                return (batch_idx, 0)
             except Exception as e:
                 logger.error(f"  批次 {batch_idx} LLM 调用失败: {e}")
-                time.sleep(5)
+                time.sleep(3)
+                return (batch_idx, 0)
+
+        import threading
+        merge_lock = threading.Lock()
+        # DeepSeek API 并发有限，3 个并发批次平衡速度与稳定性
+        with ThreadPoolExecutor(max_workers=3) as pool:
+            futures = {
+                pool.submit(_process_batch, i, batch): i
+                for i, batch in enumerate(batches, 1)
+            }
+            total_extracted = 0
+            for fut in as_completed(futures):
+                try:
+                    batch_idx, extracted = fut.result()
+                    total_extracted += extracted
+                except Exception as exc:
+                    logger.error(f"  批次处理异常: {exc}")
 
         logger.info(f"[Phase 4] 完成。共提取 {len(self._events)} 个有效事件")
 
@@ -664,17 +701,17 @@ class EventRadarAgent:
             return
 
         headers = self._notion_headers(notion_token)
-        logger.info(f"[Phase 6] Notion Upsert: {len(self._events)} 个事件")
+        logger.info(f"[Phase 6] Notion Upsert: {len(self._events)} 个事件 (并发×5)")
 
         # 步骤 1: 确保数据库字段完整
         if not self._ensure_notion_db_properties(notion_db_id, headers):
             logger.error("[Phase 6] 数据库初始化失败，跳过 Upsert。")
             return
 
-        created = updated = failed = 0
-        for ev in self._events:
+        def _upsert_one(ev: EventItem) -> str:
+            """返回 "created" / "updated" / "failed" """
             try:
-                # 步骤 2: 按 event_id 查重
+                # 查重
                 qr = requests.post(
                     f"{self._NOTION_API}/databases/{notion_db_id}/query",
                     headers=headers,
@@ -685,7 +722,6 @@ class EventRadarAgent:
                 page_props = self._build_notion_page_props(ev)
 
                 if results:
-                    # 步骤 3a: 更新已有页面
                     page_id = results[0]["id"]
                     requests.patch(
                         f"{self._NOTION_API}/pages/{page_id}",
@@ -693,22 +729,36 @@ class EventRadarAgent:
                         json={"properties": page_props},
                         timeout=15,
                     )
-                    updated += 1
                     logger.debug(f"  更新: {ev.name}")
+                    return "updated"
                 else:
-                    # 步骤 3b: 新建页面
                     requests.post(
                         f"{self._NOTION_API}/pages",
                         headers=headers,
                         json={"parent": {"database_id": notion_db_id}, "properties": page_props},
                         timeout=15,
                     )
-                    created += 1
                     logger.debug(f"  新建: {ev.name}")
-
+                    return "created"
             except Exception as exc:
                 logger.warning(f"  Upsert 失败 [{ev.name[:40]}]: {exc}")
-                failed += 1
+                return "failed"
+
+        created = updated = failed = 0
+        with ThreadPoolExecutor(max_workers=5) as pool:
+            futures = {pool.submit(_upsert_one, ev): ev for ev in self._events}
+            for fut in as_completed(futures):
+                try:
+                    result = fut.result()
+                    if result == "created":
+                        created += 1
+                    elif result == "updated":
+                        updated += 1
+                    else:
+                        failed += 1
+                except Exception as exc:
+                    failed += 1
+                    logger.debug(f"  Upsert 线程异常: {exc}")
 
         logger.info(f"[Phase 6] 完成: 新建={created} 更新={updated} 失败={failed}")
 
