@@ -395,35 +395,59 @@ class EventRadarAgent:
     # ── Phase 3: 深度正文提取（并发） ────────────────────────
 
     def _enrich_content(self) -> None:
-        logger.info(f"[Phase 3] 正文并发提取: {len(self._raw_items)} 条（max_workers=10）")
+        # 区分：Google News 条目正文提取必然失败，直接走回退逻辑
+        gnews_items = [it for it in self._raw_items if "news.google.com" in it.get("url", "")]
+        real_items  = [it for it in self._raw_items if "news.google.com" not in it.get("url", "")]
 
+        logger.info(
+            f"[Phase 3] 正文提取: {len(real_items)} 条原文 + "
+            f"{len(gnews_items)} 条 GNews（直接回退）"
+        )
+
+        # GNews 条目直接应用回退（无需网络请求）
+        self._apply_body_fallback(gnews_items)
+
+        if not real_items:
+            return
+
+        # 原文条目并发 GET
         def _fetch_one(item: dict) -> None:
             body = ContentExtractor.extract(item["url"])
             if body:
                 item["body"] = body
-                return
-            # ── 回退策略 ──
-            # Google News RSS 的 description 只含链接，正文提取必然失败。
-            # 层次回退: 正文 → RSS description → source_href 域名线索
-            rss_desc = item.get("description", "")
-            if rss_desc and len(rss_desc) > 30:
-                item["body"] = f"[来源:RSS摘要] {rss_desc}"[:300]
-            elif item.get("source_href"):
-                item["body"] = f"[来源站点: {item['source_href']}] 标题: {item.get('title', '')}"[:300]
             else:
-                item["body"] = item.get("title", "")[:300]
+                item["body"] = ""  # 标记为空，后续统一 fallback
 
         with ThreadPoolExecutor(max_workers=10) as pool:
-            futures = {pool.submit(_fetch_one, it): it for it in self._raw_items}
+            futures = {pool.submit(_fetch_one, it): it for it in real_items}
             done = 0
             for fut in as_completed(futures):
                 done += 1
                 if done % 20 == 0:
-                    logger.info(f"  进度: {done}/{len(self._raw_items)}")
+                    logger.info(f"  进度: {done}/{len(real_items)}")
                 try:
                     fut.result()
                 except Exception as exc:
                     logger.debug(f"  正文提取异常: {exc}")
+
+        # 对原文中提取失败的条目也应用回退
+        empty_items = [it for it in real_items if not it.get("body")]
+        self._apply_body_fallback(empty_items)
+
+    @staticmethod
+    def _apply_body_fallback(items: list[dict]) -> None:
+        """统一回退：RSS description → source_href 域名线索 → 纯标题"""
+        for item in items:
+            rss_desc = item.get("description", "")
+            if rss_desc and len(rss_desc) > 30:
+                item["body"] = f"[来源:RSS摘要] {rss_desc}"[:300]
+            elif item.get("source_href"):
+                item["body"] = (
+                    f"[来源站点: {item['source_href']}] "
+                    f"标题: {item.get('title', '')}"
+                )[:300]
+            else:
+                item["body"] = item.get("title", "")[:300]
 
     # ── Phase 4: LLM 事件结构化提取 ──────────────────────
 
