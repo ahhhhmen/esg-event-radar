@@ -1,0 +1,25 @@
+# ESG Event Radar — Python dependencies
+# 与基座 esg_intelligence_agent.py 保持版本对齐
+
+# 环境变量
+python-dotenv>=1.0.0
+
+# HTTP & RSS
+requests>=2.31.0
+feedparser>=6.0.12
+beautifulsoup4>=4.12.0
+
+# YAML 配置
+PyYAML>=6.0
+
+# LLM（OpenAI-compatible 接口，对接 DeepSeek）
+openai>=1.65.4
+
+# 数据模型
+pydantic>=2.10.6
+
+# 日历生成（Phase 7 就绪后启用）
+# icalendar>=5.0.0
+
+# Notion REST API（Phase 6 — raw requests，无需 SDK）
+# notion-client>=2.2.0  # 已改用 requests 直连，此行保留备注

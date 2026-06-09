@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la /Users/xiefang/Projects/esg_event_radar/ 2>/dev/null && echo \"---SEPARATOR---\" && ls -la /Users/xiefang/Projects/company-research-agent/ 2>/dev/null | head -30)",
+      "Bash(git init *)"
+    ]
+  }
+}

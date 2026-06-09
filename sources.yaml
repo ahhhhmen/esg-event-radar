@@ -1,0 +1,278 @@
+# ESG Event Radar — 垂直域供料源清单 v1
+#
+# 字段说明:
+#   name        : 源名称（日志显示用）
+#   url         : RSS feed URL
+#   type        : rss | google_news
+#                 google_news — Google News RSS 定向搜索流，需 URL 解密还原
+#   tier        : 1=权威倡议组织  2=头部会展运营商  3=行业媒体/智库
+#   region      : global | apac | emea | americas | cn
+#   org         : 来源机构（写入 EventItem.source_org）
+#   tags        : 主题标签（辅助 LLM 提取时提示上下文）
+#   active      : false = 暂时屏蔽
+#
+# v0 → v1 变更说明:
+#   Tier 1/2 倡议组织源（UNGC/WBCSD/CDP/SBTi 等）均无公开事件 RSS，
+#   已移入 html_calendar 待后续爬虫模块，active: false。
+#   替换为三轨混合策略：
+#     轨道 B — 已验证可用的行业媒体 RSS（ESGToday / RI / CarbonBrief / Bloomberg）
+#     轨道 C — Google News 定向查询（覆盖全域会议公告，信号最强）
+# ──────────────────────────────────────────────────────────────────────────────
+
+sources:
+
+  # ══════════════════════════════════════════════════════════
+  # 轨道 B — 行业媒体 RSS（已验证：200 + items > 0）
+  # ══════════════════════════════════════════════════════════
+
+  - name: "ESG Today"
+    url: "https://www.esgtoday.com/feed/"
+    type: rss
+    tier: 3
+    region: global
+    org: "ESG Today"
+    tags: ["ESG-news", "conference-announcement", "sustainability-events"]
+    active: true
+
+  - name: "Responsible Investor"
+    url: "https://www.responsible-investor.com/feed/"
+    type: rss
+    tier: 3
+    region: global
+    org: "Responsible Investor"
+    tags: ["ESG-investing", "PRI", "stewardship", "investor-events"]
+    active: true
+
+  - name: "Carbon Brief"
+    url: "https://www.carbonbrief.org/feed"
+    type: rss
+    tier: 3
+    region: global
+    org: "Carbon Brief"
+    tags: ["climate-policy", "COP", "IPCC", "climate-summit"]
+    active: true
+
+  - name: "Bloomberg Green"
+    url: "https://feeds.bloomberg.com/green/news.rss"
+    type: rss
+    tier: 2
+    region: global
+    org: "Bloomberg Green"
+    tags: ["green-finance", "ESG", "climate", "sustainability-summit"]
+    active: true
+
+  # ══════════════════════════════════════════════════════════
+  # 轨道 C — Google News 定向查询（覆盖全域会议公告）
+  # 参数: hl=en-US  gl=US  ceid=US:en
+  # 搜索窗口由 FETCH_WINDOW_DAYS 控制（默认 8 天）
+  # ══════════════════════════════════════════════════════════
+
+  # -- 轨道 C: Google News 精准查询（高管级活动定向）--
+  # 原则: 避免通配词（"sustainability conference" 返回地方性小会）
+  #       锚定 Tier1 倡议组织名 + 已知头部峰会品牌 + CEO/CSO 角色词
+
+  - name: "GNews: Tier1 Org Events"
+    url: "https://news.google.com/rss/search?q=%28WBCSD+OR+%22UN+Global+Compact%22+OR+SBTi+OR+CDP+OR+GRI+OR+%22Climate+Group%22+OR+BSR%29+%28summit+OR+forum+OR+conference%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "Google News"
+    tags: ["WBCSD", "UNGC", "SBTi", "CDP", "GRI", "Tier1-orgs"]
+    active: true
+
+  - name: "GNews: Known ESG Summit Brands"
+    url: "https://news.google.com/rss/search?q=%22GreenBiz+Forum%22+OR+%22BSR+Conference%22+OR+%22Sustainable+Brands%22+OR+%22Net+Zero+Festival%22+OR+%22Reuters+Events+Sustainability%22+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "Google News"
+    tags: ["GreenBiz", "BSR", "Sustainable-Brands", "Reuters-Events-Sustainability", "Net-Zero-Festival"]
+    active: true
+
+  - name: "GNews: Climate Week & COP 2026"
+    url: "https://news.google.com/rss/search?q=%22Climate+Week+NYC%22+OR+%22COP31%22+OR+%22COP+2026%22+OR+%22Davos+2026%22&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "Google News"
+    tags: ["Climate-Week-NYC", "COP31", "Davos", "WEF"]
+    active: true
+
+  - name: "GNews: ESG Investor Summit 2026"
+    url: "https://news.google.com/rss/search?q=%22ESG%22+%28summit+OR+forum%29+2026+%28CEO+OR+CSO+OR+%22chief+sustainability%22+OR+investor%29+speakers&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "Google News"
+    tags: ["ESG-summit", "CEO", "CSO", "investor", "speakers"]
+    active: true
+
+  - name: "GNews: Net Zero & Climate Finance 2026"
+    url: "https://news.google.com/rss/search?q=%22net+zero%22+%28summit+OR+conference+OR+forum%29+2026+%28CEO+OR+keynote+OR+registration%29&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "Google News"
+    tags: ["net-zero", "keynote", "CEO", "registration"]
+    active: true
+
+  - name: "GNews: Sustainable Finance Leaders 2026"
+    url: "https://news.google.com/rss/search?q=%22sustainable+finance%22+OR+%22green+finance%22+%28summit+OR+forum%29+2026+%28PRI+OR+TCFD+OR+ISSB+OR+registration%29&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "Google News"
+    tags: ["sustainable-finance", "PRI", "TCFD", "ISSB", "green-bonds"]
+    active: true
+
+  # ── 行业垂直轨：金属/矿业 ESG（补充雅加达镍会议、LME 伦敦等行业活动）──
+
+  - name: "GNews: Metals Mining ESG Events"
+    url: "https://news.google.com/rss/search?q=%28nickel+OR+cobalt+OR+lithium+OR+%22battery+metals%22+OR+copper%29+%28ESG+OR+sustainability+OR+%22responsible+sourcing%22+OR+%22responsible+mining%22%29+%28conference+OR+summit+OR+forum+OR+meeting%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "Google News"
+    tags: ["nickel", "cobalt", "battery-metals", "responsible-mining", "ESG"]
+    active: true
+
+  - name: "GNews: LME & Metal Exchange Events"
+    url: "https://news.google.com/rss/search?q=%22LME+Week%22+OR+%22LME+sustainability%22+OR+%22London+Metal+Exchange%22+%28sustainability+OR+ESG+OR+conference+OR+summit%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: emea
+    org: "Google News"
+    tags: ["LME", "LME-Week", "London-Metal-Exchange", "metals-sustainability"]
+    active: true
+
+  - name: "GNews: APAC Mining Sustainability"
+    url: "https://news.google.com/rss/search?q=%28Indonesia+OR+Jakarta+OR+Philippines+OR+%22Southeast+Asia%22%29+%28mining+OR+nickel+OR+cobalt%29+%28ESG+OR+sustainability+OR+%22responsible+sourcing%22%29+%28conference+OR+summit+OR+forum%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: apac
+    org: "Google News"
+    tags: ["Indonesia", "Jakarta", "nickel", "Southeast-Asia", "responsible-sourcing"]
+    active: true
+
+  - name: "GNews: RBA IRMA Nickel Institute Events"
+    url: "https://news.google.com/rss/search?q=%22Nickel+Institute%22+OR+IRMA+OR+%22Initiative+for+Responsible+Mining%22+OR+%22INSG%22+%28conference+OR+summit+OR+forum+OR+meeting%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "Google News"
+    tags: ["Nickel-Institute", "IRMA", "INSG", "responsible-mining", "RBA"]
+    active: true
+
+  - name: "GNews: LME Fastmarkets Metal Events"
+    url: "https://news.google.com/rss/search?q=%22LME+Week%22+OR+%22Fastmarkets%22+OR+%22Metal+Bulletin%22+%28sustainability+OR+ESG+OR+conference+OR+summit%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: emea
+    org: "Google News"
+    tags: ["LME-Week", "Fastmarkets", "Metal-Bulletin", "metals-sustainability"]
+    active: true
+
+  - name: "GNews: Indonesia Nickel ESG (Bahasa)"
+    url: "https://news.google.com/rss/search?q=nikel+%28ESG+OR+keberlanjutan+OR+lingkungan%29+%28konferensi+OR+forum+OR+pertemuan%29+2026&hl=id&gl=ID&ceid=ID:id"
+    type: google_news
+    tier: 2
+    region: apac
+    org: "Google News"
+    tags: ["nickel", "Indonesia", "ESG", "sustainability", "Bahasa-Indonesia"]
+    active: true
+
+  - name: "GNews: Indonesia Mining Summit (English)"
+    url: "https://news.google.com/rss/search?q=%22Indonesia%22+%28nickel+OR+%22battery+supply+chain%22%29+%22ESG%22+%28summit+OR+conference+OR+forum%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: apac
+    org: "Google News"
+    tags: ["Indonesia", "nickel", "battery-supply-chain", "ESG-summit"]
+    active: true
+
+  # ── 印尼矿业垂直 RSS（继承自基座 esg_intelligence_agent.py）──
+  - name: "Tambang.co.id — 印尼矿业动态"
+    url: "https://www.tambang.co.id/feed/"
+    type: rss
+    tier: 2
+    region: apac
+    org: "Tambang.co.id"
+    tags: ["nickel", "cobalt", "Indonesia", "mining", "Bahasa-Indonesia"]
+    active: true
+
+  # ══════════════════════════════════════════════════════════
+  # 待实现 — html_calendar 爬虫模块（active: false）
+  # 以下 Tier 1 组织无公开 RSS，需单独开发页面解析器
+  # ══════════════════════════════════════════════════════════
+
+  - name: "UNGC — Events Page"
+    url: "https://www.unglobalcompact.org/take-action/events"
+    type: html_calendar
+    tier: 1
+    region: global
+    org: "UN Global Compact"
+    tags: ["SDGs", "CEO-commitment", "Leaders-Summit"]
+    active: false
+
+  - name: "WBCSD — Events Page"
+    url: "https://www.wbcsd.org/Overview/Events"
+    type: html_calendar
+    tier: 1
+    region: global
+    org: "WBCSD"
+    tags: ["circular-economy", "net-zero", "C-suite"]
+    active: false
+
+  - name: "CDP — Events Page"
+    url: "https://www.cdp.net/en/events"
+    type: html_calendar
+    tier: 1
+    region: global
+    org: "CDP"
+    tags: ["climate-disclosure", "supply-chain"]
+    active: false
+
+  - name: "SBTi — Events"
+    url: "https://sciencebasedtargets.org/events"
+    type: html_calendar
+    tier: 1
+    region: global
+    org: "SBTi"
+    tags: ["net-zero", "1.5C", "carbon-targets"]
+    active: false
+
+  - name: "GRI — Events"
+    url: "https://www.globalreporting.org/news-and-events/events/"
+    type: html_calendar
+    tier: 1
+    region: global
+    org: "GRI"
+    tags: ["sustainability-reporting", "GRI-standards"]
+    active: false
+
+  - name: "RBA — Events"
+    url: "https://www.responsiblebusiness.org/events/"
+    type: html_calendar
+    tier: 1
+    region: global
+    org: "RBA"
+    tags: ["responsible-sourcing", "supply-chain-audit"]
+    active: false
+
+  - name: "BSR Conference"
+    url: "https://www.bsr.org/en/events"
+    type: html_calendar
+    tier: 1
+    region: global
+    org: "BSR"
+    tags: ["human-rights", "supply-chain", "CEO-network"]
+    active: false
+
+  - name: "PRI — Events"
+    url: "https://www.unpri.org/events"
+    type: html_calendar
+    tier: 1
+    region: global
+    org: "PRI"
+    tags: ["responsible-investment", "ESG-integration"]
+    active: false
