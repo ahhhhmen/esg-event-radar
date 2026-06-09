@@ -512,6 +512,10 @@ class EventRadarAgent:
                     # 容错：确保必填 int 字段有效
                     score = obj.get("exec_value_score", 3)
                     obj["exec_value_score"] = max(1, min(5, int(score)))
+                    # 容错：确保必填 str 字段不为 None（LLM 偶尔返回 null）
+                    obj["source_url"] = obj.get("source_url") or obj.get("registration_url") or ""
+                    obj["source_org"] = obj.get("source_org") or "Unknown"
+                    obj["organizer"] = obj.get("organizer") or obj.get("source_org") or "Unknown"
 
                     try:
                         event = EventItem(**obj)

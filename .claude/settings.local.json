@@ -19,7 +19,8 @@
       "Bash(git commit -m 'fix: NewsFetcher v2 — 改用 feedparser 解析，捕获 source.href 域名线索；改进 Google News 正文回退策略 *)",
       "Bash(git commit -m 'ci: GitHub Actions 每周一早8点自动运行 ESG Event Radar *)",
       "Bash(./venv/bin/pip install *)",
-      "Bash(git commit -m 'feat: Phase 7 .ics 日历生成实现 *)"
+      "Bash(git commit -m 'feat: Phase 7 .ics 日历生成实现 *)",
+      "Bash(git commit -m 'ci: Workflow 自动回传 .ics 日历文件到仓库；解除 .gitignore 对 .ics 的排除 *)"
     ]
   }
 }

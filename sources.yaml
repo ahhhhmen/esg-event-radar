@@ -201,8 +201,151 @@ sources:
     active: true
 
   # ══════════════════════════════════════════════════════════
+  # 轨道 C+ — 关键 NGO/INGO/协会 GNews 定向（替代 html_calendar 爬虫）
+  # 原则: 每个组织一条精准查询，锚定 (summit|conference|forum|event) + 2026
+  # ══════════════════════════════════════════════════════════
+
+  - name: "GNews: UNGC Leaders Summit & Events"
+    url: "https://news.google.com/rss/search?q=%22UN+Global+Compact%22+%28%22Leaders+Summit%22+OR+conference+OR+forum+OR+event%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "UN Global Compact"
+    tags: ["UNGC", "Leaders-Summit", "SDGs", "CEO"]
+    active: true
+
+  - name: "GNews: WBCSD Council Meeting & Events"
+    url: "https://news.google.com/rss/search?q=WBCSD+%28%22Council+Meeting%22+OR+%22annual+meeting%22+OR+conference+OR+forum+OR+event%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "WBCSD"
+    tags: ["WBCSD", "net-zero", "circular-economy", "C-suite"]
+    active: true
+
+  - name: "GNews: CDP Awards & Disclosure Events"
+    url: "https://news.google.com/rss/search?q=CDP+%28awards+OR+%22disclosure%22+OR+conference+OR+forum+OR+event%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "CDP"
+    tags: ["CDP", "climate-disclosure", "supply-chain", "ESG-data"]
+    active: true
+
+  - name: "GNews: SBTi Events & Target Setting"
+    url: "https://news.google.com/rss/search?q=SBTi+%28conference+OR+forum+OR+event+OR+webinar+OR+%22science-based+targets%22%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "SBTi"
+    tags: ["SBTi", "net-zero", "1.5C", "carbon-targets"]
+    active: true
+
+  - name: "GNews: GRI Standards & Sustainability Reporting Events"
+    url: "https://news.google.com/rss/search?q=GRI+%28conference+OR+forum+OR+summit+OR+event+OR+%22sustainability+reporting%22%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "GRI"
+    tags: ["GRI", "sustainability-reporting", "ESG-standards"]
+    active: true
+
+  - name: "GNews: PRI in Person & Responsible Investment"
+    url: "https://news.google.com/rss/search?q=%22PRI+in+Person%22+OR+%22Principles+for+Responsible+Investment%22+%28conference+OR+forum+OR+event+OR+summit%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "PRI"
+    tags: ["PRI", "responsible-investment", "ESG-integration", "investor"]
+    active: true
+
+  - name: "GNews: BSR Conference & Events"
+    url: "https://news.google.com/rss/search?q=BSR+%28conference+OR+forum+OR+summit+OR+event%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "BSR"
+    tags: ["BSR", "human-rights", "supply-chain", "CEO-network"]
+    active: true
+
+  - name: "GNews: RBA Responsible Business Events"
+    url: "https://news.google.com/rss/search?q=%22Responsible+Business+Alliance%22+OR+RBA+%28conference+OR+forum+OR+summit+OR+event%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "RBA"
+    tags: ["RBA", "responsible-sourcing", "supply-chain-audit"]
+    active: true
+
+  # ── 环境 NGO/INGO（新增）──
+
+  - name: "GNews: WWF Conservation Events"
+    url: "https://news.google.com/rss/search?q=WWF+%28conference+OR+forum+OR+summit+OR+event%29+2026+sustainability&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "WWF"
+    tags: ["WWF", "conservation", "biodiversity", "nature-positive"]
+    active: true
+
+  - name: "GNews: IUCN Congress & Conservation Events"
+    url: "https://news.google.com/rss/search?q=IUCN+%28congress+OR+conference+OR+forum+OR+summit+OR+event%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "IUCN"
+    tags: ["IUCN", "biodiversity", "conservation", "nature-based-solutions"]
+    active: true
+
+  - name: "GNews: Ceres Events & Investor Summit"
+    url: "https://news.google.com/rss/search?q=Ceres+%28conference+OR+forum+OR+summit+OR+event+OR+%22investor%22%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "Ceres"
+    tags: ["Ceres", "investor", "climate-risk", "water-security"]
+    active: true
+
+  - name: "GNews: WRI World Resources Institute Events"
+    url: "https://news.google.com/rss/search?q=%22World+Resources+Institute%22+OR+WRI+%28conference+OR+forum+OR+summit+OR+event%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "WRI"
+    tags: ["WRI", "climate", "energy", "cities", "governance"]
+    active: true
+
+  - name: "GNews: TNC Nature Conservancy Events"
+    url: "https://news.google.com/rss/search?q=%22The+Nature+Conservancy%22+OR+TNC+%28conference+OR+forum+OR+summit+OR+event%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "The Nature Conservancy"
+    tags: ["TNC", "conservation", "biodiversity", "nature"]
+    active: true
+
+  - name: "GNews: UNEP UN Environment Programme Events"
+    url: "https://news.google.com/rss/search?q=UNEP+OR+%22UN+Environment+Programme%22+%28conference+OR+forum+OR+summit+OR+event+OR+%22world+environment+day%22%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "UNEP"
+    tags: ["UNEP", "environment", "climate", "biodiversity", "pollution"]
+    active: true
+
+  - name: "GNews: ILO Labour & Just Transition Events"
+    url: "https://news.google.com/rss/search?q=ILO+OR+%22International+Labour+Organization%22+%28conference+OR+forum+OR+summit+OR+%22just+transition%22%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "ILO"
+    tags: ["ILO", "just-transition", "labour-rights", "social-dialogue"]
+    active: true
+
+  # ══════════════════════════════════════════════════════════
   # 待实现 — html_calendar 爬虫模块（active: false）
-  # 以下 Tier 1 组织无公开 RSS，需单独开发页面解析器
+  # 以下 Tier 1 组织无公开 RSS，上述 GNews 定向查询作为替代
+  # html_calendar 爬虫适合需要获取完整活动列表时的升级方案
   # ══════════════════════════════════════════════════════════
 
   - name: "UNGC — Events Page"
