@@ -1,0 +1,40 @@
+name: ESG Event Radar Weekly Scan
+
+# 每周一 UTC 00:00 自动运行（北京时间周一早上 08:00）
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+    # 允许在 GitHub 网页端手动点击运行
+
+jobs:
+  run-event-radar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+    # 1. 检出仓库代码
+    - name: Checkout Repository Code
+      uses: actions/checkout@v4
+
+    # 2. 部署 Python 环境
+    - name: Set up Python 3.13
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+
+    # 3. 安装依赖
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # 4. 执行 ESG 会议雷达扫描
+    - name: Run ESG Event Radar
+      env:
+        DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        DINGTALK_WEBHOOK_RADAR: ${{ secrets.DINGTALK_WEBHOOK_RADAR }}
+      run: |
+        python event_radar_agent.py
