@@ -158,55 +158,61 @@ def make_event_id(name: str, start_date: str) -> str:
 
 
 # ─────────────────────────────────────────────────────────
-# RSS 抓取器（继承自基座，去除 Google News 解密逻辑）
+# RSS 抓取器（v2：feedparser 解析，捕获 source.href 供 Google News 溯源）
 # ─────────────────────────────────────────────────────────
 
 class NewsFetcher:
-    """垂直域 RSS 抓取器。"""
+    """垂直域 RSS 抓取器。v2 改用 feedparser，正确解析 source url 属性。"""
 
     TIMEOUT = 20
-    MAX_RESULTS = 20  # 会议源条目密度低于新闻源，适当放宽
+    MAX_RESULTS = 20
 
     @classmethod
     def fetch(cls, url: str, resolve_google: bool = False) -> list[dict]:
         articles: list[dict] = []
         try:
-            resp = requests.get(url, headers=FETCH_HEADERS, timeout=cls.TIMEOUT)
-            if resp.status_code != 200:
-                logger.debug(f"RSS fetch {resp.status_code}: {url[:80]}")
-                return articles
-            for item_xml in re.findall(
-                r"<item>(.*?)</item>", resp.text, re.DOTALL
-            )[: cls.MAX_RESULTS]:
-                parsed = cls._parse_item(item_xml)
-                if parsed:
-                    parsed["description"] = strip_html(parsed.get("description", ""))
-                    if resolve_google:
-                        parsed["url"] = resolve_news_url(parsed["url"])
-                    articles.append(parsed)
+            feed = feedparser.parse(url)
+            if feed.bozo and not feed.entries:
+                # bozo 为非致命错误（如非标准 XML），有 entries 仍可使用
+                logger.debug(f"RSS parse warning [{url[:60]}]: {feed.bozo_exception}")
+            for entry in feed.entries[: cls.MAX_RESULTS]:
+                parsed = cls._parse_entry(entry)
+                if parsed is None:
+                    continue
+                # 清洗 description（保留 HTML summary 作为 fallback 正文来源）
+                parsed["description"] = strip_html(parsed.get("description", ""))
+                if resolve_google:
+                    parsed["url"] = resolve_news_url(parsed["url"])
+                articles.append(parsed)
         except Exception as exc:
             logger.debug(f"RSS fetch failed [{url[:60]}]: {exc}")
         return articles
 
     @staticmethod
-    def _parse_item(item_xml: str) -> Optional[dict]:
-        t  = re.search(r"<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</title>", item_xml)
-        l  = re.search(r"<link>(.*?)</link>", item_xml)
-        d  = re.search(r"<pubDate>(.*?)</pubDate>", item_xml)
-        de = re.search(r"<description>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</description>", item_xml)
-        s  = re.search(r'<source[^>]*>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</source>', item_xml)
-
-        title = (t.group(1) if t else "").strip()
-        link  = (l.group(1) if l else "").strip()
+    def _parse_entry(entry) -> Optional[dict]:
+        title = (entry.get("title") or "").strip()
+        link = (entry.get("link") or "").strip()
         if not title or not link:
             return None
 
+        # 提取 source 名称与域名（feedparser 正确解析 <source url="..."> 属性）
+        source_href = None
+        source_name = "Unknown"
+        src = entry.get("source")
+        if src:
+            source_name = (src.get("title") or source_name).strip()
+            source_href = (src.get("href") or "").strip()
+
+        # 提取 summary 作为 fallback 正文
+        summary_html = entry.get("summary") or ""
+
         return {
             "title":       title,
-            "date":        (d.group(1) if d else "").strip(),
-            "source":      (s.group(1) if s else "Unknown").strip(),
+            "date":        entry.get("published") or "",
+            "source":      source_name,
+            "source_href": source_href or "",     # 新增：源站域名，供正文提取失败时作为上下文
             "url":         link,
-            "description": (de.group(1) if de else "").strip(),
+            "description": summary_html,           # 保留 HTML summary，后续 strip
         }
 
 
@@ -372,7 +378,19 @@ class EventRadarAgent:
 
         def _fetch_one(item: dict) -> None:
             body = ContentExtractor.extract(item["url"])
-            item["body"] = body if body else item.get("description", "")[:300]
+            if body:
+                item["body"] = body
+                return
+            # ── 回退策略 ──
+            # Google News RSS 的 description 只含链接，正文提取必然失败。
+            # 层次回退: 正文 → RSS description → source_href 域名线索
+            rss_desc = item.get("description", "")
+            if rss_desc and len(rss_desc) > 30:
+                item["body"] = f"[来源:RSS摘要] {rss_desc}"[:300]
+            elif item.get("source_href"):
+                item["body"] = f"[来源站点: {item['source_href']}] 标题: {item.get('title', '')}"[:300]
+            else:
+                item["body"] = item.get("title", "")[:300]
 
         with ThreadPoolExecutor(max_workers=10) as pool:
             futures = {pool.submit(_fetch_one, it): it for it in self._raw_items}
@@ -391,10 +409,10 @@ class EventRadarAgent:
     def _build_extraction_prompt(self, batch: list[dict]) -> str:
         items_text = "\n\n".join(
             f"[{i+1}] 标题: {it['title']}\n"
+            f"    来源域名: {it.get('source_href', '无')}\n"
             f"    来源机构: {it['source_org']}\n"
             f"    发布日期: {it.get('date', '未知')}\n"
-            f"    原始链接: {it['url']}\n"
-            f"    正文摘要: {it.get('body', '')[:200]}"
+            f"    正文摘要: {it.get('body', '')[:250]}"
             for i, it in enumerate(batch)
         )
 
