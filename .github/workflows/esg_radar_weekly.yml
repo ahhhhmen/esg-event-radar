@@ -29,7 +29,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    # 4. 执行 ESG 会议雷达扫描
+    # 4. 执行 ESG 会议雷达扫描（生成 .ics + 写 Notion + 推钉钉）
     - name: Run ESG Event Radar
       env:
         DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
@@ -38,3 +38,12 @@ jobs:
         DINGTALK_WEBHOOK_RADAR: ${{ secrets.DINGTALK_WEBHOOK_RADAR }}
       run: |
         python event_radar_agent.py
+
+    # 5. 将生成的 .ics 日历文件回传至仓库（可按需开启 GitHub Pages 提供订阅）
+    - name: Commit and Push ICS Calendar
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add esg_events.ics
+        git diff-index --quiet HEAD || git commit -m "🤖 每周自动更新: ESG 会议日历 ICS ($(date +'%Y-%m-%d'))"
+        git push

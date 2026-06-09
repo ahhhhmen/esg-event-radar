@@ -1,0 +1,177 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ESG Event Radar//esg_event_radar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALDESC:自动扫描全球 ESG 与可持续发展会议，高管参
+ 会决策参考
+X-WR-CALNAME:ESG 全球会议日历
+BEGIN:VEVENT
+SUMMARY:Bonn Climate Conference 2026
+DTSTART;VALUE=DATE:20260609
+DTEND;VALUE=DATE:20260609
+UID:18a3a4529163@esg-event-radar
+CATEGORIES:climate change,adaptation,fossil fuels,COP31 preparation
+DESCRIPTION:主办方: UNFCCC\n形式: in-person\n费用: unknown\n议程:
+  Mid-year climate talks focusing on adaptation\, fossil fuels\, and delive
+ ry ahead of COP31.\n高管价值: ★★★★☆\n评分依据: D1-UNFCCC
+ 为1级国际组织，D3-与COP31监管议程直接挂钩，D2-各国高
+ 级别官员出席。综合评4分。\n来源: https://www.downtoearth.org
+ .in
+LOCATION:Bonn\, DE
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Summer Davos 2026
+DTSTART;VALUE=DATE:20260609
+DTEND;VALUE=DATE:20260609
+UID:d09bec30ad03@esg-event-radar
+CATEGORIES:global economy,sustainability,technology,geopolitics
+DESCRIPTION:主办方: World Economic Forum\n形式: in-person\n费用: in
+ vite-only\n议程: Annual meeting of global leaders discussing economic\, 
+ environmental\, and social challenges.\n高管价值: ★★★★★\n评
+ 分依据: D1-WEF为顶级国际组织，D2-明确CEO/CSO出席，D5-受
+ 邀制精英网络。综合评5分。\n来源: https://www.weforum.org
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:RIAA 2026
+DTSTART;VALUE=DATE:20260604
+DTEND;VALUE=DATE:20260604
+UID:5dbc68a2e4b1@esg-event-radar
+CATEGORIES:ESG investing,responsible investment,Australian market,US backl
+ ash
+DESCRIPTION:主办方: Responsible Investment Association Australasia\n形
+ 式: in-person\n费用: paid\n议程: Australian investors discuss ESG res
+ ilience amid US political backlash.\n高管价值: ★★★☆☆\n评分
+ 依据: D1-行业专业协会，D2-受众含高级管理层，D3-与ESG监
+ 管趋势关联。综合评3分。\n来源: https://www.netzeroinvestor.ne
+ t
+LOCATION:AU
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Sustainability LIVE at LCAW 2026
+DTSTART;VALUE=DATE:20260609
+DTEND;VALUE=DATE:20260609
+UID:e7ed374eb397@esg-event-radar
+CATEGORIES:Sustainability,Climate Action,ESG,Net Zero
+DESCRIPTION:主办方: Sustainability Magazine\n形式: in-person\n费用:
+  unknown\n议程: Major brands join Sustainability LIVE during London Clim
+ ate Action Week 2026\, featuring keynotes and panels on net-zero strategie
+ s.\n高管价值: ★★★★☆\n评分依据: D1-行业头部媒体主
+ 办，D2-往届含CEO/CSO出席，D3-与LCAW监管议程挂钩，D4-主要
+ 品牌参与。综合评4分。\n来源: https://sustainabilitymag.com
+LOCATION:London\, GB
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Net Zero Conference 2026
+DTSTART;VALUE=DATE:20260609
+DTEND;VALUE=DATE:20260609
+UID:549597625f27@esg-event-radar
+CATEGORIES:Net Zero,Sustainability,Climate,PR & Media
+DESCRIPTION:主办方: Net Zero Conference\n形式: in-person\n费用: unk
+ nown\n议程: Net Zero Conference announces Kathy Berardi as Official PR &
+  Media Partner for 2026\, focusing on net-zero communications.\n高管价
+ 值: ★★★☆☆\n评分依据: D1-专业会议，D2-无CEO硬承诺
+ ，D3-与净零目标相关，D4-行业一般参与。综合评3分。\n
+ 来源: https://www.prweb.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Procurement LIVE: The London Summit 2026
+DTSTART;VALUE=DATE:20260609
+DTEND;VALUE=DATE:20260609
+UID:d93bc1acabd2@esg-event-radar
+CATEGORIES:Procurement,Supply Chain,Sustainability,Digital
+DESCRIPTION:主办方: Supply Chain Digital\n形式: in-person\n费用: un
+ known\n议程: Procurement LIVE London Summit 2026 brings together supply 
+ chain and procurement leaders to discuss digital transformation and sustai
+ nability.\n高管价值: ★★★☆☆\n评分依据: D1-行业媒体主
+ 办，D2-受众含高级管理层，D3-供应链可持续性相关，D4-
+ 行业一般参与。综合评3分。\n来源: https://supplychaindigital.
+ com
+LOCATION:London\, GB
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:SFi Impact Week 2026
+DTSTART;VALUE=DATE:20260609
+DTEND;VALUE=DATE:20260609
+UID:e5ed7083cf5a@esg-event-radar
+CATEGORIES:Impact Investing,Sustainable Finance,Capital Markets,ESG
+DESCRIPTION:主办方: SFi (Sustainable Finance Initiative)\n形式: in-pe
+ rson\n费用: unknown\n议程: Global capital leaders convene in Hong Kong
+  for SFi Impact Week 2026 to accelerate purpose-driven investment and sust
+ ainable finance.\n高管价值: ★★★★☆\n评分依据: D1-专业
+ 可持续金融倡议，D2-全球资本领袖出席，D3-与可持续金
+ 融监管挂钩，D4-头部金融机构参与。综合评4分。\n来源: 
+ https://www.manilatimes.net
+LOCATION:Hong Kong\, HK
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Sustainability LIVE Speakers for London Climate Action Week
+DTSTART;VALUE=DATE:20260609
+DTEND;VALUE=DATE:20260609
+UID:2a46bf524542@esg-event-radar
+CATEGORIES:Sustainability,Climate Action,ESG,London Climate Action Week
+DESCRIPTION:主办方: Sustainability Magazine\n形式: in-person\n费用:
+  unknown\n议程: Sustainability LIVE announces speakers for London Climat
+ e Action Week\, featuring keynotes from major brands on climate strategies
+ .\n高管价值: ★★★★☆\n评分依据: D1-行业头部媒体主
+ 办，D2-往届含CEO/CSO出席，D3-与LCAW监管议程挂钩，D4-主要
+ 品牌参与。综合评4分。\n来源: https://sustainabilitymag.com
+LOCATION:London\, GB
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Fastmarkets Battery and Energy Storage
+DTSTART;VALUE=DATE:20260528
+DTEND;VALUE=DATE:20260528
+UID:2f1fab698710@esg-event-radar
+CATEGORIES:Battery,Energy Storage,Critical Minerals
+DESCRIPTION:主办方: Fastmarkets\n形式: unknown\n费用: unknown\n议
+ 程: Conference covering battery and energy storage market trends\, supply
+  chain\, and pricing.\n高管价值: ★★★☆☆\n评分依据: D1-主
+ 办方为行业头部媒体Fastmarkets，D2-受众含高管但无CEO硬承
+ 诺，D3-与电池供应链监管间接关联。综合评3分。\n来源: 
+ https://www.fastmarkets.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:18th Global Lithium\, Battery and Critical Materials Conference
+DTSTART;VALUE=DATE:20260529
+DTEND;VALUE=DATE:20260529
+UID:d2922fd05e17@esg-event-radar
+CATEGORIES:Lithium,Battery,Critical Materials,National Security,Industrial
+  Policy
+DESCRIPTION:主办方: Fastmarkets\n形式: in-person\n费用: paid\n议
+ 程: Convenes global critical minerals leaders to discuss market shifts am
+ id national security and industrial policy focus.\n高管价值: ★★★
+ ★☆\n评分依据: D1-主办方Fastmarkets为行业头部媒体，D2-
+ 明确提及全球领导者参会，D3-与国家安监政策挂钩，D4-
+ 行业头部企业参与。综合评4分。\n来源: https://batteriesnews
+ .com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Fastmarkets Global Lithium Battery and Critical Materials Conferen
+ ce 2026
+DTSTART;VALUE=DATE:20260527
+DTEND;VALUE=DATE:20260527
+UID:cddc49ddae61@esg-event-radar
+CATEGORIES:Lithium,Battery,Critical Materials
+DESCRIPTION:主办方: Fastmarkets\n形式: in-person\n费用: paid\n议
+ 程: Conference focusing on lithium\, battery\, and critical materials mar
+ ket trends and supply chain dynamics.\n高管价值: ★★★☆☆\n评
+ 分依据: D1-主办方Fastmarkets为行业头部媒体，D2-受众含高
+ 管但无CEO硬承诺，D3-与关键矿产监管间接关联。综合评3
+ 分。\n来源: https://discoveryalert.com.au
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2nd ESG Forum 2026
+DTSTART;VALUE=DATE:20260529
+DTEND;VALUE=DATE:20260529
+UID:149e9f6fe5b1@esg-event-radar
+CATEGORIES:ESG,Nickel,Sustainability,Mining
+DESCRIPTION:主办方: APNI (Asosiasi Penambang Nikel Indonesia)\n形式: 
+ in-person\n费用: unknown\n议程: Forum to strengthen ESG standards and 
+ competitiveness of Indonesian nickel industry.\n高管价值: ★★★☆
+ ☆\n评分依据: D1-主办方APNI为行业专业协会，D2-受众含高
+ 管和政府官员，D3-与ESG监管标准直接挂钩。综合评3分。\
+ n来源: https://apni.id
+LOCATION:ID
+END:VEVENT
+END:VCALENDAR

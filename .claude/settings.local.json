@@ -2,7 +2,24 @@
   "permissions": {
     "allow": [
       "Bash(ls -la /Users/xiefang/Projects/esg_event_radar/ 2>/dev/null && echo \"---SEPARATOR---\" && ls -la /Users/xiefang/Projects/company-research-agent/ 2>/dev/null | head -30)",
-      "Bash(git init *)"
+      "Bash(git init *)",
+      "Bash(gh auth *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(ls /Users/xiefang/Projects/esg_event_radar/venv/bin/python3 2>/dev/null && echo \"venv exists\" || echo \"venv missing\")",
+      "Bash(./venv/bin/pip list *)",
+      "WebSearch",
+      "Bash(ls /Users/xiefang/Projects/company-research-agent/ 2>/dev/null && echo \"exists\" || echo \"not found\")",
+      "Bash(ls -la /Users/xiefang/Projects/ 2>/dev/null)",
+      "Bash(crontab -l)",
+      "Read(//Users/xiefang/.claude/**)",
+      "Read(//Users/xiefang/Library/CloudStorage/OneDrive-个人/.claude/**)",
+      "mcp__scheduled-tasks__list_scheduled_tasks",
+      "Bash(git add *)",
+      "Bash(git commit -m 'fix: NewsFetcher v2 — 改用 feedparser 解析，捕获 source.href 域名线索；改进 Google News 正文回退策略 *)",
+      "Bash(git commit -m 'ci: GitHub Actions 每周一早8点自动运行 ESG Event Radar *)",
+      "Bash(./venv/bin/pip install *)",
+      "Bash(git commit -m 'feat: Phase 7 .ics 日历生成实现 *)"
     ]
   }
 }
