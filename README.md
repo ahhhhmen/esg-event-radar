@@ -16,7 +16,7 @@ A multilingual intelligence agent that monitors global ESG, sustainability, and 
 - **Notion database upsert** — Full-field sync with auto-created Notion properties
 - **ICS calendar generation** — `esg_events.ics` subscription file for calendar apps
 - **DingTalk alerts** — Top-10 event push notifications (optional)
-- **Cron / Docker / GitHub Actions** — Three deployment modes available
+- **Automated weekly sync** — GitHub Actions cron runs every Monday 08:00 Beijing time, with manual trigger support
 
 ## Architecture
 
@@ -77,14 +77,6 @@ python main.py
 ```
 
 The agent will scrape sources, extract events, score them, and (if configured) upsert to Notion. The calendar file `esg_events.ics` is written to the project root.
-
-### 3. Run as a scheduler (containerized)
-
-```bash
-docker compose up -d
-```
-
-This starts a long-running container with APScheduler (cron mode), triggering a scan on the schedule defined by `SCHEDULE_CRON` (default: weekly on Monday 08:00 Beijing time).
 
 ## GitHub Actions
 
@@ -176,7 +168,6 @@ Edit [`sources.yaml`](sources.yaml) to add, remove, or disable feeds. Each sourc
 
 ```
 ├── main.py                 # CLI entry point
-├── scheduler.py            # APScheduler-based daemon
 ├── event_radar_agent.py    # Core agent (all phases)
 ├── sources.yaml            # Feed & calendar source config
 ├── scoring_criteria.md     # LLM scoring rubric (prompt anchor)
@@ -187,8 +178,6 @@ Edit [`sources.yaml`](sources.yaml) to add, remove, or disable feeds. Each sourc
 ├── test_dedup_backtest.py  # Dedup pipeline benchmark
 ├── test_notion_connection.py # Notion API connectivity test
 ├── requirements.txt
-├── Dockerfile
-├── docker-compose.yml
 ├── .env.example            # Environment template
 ├── .gitignore
 └── .github/workflows/run.yml  # GitHub Actions workflow

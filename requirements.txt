@@ -26,8 +26,5 @@ icalendar>=5.0.0
 # 重试与退避（指数退避 + 抖动）
 tenacity>=8.0
 
-# 容器内定时调度（替代宿主机 cron）
-APScheduler>=3.10
-
 # Notion REST API（Phase 6 — raw requests，无需 SDK）
 # notion-client>=2.2.0  # 已改用 requests 直连，此行保留备注
