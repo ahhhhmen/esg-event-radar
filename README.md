@@ -88,13 +88,31 @@ This starts a long-running container with APScheduler, triggering a scan every 1
 
 ## GitHub Actions
 
-The workflow `.github/workflows/run.yml` runs on a cron schedule (UTC 00:00 & 12:00 → Beijing 08:00 & 20:00). It:
+The workflow `.github/workflows/run.yml` runs **twice every day** on a cron schedule:
+
+| UTC | Beijing (UTC+8) |
+|-----|-----------------|
+| 00:00 | 08:00 |
+| 12:00 | 20:00 |
+
+Each run performs three steps:
 
 1. Installs dependencies
 2. Runs `python main.py`
 3. Commits updated `esg_events.ics` back to the repository
 
-**Required secrets** (set in GitHub → Settings → Secrets and variables → Actions):
+### Where results go
+
+| Output | Destination | Details |
+|--------|-------------|---------|
+| **Notion database** | Your Notion workspace | Full-field upsert to the database specified by `NOTION_DATABASE_ID`. All events are synced with dedup keys, so re-runs are idempotent. |
+| **ICS calendar file** | `esg_events.ics` (repo root) + `output/esg_events.ics` | Auto-committed & pushed by the workflow after each run. Subscribe your calendar app to the raw file URL on `main` branch for live updates. |
+| **DingTalk push** (optional) | DingTalk group chat | Top 10 highest-scored events are pushed when `DINGTALK_WEBHOOK_RADAR` is configured. |
+| **Run logs** | GitHub Actions → workflow run page | Full pipeline logs (phase timings, event counts, errors) visible in the Actions tab. |
+
+### Required secrets
+
+Set these in **GitHub → Settings → Secrets and variables → Actions**:
 
 | Secret | Description |
 |--------|-------------|
