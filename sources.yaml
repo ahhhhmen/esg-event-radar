@@ -144,6 +144,24 @@ sources:
     tags: ["LME", "LME-Week", "London-Metal-Exchange", "metals-sustainability"]
     active: true
 
+  - name: "GNews: LME Week Metals Seminar"
+    url: "https://news.google.com/rss/search?q=%22LME+Week%22+OR+%22LME+Metals+Seminar%22+OR+%22LME+Metals+Seminar%22+%28agenda+OR+speakers+OR+registration+OR+2026%29&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: emea
+    org: "LME"
+    tags: ["LME-Week", "Metals-Seminar", "responsible-sourcing", "London"]
+    active: true
+
+  - name: "GNews: Fastmarkets LME Week Side Events"
+    url: "https://news.google.com/rss/search?q=%28Fastmarkets+OR+%22Metal+Bulletin%22%29+%28%22LME+Week%22+OR+%22metals+seminar%22+OR+%22metals+conference%22%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: emea
+    org: "Fastmarkets"
+    tags: ["Fastmarkets", "Metal-Bulletin", "LME-Week", "metals-seminar"]
+    active: true
+
   - name: "GNews: APAC Mining Sustainability"
     url: "https://news.google.com/rss/search?q=%28Indonesia+OR+Jakarta+OR+Philippines+OR+%22Southeast+Asia%22%29+%28mining+OR+nickel+OR+cobalt%29+%28ESG+OR+sustainability+OR+%22responsible+sourcing%22%29+%28conference+OR+summit+OR+forum%29+2026&hl=en-US&gl=US&ceid=US:en"
     type: google_news
