@@ -342,6 +342,127 @@ sources:
     tags: ["ILO", "just-transition", "labour-rights", "social-dialogue"]
     active: true
 
+  # ── 关键矿产协会与标准组织（新增）──
+
+  - name: "GNews: IRMA Initiative for Responsible Mining"
+    url: "https://news.google.com/rss/search?q=IRMA+OR+%22Initiative+for+Responsible+Mining+Assurance%22+%28conference+OR+forum+OR+summit+OR+event+OR+webinar%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "IRMA"
+    tags: ["IRMA", "responsible-mining", "audit", "FPIC", "certification"]
+    active: true
+
+  - name: "GNews: RMI Responsible Minerals Initiative"
+    url: "https://news.google.com/rss/search?q=%22Responsible+Minerals+Initiative%22+OR+RMI+%28conference+OR+forum+OR+summit+OR+event+OR+webinar+OR+%22annual+conference%22%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "RMI"
+    tags: ["RMI", "responsible-minerals", "due-diligence", "supply-chain", "tin-tantalum-tungsten"]
+    active: true
+
+  - name: "GNews: Nickel Institute Events"
+    url: "https://news.google.com/rss/search?q=%22Nickel+Institute%22+%28conference+OR+forum+OR+summit+OR+event+OR+webinar+OR+%22NiPERA%22%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "Nickel Institute"
+    tags: ["Nickel-Institute", "NiPERA", "nickel", "life-cycle", "responsible-sourcing"]
+    active: true
+
+  - name: "GNews: Cobalt Institute Events"
+    url: "https://news.google.com/rss/search?q=%22Cobalt+Institute%22+OR+%22Cobalt+Congress%22+%28conference+OR+forum+OR+summit+OR+event+OR+webinar%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "Cobalt Institute"
+    tags: ["Cobalt-Institute", "cobalt", "DRC", "critical-minerals", "EV-battery"]
+    active: true
+
+  - name: "GNews: International Copper Association"
+    url: "https://news.google.com/rss/search?q=%22International+Copper+Association%22+OR+%22ICA+copper%22+%28conference+OR+forum+OR+summit+OR+event+OR+webinar+OR+%22CESCO+Week%22%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "International Copper Association"
+    tags: ["ICA", "copper", "CESCO", "critical-minerals", "energy-transition"]
+    active: true
+
+  - name: "GNews: Copper Mark Nickel Mark Assurance"
+    url: "https://news.google.com/rss/search?q=%22Copper+Mark%22+OR+%22Nickel+Mark%22+OR+%22Molybdenum+Mark%22+OR+%22Consolidated+Mining+Standard%22+%28conference+OR+forum+OR+summit+OR+event+OR+webinar+OR+%22assurance%22%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "Copper Mark"
+    tags: ["Copper-Mark", "Nickel-Mark", "Molybdenum-Mark", "assurance", "responsible-production"]
+    active: true
+
+  - name: "GNews: CMSI Consolidated Mining Standard"
+    url: "https://news.google.com/rss/search?q=%22Consolidated+Mining+Standard+Initiative%22+OR+CMSI+%28conference+OR+forum+OR+summit+OR+event+OR+webinar+OR+%22mining+standard%22%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: global
+    org: "CMSI"
+    tags: ["CMSI", "Consolidated-Mining-Standard", "ESG-assurance", "mining-certification"]
+    active: true
+
+  - name: "GNews: LME Responsible Sourcing Series"
+    url: "https://news.google.com/rss/search?q=LME+OR+%22London+Metal+Exchange%22+%28%22responsible+sourcing%22+OR+%22ESG%22+OR+%22sustainability%22%29+%28conference+OR+forum+OR+summit+OR+event+OR+webinar%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: emea
+    org: "LME"
+    tags: ["LME", "responsible-sourcing", "metals-ESG", "sustainability"]
+    active: true
+
+  # ── 中文 ESG / 可持续媒体源（新增）──
+
+  - name: "GNews: 财新 ESG30 可持续发展论坛"
+    url: "https://news.google.com/rss/search?q=%E8%B4%A2%E6%96%B0+%28ESG30+OR+ESG+OR+%E5%8F%AF%E6%8C%81%E7%BB%AD%E5%8F%91%E5%B1%95%29+%28%E5%B3%B0%E4%BC%9A+OR+%E8%AE%BA%E5%9D%9B+OR+%E5%8F%91%E5%B8%83%29+2026&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
+    type: google_news
+    tier: 2
+    region: cn
+    org: "Caixin"
+    tags: ["Caixin", "ESG30", "sustainability", "China-ESG", "CSR"]
+    active: true
+
+  - name: "GNews: 中国 ESG 可持续峰会论坛综合"
+    url: "https://news.google.com/rss/search?q=%28ESG+OR+%E5%8F%AF%E6%8C%81%E7%BB%AD%E5%8F%91%E5%B1%95+OR+%E7%A2%B3%E4%B8%AD%E5%92%8C+OR+%E7%A2%B3%E8%BE%BE%E5%B3%B0+OR+%E7%BB%BF%E8%89%B2%E9%87%91%E8%9E%8D%29+%28%E5%B3%B0%E4%BC%9A+OR+%E8%AE%BA%E5%9D%9B+OR+%E5%A4%A7%E4%BC%9A%29+2026&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
+    type: google_news
+    tier: 2
+    region: cn
+    org: "Google News CN"
+    tags: ["China", "ESG-summit", "carbon-neutral", "green-finance", "sustainability"]
+    active: true
+
+  - name: "GNews: 新浪财经 ESG 评级 可持续"
+    url: "https://news.google.com/rss/search?q=%E6%96%B0%E6%B5%AA%E8%B4%A2%E7%BB%8F+%28ESG+OR+%E5%8F%AF%E6%8C%81%E7%BB%AD%E5%8F%91%E5%B1%95+OR+%E7%A2%B3%E4%B8%AD%E5%92%8C%29+%28%E5%B3%B0%E4%BC%9A+OR+%E8%AE%BA%E5%9D%9B+OR+%E8%AF%84%E7%BA%A7%29+2026&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
+    type: google_news
+    tier: 2
+    region: cn
+    org: "Sina Finance"
+    tags: ["Sina-Finance", "ESG-rating", "China", "carbon-neutral", "green-finance"]
+    active: true
+
+  - name: "GNews: 21世纪经济报道 ESG 碳中和"
+    url: "https://news.google.com/rss/search?q=%2221%E4%B8%96%E7%BA%AA%E7%BB%8F%E6%B5%8E%E6%8A%A5%E9%81%93%22+%28ESG+OR+%E5%8F%AF%E6%8C%81%E7%BB%AD%E5%8F%91%E5%B1%95+OR+%E7%A2%B3%E4%B8%AD%E5%92%8C%29+%28%E5%B3%B0%E4%BC%9A+OR+%E8%AE%BA%E5%9D%9B%29+2026&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
+    type: google_news
+    tier: 2
+    region: cn
+    org: "21st Century Business Herald"
+    tags: ["21st-Century-Herald", "ESG", "China", "carbon-neutral", "green-finance"]
+    active: true
+
+  - name: "GNews: 中国 关键矿产 ESG 可持续供应链"
+    url: "https://news.google.com/rss/search?q=%28%E5%85%B3%E9%94%AE%E7%9F%BF%E4%BA%A7+OR+%E5%85%B3%E9%94%AE%E7%9F%BF%E7%89%A9%29+%28ESG+OR+%E5%8F%AF%E6%8C%81%E7%BB%AD+OR+%E8%B4%9F%E8%B4%A3%E4%BB%BB%E4%BE%9B%E5%BA%94%E9%93%BE%29+%28%E5%B3%B0%E4%BC%9A+OR+%E8%AE%BA%E5%9D%9B+OR+%E5%A4%A7%E4%BC%9A%29+2026&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
+    type: google_news
+    tier: 2
+    region: cn
+    org: "Google News CN"
+    tags: ["critical-minerals", "China", "ESG", "responsible-sourcing", "supply-chain"]
+    active: true
+
   # ══════════════════════════════════════════════════════════
   # 待实现 — html_calendar 爬虫模块（active: false）
   # 以下 Tier 1 组织无公开 RSS，上述 GNews 定向查询作为替代
