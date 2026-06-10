@@ -84,16 +84,15 @@ The agent will scrape sources, extract events, score them, and (if configured) u
 docker compose up -d
 ```
 
-This starts a long-running container with APScheduler, triggering a scan every 12 hours (configurable via `SCHEDULE_INTERVAL_HOURS`).
+This starts a long-running container with APScheduler (cron mode), triggering a scan on the schedule defined by `SCHEDULE_CRON` (default: weekly on Monday 08:00 Beijing time).
 
 ## GitHub Actions
 
-The workflow `.github/workflows/run.yml` runs **twice every day** on a cron schedule:
+The workflow `.github/workflows/run.yml` runs **once a week** on a cron schedule:
 
 | UTC | Beijing (UTC+8) |
 |-----|-----------------|
-| 00:00 | 08:00 |
-| 12:00 | 20:00 |
+| Mon 00:00 | Mon 08:00 |
 
 Each run performs three steps:
 

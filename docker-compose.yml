@@ -17,7 +17,7 @@ services:
       # .ics 日历输出 — 直接挂载到宿主机当前目录
       - ./output:/app/output
     environment:
-      - SCHEDULE_INTERVAL_HOURS=12
+      - SCHEDULE_CRON=0 0 * * 1
       - LOG_LEVEL=INFO
       - OUTPUT_DIR=/app/output
       - TZ=Asia/Shanghai
