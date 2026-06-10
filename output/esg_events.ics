@@ -7,863 +7,278 @@ X-WR-CALDESC:自动扫描全球 ESG 与可持续发展会议，高管参
  会决策参考
 X-WR-CALNAME:ESG 全球会议日历
 BEGIN:VEVENT
-SUMMARY:ESG and Climate Change Summit Asia 2026 — 2026年亚洲ESG与气
- 候变化峰会
-DTSTART;VALUE=DATE:20260616
-DTEND;VALUE=DATE:20260617
-UID:473bcf968a1f@esg-event-radar
-CATEGORIES:CSRD,ESG,ESG报告,ISSB,SEC气候规则
-DESCRIPTION:主办方: Reuters Events 路透社活动\n形式: in-person\n
- 费用: paid\n议程: 聚焦亚洲ESG监管趋势、ISSB实施路径、范
- 围三排放管理及绿色金融创新，汇聚300+亚太区企业高管
- 与政策制定者。\n高管价值: ★★★★☆\n评分依据: D1-路
- 透社为行业头部媒体，D2-往届含多家亚洲头部企业CEO/CSO
- 出席，D3-与ISSB/TCFD监管议程直接挂钩。综合评4分。\n报
- 名: https://events.reutersevents.com/esg-climate-summit-asia-2026\n来源
- : https://www.example-rss-feed.com/esg-summit-asia
-LOCATION:新加坡\, SG\, 滨海湾金沙会展中心
-URL:https://events.reutersevents.com/esg-climate-summit-asia-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:UN Global Compact Leaders Summit 2026 — 2026年联合国全球
- 契约领导人峰会
-DTSTART;VALUE=DATE:20260921
-DTEND;VALUE=DATE:20260923
-UID:317256b2ee8c@esg-event-radar
-CATEGORIES:ESG,ESG治理,ESG领导力,SDGs,人权
-DESCRIPTION:主办方: 联合国全球契约组织 (UN Global Compact)\n
- 形式: hybrid\n费用: invite-only\n议程: 全球最大企业可持续
- 发展峰会，聚焦加速SDGs实现、气候雄心与包容性增长，
- 汇聚全球100+国家CEO与政策制定者。\n高管价值: ★★★★
- ★\n评分依据: D1-UNGC为1级国际倡议组织，D2-往届含60+国CE
- O出席，D3-与SDGs监管路径挂钩，D5-受邀制精英网络。综合
- 评5分。\n报名: https://unglobalcompact.org/leaders-summit-2026\n来
- 源: https://unglobalcompact.org/leaders-summit-2026
-LOCATION:纽约\, US\, 联合国总部
-URL:https://unglobalcompact.org/leaders-summit-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Indonesia Sustainability Conference 2026 — 2026年印度尼西
- 亚可持续发展会议
-DTSTART;VALUE=DATE:20260804
-DTEND;VALUE=DATE:20260805
-UID:1484e56b4ccf@esg-event-radar
-CATEGORIES:ESG报告,ESG披露,可再生能源转型,可持续发展,可
- 持续棕榈油
-DESCRIPTION:主办方: 印尼工商会 (KADIN) 与联合国开发计划署
-  (UNDP)\n形式: in-person\n费用: paid\n议程: 聚焦印尼绿色分类
- 法实施、碳交易市场发展与大宗商品可持续供应链，汇
- 聚东南亚政策制定者与企业领袖。\n高管价值: ★★★☆
- ☆\n评分依据: D1-UNDP为国际组织，D2-含CEO/政府官员出席
- ，D3-与印尼绿色分类法监管挂钩，D4-区域竞争情报价值
- 高。综合评3分。\n报名: https://www.kadin.id/konferensi-keberlanju
- tan-2026\n来源: https://www.kadin.id/konferensi-keberlanjutan-2026
-LOCATION:雅加达\, ID\, 雅加达会议中心
-URL:https://www.kadin.id/konferensi-keberlanjutan-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Global Sustainable Finance Forum 2026 — 2026年全球可持续
- 金融论坛
-DTSTART;VALUE=DATE:20260622
-DTEND;VALUE=DATE:20260624
-UID:ec60130fad80@esg-event-radar
-CATEGORIES:CSRD,CSRD合规,ESG投资,ESG评级,可持续金融
-DESCRIPTION:主办方: 联合国环境规划署金融倡议（UNEP FI）\n
- 形式: hybrid\n费用: paid\n议程: 探讨EU分类法、ISSB标准实施
- 、自然资本核算，汇集全球200+金融机构与政策制定者。\
- n高管价值: ★★★★★\n评分依据: D1-UNEP FI为国际倡议组
- 织，D2-往届含多家全球银行CEO出席，D3-与EU CSRD/CBAM监管
- 直接挂钩，D5-受邀制精英网络。综合评5分。\n报名: https:
- //www.unepfi.org/events/global-sustainable-finance-forum-2026/\n来源: ht
- tps://www.unepfi.org/events/global-sustainable-finance-forum-2026/
-LOCATION:伦敦\, GB\, 伦敦金融城会议中心
-URL:https://www.unepfi.org/events/global-sustainable-finance-forum-2026/
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:ESG and Climate Change Summit Asia 2026 — 2026年亚洲ESG与气
- 候变化峰会
-DTSTART;VALUE=DATE:20260714
-DTEND;VALUE=DATE:20260715
-UID:efeb74a60861@esg-event-radar
-CATEGORIES:ESG,ISSB,TCFD,净零排放,可持续金融
-DESCRIPTION:主办方: Reuters Events 路透社活动\n形式: in-person\n
- 费用: paid\n议程: 聚焦亚洲ESG监管趋势、气候风险披露、
- 转型金融策略，汇聚300+亚太区企业高管与政策制定者。\
- n高管价值: ★★★★☆\n评分依据: D1-路透社为行业头部
- 媒体，D2-往届含多家亚洲头部企业CEO/CSO出席，D3-与ISSB/TC
- FD披露标准直接挂钩。综合评4分。\n报名: https://events.reut
- ersevents.com/esg-climate-change-summit-asia-2026\n来源: https://www.reu
- tersevents.com/esg-climate-change-summit-asia-2026
-LOCATION:新加坡\, SG\, 滨海湾金沙会展中心
-URL:https://events.reutersevents.com/esg-climate-change-summit-asia-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:BSR Conference 2026 — 2026年BSR可持续商业会议
-DTSTART;VALUE=DATE:20261026
-DTEND;VALUE=DATE:20261029
-UID:f44d11c7b495@esg-event-radar
-CATEGORIES:CSDDD,ESG,ESG报告,ESG披露,ESG整合
-DESCRIPTION:主办方: BSR (Business for Social Responsibility) 企业社
- 会责任商业协会\n形式: in-person\n费用: paid\n议程: 全球领
- 先的可持续商业网络会议，聚焦企业责任、供应链脱碳
- 、社会影响投资，提供高端闭门社交。\n高管价值: ★★
- ★★☆\n评分依据: D1-BSR为专业协会，D2-受众含高级管理
- 层，D3-与CSRD/CSDDD监管关联，D5-封闭受邀制网络。综合评4
- 分。\n报名: https://www.bsr.org/en/conference/2026\n来源: https://ww
- w.bsr.org/en/conference/2026
-LOCATION:纽约\, US\, 纽约希尔顿酒店
-URL:https://www.bsr.org/en/conference/2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:GreenBiz Forum 2026 — GreenBiz 2026论坛
-DTSTART;VALUE=DATE:20260622
-DTEND;VALUE=DATE:20260624
-UID:8893c3ed3e77@esg-event-radar
-CATEGORIES:ESG数据,企业可持续发展,企业可持续发展战略,企
- 业可持续性,企业可持续性战略
-DESCRIPTION:主办方: GreenBiz Group\n形式: in-person\n费用: paid\n
- 议程: 探讨企业净零路径与自然相关财务披露，设有创新
- 展示区与高管交流环节，往届演讲者包括微软、沃尔玛
- 等公司高管。\n高管价值: ★★★★☆\n评分依据: D1-GreenB
- iz为行业头部媒体，D2-往届含多家Fortune 500高管出席，D3-
- 与TNFD/TCFD自愿披露标准关联，D4-同业参与广泛。综合评4
- 分。\n报名: https://www.greenbiz.com/forum-2026\n来源: https://www.g
- reenbiz.com/forum-2026
-LOCATION:凤凰城\, US\, 凤凰城会议中心
-URL:https://www.greenbiz.com/forum-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:CDP Supply Chain Forum 2026 — 2026年CDP供应链论坛
-DTSTART;VALUE=DATE:20260714
-DTEND;VALUE=DATE:20260715
-UID:8d9c55bd0570@esg-event-radar
-CATEGORIES:CDP披露,SBTi,Scope 3,TCFD,供应商参与
-DESCRIPTION:主办方: CDP (碳信息披露项目)\n形式: hybrid\n费用
- : paid\n议程: 聚焦范围三排放管理与供应商脱碳策略，分
- 享CDP披露数据最佳实践，提供采购商-供应商对接机会。\
- n高管价值: ★★★☆☆\n评分依据: D1-CDP为全球披露标准
- 机构，D2-受众以经理/分析师为主，D3-与TCFD/SBTi自愿标准
- 关联，D4-行业一般参与。综合评3分。\n报名: https://www.cdp
- .net/en/events/supply-chain-forum-2026\n来源: https://www.cdp.net/en/eve
- nts/supply-chain-forum-2026
-LOCATION:伦敦\, GB\, 伦敦金融城
-URL:https://www.cdp.net/en/events/supply-chain-forum-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Reuters Events Net Zero Festival 2026 — 2026年路透社净零
- 节
-DTSTART;VALUE=DATE:20261005
-DTEND;VALUE=DATE:20261007
-UID:e8763c9a415a@esg-event-radar
-CATEGORIES:企业气候战略,净零排放,技术创新,政策,清洁技
- 术
-DESCRIPTION:主办方: Reuters Events\n形式: hybrid\n费用: paid\n议
- 程: 全球净零转型旗舰活动，汇聚2000+参会者，探讨技术
- 、金融与政策协同推动脱碳。\n高管价值: ★★★★☆\n
- 评分依据: D1-路透社为行业头部媒体，D2-往届含多家Fortun
- e 500 CEO出席，D3-与净零监管议程挂钩。综合评4分。\n报
- 名: https://events.reutersevents.com/net-zero-festival\n来源: https://e
- vents.reutersevents.com/net-zero-festival
-LOCATION:伦敦\, GB\, 伦敦ExCeL展览中心
-URL:https://events.reutersevents.com/net-zero-festival
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Indonesia Sustainability Conference 2026 — 2026年印度尼西
- 亚可持续发展会议
-DTSTART;VALUE=DATE:20260825
-DTEND;VALUE=DATE:20260826
-UID:89064ee1f22f@esg-event-radar
-CATEGORIES:ESG报告,公正转型,可持续发展,可持续棕榈油,可
- 持续金融
-DESCRIPTION:主办方: 印尼工商会 (KADIN) 与联合国开发计划署
-  (UNDP)\n形式: hybrid\n费用: paid\n议程: 聚焦印尼碳交易所与
- 欧盟零毁林法规，设棕榈油可持续采购圆桌，政府部长
- 确认出席。\n高管价值: ★★★★☆\n评分依据: D1-UNDP为
- 国际组织，D2-含政府部长与CEO出席，D3-与EUDR监管直接挂
- 钩，D4-同业参与度高。综合评4分。\n报名: https://www.kadin.
- id/konferensi-keberlanjutan-2026\n来源: https://www.example-rss.com/indo
- nesia-sustainability-2026
-LOCATION:雅加达\, ID\, 雅加达会议中心
-URL:https://www.kadin.id/konferensi-keberlanjutan-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Sustainable Finance Summit 2026 — 2026年可持续金融峰会
-DTSTART;VALUE=DATE:20261005
-DTEND;VALUE=DATE:20261006
-UID:4f3ee16330d7@esg-event-radar
-CATEGORIES:CSRD,ESG投资,可持续金融,气候风险,碳市场
-DESCRIPTION:主办方: 法国巴黎银行 (BNP Paribas) 与法国金融市
- 场监管局 (AMF)\n形式: in-person\n费用: paid\n议程: 聚焦欧盟
- 可持续金融议程，深入探讨CSRD实施、绿色分类法更新与
- 转型金融工具。\n高管价值: ★★★★☆\n评分依据: D1-AMF
- 为监管机构，D3-与CSRD/绿色分类法直接挂钩，D2-含银行高
- 管与监管者。综合评4分。\n报名: https://www.sommet-finance-dur
- able.fr/2026\n来源: https://www.sommet-finance-durable.fr/2026
-LOCATION:巴黎\, FR\, 巴黎会议宫
-URL:https://www.sommet-finance-durable.fr/2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Sustainable Supply Chain Forum 2026 — 2026年可持续供应链
- 论坛
-DTSTART;VALUE=DATE:20260622
-DTEND;VALUE=DATE:20260623
-UID:eb60da918997@esg-event-radar
-CATEGORIES:CBAM,CSDDD,人权尽职调查,供应链可持续性,数字化
-DESCRIPTION:主办方: BSR 商业社会责任组织\n形式: hybrid\n费
- 用: paid\n议程: 聚焦欧盟CSDDD与CBAM合规要求，探讨供应链
- 脱碳、数字化追溯与人权风险管理，含苹果、宜家等企
- 业案例分享。\n高管价值: ★★★★☆\n评分依据: D1-BSR为
- 专业协会，D2-受众含高级管理层，D3-与CSDDD/CBAM监管直接
- 挂钩，D4-含头部企业案例。综合评4分。\n报名: https://www.
- bsr.org/en/events/sustainable-supply-chain-forum-2026\n来源: https://www
- .example-rss-feed.com/bsr-supply-chain-forum
-LOCATION:伦敦\, GB\, QEII Centre
-URL:https://www.bsr.org/en/events/sustainable-supply-chain-forum-2026
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:ESG and Sustainability Summit 2026 — 2026年ESG与可持续发
  展峰会
 DTSTART;VALUE=DATE:20260615
 DTEND;VALUE=DATE:20260616
 UID:8c36d37d5997@esg-event-radar
-CATEGORIES:ESG,供应链可持续性,供应链透明度,可持续发展,
- 气候风险
+CATEGORIES:ESG,ESG报告,ESG披露,供应链,供应链可持续性
 DESCRIPTION:主办方: Reuters Events\n形式: in-person\n费用: paid\n
- 议程: 聚焦ISSB新标准实施、SEC气候披露规则、CBAM合规路
- 径，以及CEO圆桌讨论。\n高管价值: ★★★★☆\n评分依
- 据: D1-路透社为行业头部媒体，D2-往届含多家Fortune 500 CEO
- 出席，D3-与SEC/ISSB监管直接挂钩。综合评4分。\n报名: http
- s://events.reutersevents.com/esg-summit-2026\n来源: https://www.reuterse
- vents.com/esg-summit-2026
+ 议程: 聚焦ISSB与SEC气候披露规则落地，邀请标普500企业CS
+ O分享最佳实践，设有闭门CEO圆桌讨论监管合规路径。\n
+ 高管价值: ★★★★☆\n评分依据: D1-主办方Reuters Events为
+ 行业头部媒体，D2-往届含多家Fortune 500 CEO出席，D3-与SEC/I
+ SSB监管议程直接挂钩。综合评4分。\n报名: https://events.reu
+ tersevents.com/esg-summit-2026\n来源: https://www.reutersevents.com/feed
+ /esg-summit
 LOCATION:纽约\, US\, 纽约希尔顿酒店
 URL:https://events.reutersevents.com/esg-summit-2026
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:WBCSD Year-in-Review Webinar 2026 — WBCSD 2026年度回顾网络
- 研讨会
-DTSTART;VALUE=DATE:20261210
-DTEND;VALUE=DATE:20261210
-UID:76268437b4a5@esg-event-radar
-CATEGORIES:可持续发展趋势,政策回顾,商业案例,WBCSD倡议进
- 展
-DESCRIPTION:主办方: 世界可持续发展工商理事会 (WBCSD)\n形
- 式: online\n费用: free\n议程: 回顾2026年全球可持续发展政
- 策与商业实践关键进展，展望2027年议程。\n高管价值: ★
- ★★☆☆\n评分依据: D1-WBCSD为全球商业联盟，D2-受众含
- 高级管理层，D3-监管关联信息不足，默认中档。综合评3
- 分。\n报名: https://www.wbcsd.org/events/year-in-review-2026\n来源: 
- https://www.wbcsd.org/events/year-in-review-2026
-URL:https://www.wbcsd.org/events/year-in-review-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Sustainable Finance Summit 2026 — 2026年可持续金融峰会
-DTSTART;VALUE=DATE:20261104
-DTEND;VALUE=DATE:20261105
-UID:2c73fae535a8@esg-event-radar
-CATEGORIES:CSRD,ESG投资,ESG评级,可持续债券,气候压力测试
-DESCRIPTION:主办方: 法国巴黎银行 (BNP Paribas) 与法国金融市
- 场监管局 (AMF)\n形式: in-person\n费用: paid\n议程: 聚焦欧盟
- 可持续金融议程（CSRD、绿色分类法）、ESG评级改革与气
- 候风险定价。\n高管价值: ★★★★☆\n评分依据: D1-AMF为
- 监管机构，D3-与CSRD/绿色分类法直接挂钩，D2-含CFO与资产
- 管理高管，D4-欧洲头部金融机构参与。综合评4分。\n报
- 名: https://www.sommet-finance-durable.fr/2026\n来源: https://www.somme
- t-finance-durable.fr/2026
-LOCATION:巴黎\, FR\, 巴黎凡尔赛门展览中心
-URL:https://www.sommet-finance-durable.fr/2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Sustainable Brands 2026 — 2026年可持续品牌大会
-DTSTART;VALUE=DATE:20260608
-DTEND;VALUE=DATE:20260611
-UID:b98472ad4b1d@esg-event-radar
-CATEGORIES:ESG战略,ESG沟通,ESG营销,供应链可持续性,供应链
- 透明度
-DESCRIPTION:主办方: Sustainable Brands 可持续品牌组织\n形式: i
- n-person\n费用: paid\n议程: 探讨品牌如何通过可持续创新驱
- 动增长，涵盖循环设计、再生农业与消费者沟通策略。\n
- 高管价值: ★★★☆☆\n评分依据: D1-行业专业组织主办
- ，D2-受众含高级管理层但无CEO硬承诺，D3-与自愿性标准
- 关联，监管关联度中。综合评3分。\n报名: https://sustainabl
- ebrands.com/events/sb2026\n来源: https://sustainablebrands.com/events/sb
- 2026
-LOCATION:圣地亚哥\, US\, 圣地亚哥会议中心
-URL:https://sustainablebrands.com/events/sb2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:2026 Forum Sustainable Development — 2026年可持续发展论
- 坛
-DTSTART;VALUE=DATE:20261103
-DTEND;VALUE=DATE:20261104
-UID:d3cad8f259d6@esg-event-radar
-CATEGORIES:可持续发展目标,全球伙伴关系,气候融资
-DESCRIPTION:主办方: 德国联邦经济合作与发展部 (BMZ)\n形式:
-  in-person\n费用: free\n议程: 聚焦德国可持续发展政策，促
- 进多方对话与合作。\n高管价值: ★★★☆☆\n评分依据: 
- D1-政府主办权威度高，D2-受众含企业代表但CEO密度不确
- 定，D3-与SDGs监管议程挂钩，D4-区域性活动。综合评3分。
- \n报名: https://www.bmz.de/forum-nachhaltige-entwicklung-2026\n来源: h
- ttps://example.com/rss/bmz-forum
-LOCATION:柏林\, DE\, 柏林会议中心
-URL:https://www.bmz.de/forum-nachhaltige-entwicklung-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:2026 Asia Sustainability Conference — 2026年亚洲可持续发
- 展会议
-DTSTART;VALUE=DATE:20260825
-DTEND;VALUE=DATE:20260826
-UID:a2c93c04fb03@esg-event-radar
-CATEGORIES:绿色金融,循环经济,生物多样性,ESG报告
-DESCRIPTION:主办方: 印尼可持续发展论坛 (ISF)\n形式: hybrid\n
- 费用: paid\n议程: 聚焦亚洲地区可持续发展挑战与机遇，
- 涵盖绿色金融和循环经济实践。\n高管价值: ★★★☆☆\
- n评分依据: D1-区域性机构权威度中等，D2-受众含企业高
- 管，D3-与ESG报告标准关联，D4-亚洲同业参与。综合评3分
- 。\n报名: https://www.isf.or.id/konferensi-keberlanjutan-asia-2026\n来
- 源: https://example.com/rss/asia-sustainability
-LOCATION:雅加达\, ID\, 雅加达会议中心
-URL:https://www.isf.or.id/konferensi-keberlanjutan-asia-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:2026 CSR & Sustainable Development Conference — 2026年企业社
- 会责任与可持续发展会议
-DTSTART;VALUE=DATE:20261005
-DTEND;VALUE=DATE:20261006
-UID:50d221a3230e@esg-event-radar
-CATEGORIES:CSR,绿色分类法,负责任采购,社会对话
-DESCRIPTION:主办方: 法国企业运动 (MEDEF)\n形式: in-person\n费
- 用: paid\n议程: 探讨法国及欧盟CSR法规最新动态，分享企
- 业最佳实践。\n高管价值: ★★★☆☆\n评分依据: D1-MEDEF
- 为法国主要雇主协会，D2-受众含企业高管，D3-与EU CSRD/绿
- 色分类法直接关联，D4-法国同业参与。综合评3分。\n报
- 名: https://www.medef.com/evenements/conference-rse-2026\n来源: https:/
- /example.com/rss/medef-csr
-LOCATION:巴黎\, FR\, 巴黎凡尔赛门展览中心
-URL:https://www.medef.com/evenements/conference-rse-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:SBTi Annual Summit 2026 — 2026年科学碳目标倡议年度峰
- 会
-DTSTART;VALUE=DATE:20260708
-DTEND;VALUE=DATE:20260709
-UID:a0c75cea26e4@esg-event-radar
-CATEGORIES:科学碳目标,净零排放,价值链减排,气候转型计划
- ,企业气候治理
-DESCRIPTION:主办方: 科学碳目标倡议（SBTi）\n形式: hybrid\n
- 费用: paid\n议程: 发布SBTi最新标准更新，分享企业净零实
- 施最佳实践，探讨范围三减排挑战与机遇。\n高管价值: 
- ★★★★★\n评分依据: D1-SBTi为1级国际倡议组织，D2-往
- 届含全球头部企业CSO/CEO出席，D3-与ISSB/CSRD监管路径直接
- 挂钩。综合评5分。\n报名: https://sciencebasedtargets.org/events/
- sbti-annual-summit-2026\n来源: https://sciencebasedtargets.org/events/sb
- ti-annual-summit-2026
-LOCATION:纽约\, US\, 纽约时代广场万豪酒店
-URL:https://sciencebasedtargets.org/events/sbti-annual-summit-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:CDP Supply Chain Forum 2026 — 2026年CDP供应链论坛
-DTSTART;VALUE=DATE:20260618
-DTEND;VALUE=DATE:20260618
-UID:c171367f1eff@esg-event-radar
-CATEGORIES:CDP披露,供应商参与,供应链可持续性,供应链脱碳
- ,气候韧性
-DESCRIPTION:主办方: CDP全球环境信息研究中心\n形式: online\n
- 费用: free\n议程: 聚焦供应链环境数据收集、供应商减排
- 目标设定、CDP披露最佳实践，助力企业实现范围三目标
- 。\n高管价值: ★★★☆☆\n评分依据: D1-CDP为国际披露标
- 准组织，D2-受众以总监/经理级为主，D3-与TCFD/GRI自愿性
- 披露标准关联。综合评3分。\n报名: https://www.cdp.net/en/even
- ts/cdp-supply-chain-forum-2026\n来源: https://www.cdp.net/en/events/cdp-
- supply-chain-forum-2026
-LOCATION:伦敦\, 伦敦金融城会议中心
-URL:https://www.cdp.net/en/events/cdp-supply-chain-forum-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Reuters Events: Responsible Business Europe 2026 — 路透社活
- 动：负责任商业欧洲2026
-DTSTART;VALUE=DATE:20260617
-DTEND;VALUE=DATE:20260618
-UID:f3ecce70476b@esg-event-radar
-CATEGORIES:ESG,可持续发展,企业社会责任,欧洲监管,CSRD
-DESCRIPTION:主办方: 路透社活动（Reuters Events）\n形式: in-per
- son\n费用: paid\n议程: 聚焦欧洲ESG监管新规（CSRD/CSDDD）、
- 企业净零转型路径与负责任供应链实践。\n高管价值: ★
- ★★★☆\n评分依据: D1-路透社为行业头部媒体，D2-受众
- 含CSO/高管，D3-与CSRD/CSDDD监管直接挂钩，D4-同业参与度高
- 。综合评4分。\n来源: https://www.example.com/rss/1
-LOCATION:伦敦\, GB
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:CDP Supply Chain Forum 2026 — 2026年CDP供应链论坛
-DTSTART;VALUE=DATE:20260908
-DTEND;VALUE=DATE:20260909
-UID:108788b08628@esg-event-radar
-CATEGORIES:TCFD,供应商参与,供应链脱碳,气候数据,气候风险
-DESCRIPTION:主办方: CDP (碳信息披露项目)\n形式: hybrid\n费用
- : paid\n议程: 聚焦供应链范围三减排最佳实践，分享CDP披
- 露数据洞察与供应商协作案例。\n高管价值: ★★★☆☆\
- n评分依据: D1-CDP为全球披露标准机构，D2-受众含CSO/供应
- 链总监，D3-与TCFD/ISSB披露框架关联，D4-行业头部企业参
- 与。综合评3分。\n报名: https://www.cdp.net/en/events/supply-chain
- -forum-2026\n来源: https://www.cdp.net/en/events/supply-chain-forum-2026
-LOCATION:伦敦\, GB\, 伦敦金融城会议中心
-URL:https://www.cdp.net/en/events/supply-chain-forum-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:2026 GreenBiz Forum — 2026年GreenBiz论坛
-DTSTART;VALUE=DATE:20260714
-DTEND;VALUE=DATE:20260716
-UID:0977b47404b1@esg-event-radar
-CATEGORIES:ESG,ESG数据,ESG数据管理,企业可再生能源采购,企
- 业可持续战略
-DESCRIPTION:主办方: GreenBiz Group 绿色商业集团\n形式: in-perso
- n\n费用: paid\n议程: 探讨净零转型路径、ESG数据披露与绿
- 色金融创新，汇聚行业思想领袖与政策专家。\n高管价值
- : ★★★★☆\n评分依据: D1-GreenBiz为行业头部媒体，D2-受
- 众含高级管理层，D3-与SEC气候披露规则挂钩，D4-同业参
- 与度高。综合评4分。\n报名: https://www.greenbiz.com/events/gree
- nbiz-forum-2026\n来源: https://example.com/rss/greenbiz-forum-2026
-LOCATION:凤凰城\, US\, 凤凰城会议中心
-URL:https://www.greenbiz.com/events/greenbiz-forum-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:CDP Supply Chain Forum 2026 — 2026年CDP供应链论坛
-DTSTART;VALUE=DATE:20261104
-DTEND;VALUE=DATE:20261105
-UID:61b22d4761ce@esg-event-radar
-CATEGORIES:TCFD,供应商参与,供应链碳排放,供应链脱碳,披露
-DESCRIPTION:主办方: CDP (Carbon Disclosure Project) 碳披露项目\n
- 形式: hybrid\n费用: paid\n议程: 聚焦供应链环境数据披露与
- 脱碳实践，探讨如何通过采购影响力推动供应商减排，
- 分享CDP披露平台最新功能。\n高管价值: ★★★☆☆\n评
- 分依据: D1-CDP为全球披露标准制定者，D3-与TCFD及自愿性
- 披露标准关联，D2-受众以总监/经理为主，CEO出席密度中
- 。综合评3分。\n报名: https://www.cdp.net/en/events/supply-chain-fo
- rum-2026\n来源: https://www.cdp.net/en/events/supply-chain-forum-2026
-LOCATION:伦敦\, GB\, 伦敦金融城会议中心
-URL:https://www.cdp.net/en/events/supply-chain-forum-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Sustainable Finance Summit 2026 — 2026年可持续金融峰会
-DTSTART;VALUE=DATE:20260908
-DTEND;VALUE=DATE:20260909
-UID:6928111979ee@esg-event-radar
-CATEGORIES:CSRD,CSRD合规,ESG投资,ESG评级,EU分类法
-DESCRIPTION:主办方: 法国巴黎银行 (BNP Paribas) 与法国金融市
- 场监管局 (AMF)\n形式: in-person\n费用: paid\n议程: 欧洲可持
- 续金融旗舰会议，深入探讨CSRD实施、EU分类法更新与绿
- 色债券市场趋势，监管机构直接参与。\n高管价值: ★★
- ★★☆\n评分依据: D1-AMF为监管机构，D2-含CFO/银行高管出
- 席，D3-与CSRD/EU分类法直接挂钩，D4-欧洲同业密集。综合
- 评4分。\n报名: https://www.sommet-finance-durable.fr/2026\n来源: ht
- tps://www.sommet-finance-durable.fr/2026
-LOCATION:巴黎\, FR\, 巴黎会议宫
-URL:https://www.sommet-finance-durable.fr/2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:World Circular Economy Forum — 世界循环经济论坛
-DTSTART;VALUE=DATE:20260629
-DTEND;VALUE=DATE:20260701
-UID:541b5fccb500@esg-event-radar
-CATEGORIES:企业创新,可持续设计,塑料污染,循环经济,政策
- 框架
-DESCRIPTION:主办方: 芬兰创新基金Sitra\n形式: hybrid\n费用: pa
- id\n议程: 全球最大循环经济会议，探讨从线性经济向循
- 环经济转型的政策、商业模式与技术创新。\n高管价值: 
- ★★★★☆\n评分依据: D1-Sitra为国家级创新基金，D2-往
- 届含多国部长及CEO出席，D3-与欧盟循环经济行动计划直
- 接挂钩。综合评4分。\n报名: https://www.wcef2026.com\n来源: ht
- tps://www.sitra.fi/en/events/wcef2026
-LOCATION:赫尔辛基\, FI\, 赫尔辛基会展中心
-URL:https://www.wcef2026.com
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Green Finance Summit — 绿色金融峰会
-DTSTART;VALUE=DATE:20260708
-DTEND;VALUE=DATE:20260708
-UID:4b012268fb49@esg-event-radar
-CATEGORIES:绿色金融,可持续投资,ESG评级,气候风险,转型金
- 融
-DESCRIPTION:主办方: Financial Times Live\n形式: in-person\n费用: pa
- id\n议程: 聚焦转型金融框架、ESG评级标准化、气候压力
- 测试与绿色债券市场发展趋势。\n高管价值: ★★★★☆\
- n评分依据: D1-金融时报为行业头部媒体，D2-往届有CEO/CIO
- 出席，D3-与可持续金融监管议程挂钩。综合评4分。\n报
- 名: https://live.ft.com/Events/2026/Green-Finance-Summit\n来源: https:/
- /live.ft.com/feed/
-LOCATION:伦敦\, GB\, The Brewery\, London
-URL:https://live.ft.com/Events/2026/Green-Finance-Summit
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Net Zero Leaders Forum — 净零领导者论坛
-DTSTART;VALUE=DATE:20260715
-DTEND;VALUE=DATE:20260716
-UID:dae36d39a7eb@esg-event-radar
-CATEGORIES:净零排放,气候战略,SBTi,碳移除,行业转型
-DESCRIPTION:主办方: World Business Council for Sustainable Development 
- (WBCSD)\n形式: in-person\n费用: invite-only\n议程: 闭门会议，
- 聚焦SBTi最新标准、行业脱碳路线图与碳移除技术规模化
- 路径。\n高管价值: ★★★★★\n评分依据: D1-WBCSD为全球
- 倡议组织，D2-受邀CEO/CSO级别，D3-与SBTi监管路径挂钩，D5-
- 受邀制精英网络。综合评5分。\n报名: https://www.wbcsd.org/Ev
- ents/Net-Zero-Leaders-Forum-2026\n来源: https://www.wbcsd.org/feed/
-LOCATION:日内瓦\, CH\, WBCSD Headquarters
-URL:https://www.wbcsd.org/Events/Net-Zero-Leaders-Forum-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Responsible Business Europe 2026 — 负责任商业欧洲2026
-DTSTART;VALUE=DATE:20260624
-DTEND;VALUE=DATE:20260625
-UID:773dc170b5af@esg-event-radar
-CATEGORIES:CSDDD,CSRD,CSRD合规,ESG合规,ESG战略
-DESCRIPTION:主办方: Ethical Corporation (Reuters Events)\n形式: in-pe
- rson\n费用: paid\n议程: 聚焦欧洲CSRD、CSDDD等监管合规要求
- ，探讨企业如何将责任融入核心商业战略。\n高管价值: 
- ★★★★☆\n评分依据: D1-路透社为行业头部媒体，D2-受
- 众含高级管理层，D3-与CSRD/CSDDD监管直接挂钩。综合评4分
- 。\n报名: https://events.reutersevents.com/responsible-business-europe-
- 2026\n来源: https://events.reutersevents.com/responsible-business-europe
- -2026
-LOCATION:伦敦\, GB\, 伦敦希尔顿酒店
-URL:https://events.reutersevents.com/responsible-business-europe-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Sustainability Reporting Summit 2026 — 可持续发展报告峰
- 会2026
-DTSTART;VALUE=DATE:20260714
-DTEND;VALUE=DATE:20260715
-UID:bd455c92dee9@esg-event-radar
-CATEGORIES:ESG报告,GRI,GRI标准,ISSB标准,利益相关者参与
-DESCRIPTION:主办方: Corporate Citizenship\n形式: hybrid\n费用: paid
- \n议程: 深入解读ISSB、GRI等最新报告标准，分享ESG数据收
- 集、管理与鉴证最佳实践。\n高管价值: ★★★☆☆\n评
- 分依据: D1-专业咨询机构主办，D2-受众以报告经理为主，
- D3-与ISSB/GRI标准直接挂钩。综合评3分。\n报名: https://www.c
- orporate-citizenship.com/events/sustainability-reporting-summit-2026\n来
- 源: https://www.corporate-citizenship.com/events/sustainability-reporting
- -summit-2026
-LOCATION:纽约\, US\, 纽约万豪酒店
-URL:https://www.corporate-citizenship.com/events/sustainability-reporting-
- summit-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Climate Week NYC 2026 — 纽约气候周2026
-DTSTART;VALUE=DATE:20260921
-DTEND;VALUE=DATE:20260927
-UID:8b710c55cf2d@esg-event-radar
-CATEGORIES:企业承诺,公正转型,净零排放,政策倡导,气候变
- 化
-DESCRIPTION:主办方: 气候组织 (Climate Group)\n形式: hybrid\n费
- 用: paid\n议程: 与联合国大会同期举行的全球最大气候活
- 动周，汇聚各界领袖推动气候雄心与行动。\n高管价值: 
- ★★★★★\n评分依据: D1-与联合国大会同期，D2-往届含
- 多国元首与全球CEO出席，D3-与全球气候政策直接挂钩。
- 综合评5分。\n报名: https://www.climateweeknyc.org/\n来源: https:/
- /www.climateweeknyc.org/
-LOCATION:纽约\, US\, 多个场馆
-URL:https://www.climateweeknyc.org/
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Reuters Events Net Zero Festival 2026 — 路透社净零节2026
-DTSTART;VALUE=DATE:20261103
-DTEND;VALUE=DATE:20261104
-UID:edd5b886caf2@esg-event-radar
-CATEGORIES:净零排放,气候技术,绿色金融,碳市场,能源转型
-DESCRIPTION:主办方: Reuters Events\n形式: hybrid\n费用: paid\n议
- 程: 全球净零转型旗舰活动，汇聚企业、政府与投资者，
- 探讨脱碳路径、气候融资与创新技术。\n高管价值: ★★
- ★★☆\n评分依据: D1-路透社为行业头部媒体，D2-往届含
- 多家全球500强CSO出席，D3-与净零监管议程挂钩。综合评4
- 分。\n报名: https://events.reutersevents.com/net-zero-festival-2026\n
- 来源: https://events.reutersevents.com/net-zero-festival-2026
-LOCATION:伦敦\, GB\, 伦敦Excel国际会展中心
-URL:https://events.reutersevents.com/net-zero-festival-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:World Economic Forum Annual Meeting 2027 — 世界经济论坛年
- 会2027
-DTSTART;VALUE=DATE:20270117
-DTEND;VALUE=DATE:20270121
-UID:301cc4ced6d1@esg-event-radar
-CATEGORIES:全球经济,地缘政治,气候与自然,技术治理,社会
- 公平
-DESCRIPTION:主办方: 世界经济论坛 (WEF)\n形式: in-person\n费用
- : invite-only\n议程: 全球最高级别政商峰会，讨论世界面临
- 的最紧迫挑战，推动公私合作与系统性变革。\n高管价值
- : ★★★★★\n评分依据: D1-WEF为1级全球论坛，D2-明确标
- 注CEO/国家元首出席，D3-与全球治理议程挂钩，D5-受邀制
- 核心网络。综合评5分。\n报名: https://www.weforum.org/events/wo
- rld-economic-forum-annual-meeting-2027\n来源: https://www.weforum.org/ev
- ents/world-economic-forum-annual-meeting-2027
-LOCATION:达沃斯\, CH\, 达沃斯会议中心
-URL:https://www.weforum.org/events/world-economic-forum-annual-meeting-202
- 7
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:UNGC Leaders Summit 2026 — 2026年联合国全球契约领导人
- 峰会
-DTSTART;VALUE=DATE:20260921
-DTEND;VALUE=DATE:20260923
-UID:09f06e3e3ece@esg-event-radar
-CATEGORIES:SDGs,企业可持续性,气候行动,人权,反腐败
+SUMMARY:UN Global Compact Leaders Summit 2026 — 2026年联合国全球
+ 契约领导人峰会
+DTSTART;VALUE=DATE:20260920
+DTEND;VALUE=DATE:20260922
+UID:56d0e1b76ac0@esg-event-radar
+CATEGORIES:ESG领导力,SDGs,SDGs加速,人权,人权尽责
 DESCRIPTION:主办方: 联合国全球契约组织 (UNGC)\n形式: hybrid\
- n费用: invite-only\n议程: 全球最大企业可持续性峰会，聚
- 焦加速SDGs实现、气候融资与包容性转型。\n高管价值: ★
- ★★★★\n评分依据: D1-UNGC为1级国际倡议组织，D2-往届
- 含60+国CEO出席，D3-与SDGs监管路径挂钩，D5-受邀制精英网
- 络。综合评5分。\n报名: https://unglobalcompact.org/leaders-summit
- -2026\n来源: https://unglobalcompact.org/leaders-summit-2026
+ n费用: invite-only\n议程: 汇聚全球CEO与政策制定者，探讨
+ 加速实现SDGs的商业路径，发布最新企业可持续性进展报
+ 告。\n高管价值: ★★★★★\n评分依据: D1-UNGC为1级国际
+ 倡议组织，D2-往届含60+国CEO出席，D3-与SDGs监管路径挂钩
+ ，D5-受邀制精英网络。综合评5分。\n报名: https://unglobalco
+ mpact.org/leaders-summit-2026\n来源: https://unglobalcompact.org/leaders
+ -summit-2026
 LOCATION:纽约\, US\, 联合国总部
 URL:https://unglobalcompact.org/leaders-summit-2026
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Green Taxonomy and Sustainable Finance Conference — 绿色分类
- 法与可持续金融会议
-DTSTART;VALUE=DATE:20260701
-DTEND;VALUE=DATE:20260702
-UID:39e3fda52de9@esg-event-radar
-CATEGORIES:欧盟绿色分类法,可持续金融,CSRD,ESG评级,转型金
- 融
-DESCRIPTION:主办方: 欧盟委员会与法国财政部\n形式: in-perso
- n\n费用: invite-only\n议程: 欧盟委员会官员解读分类法最新
- 修订，讨论CSRD与分类法对接路径，闭门政策对话。\n高
- 管价值: ★★★★★\n评分依据: D1-欧盟委员会为最高权
- 威，D2-受众含CFO/政策制定者，D3-与CSRD/分类法监管直接
- 挂钩，D5-受邀制。综合评5分。\n报名: https://www.example.com/
- green-taxonomy-conference-2026\n来源: https://www.example.com/rss/green-
- taxonomy
-LOCATION:巴黎\, FR\, 法国财政部会议厅
-URL:https://www.example.com/green-taxonomy-conference-2026
+SUMMARY:Indonesia Sustainability Conference 2026 — 2026年印度尼西
+ 亚可持续发展会议
+DTSTART;VALUE=DATE:20260705
+DTEND;VALUE=DATE:20260706
+UID:62b015742055@esg-event-radar
+CATEGORIES:ESG报告,ESG披露,净零排放,印尼ESG监管,可持续发
+ 展
+DESCRIPTION:主办方: 印尼工商会（KADIN）与世界经济论坛\n
+ 形式: in-person\n费用: paid\n议程: 聚焦印尼国家自主贡献（
+ NDC）更新、镍矿绿色供应链转型，以及东盟碳市场互联
+ 互通进展。\n高管价值: ★★★★☆\n评分依据: D1-世界经
+ 济论坛联合主办，D2-往届含总统级及CEO出席，D3-与印尼ND
+ C及EU CBAM监管关联。综合评4分。\n报名: https://kadin.id/konfe
+ rensi-keberlanjutan-2026\n来源: https://kadin.id/feed/konferensi-keberla
+ njutan-2026
+LOCATION:雅加达\, ID\, 雅加达会议中心
+URL:https://kadin.id/konferensi-keberlanjutan-2026
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:2026 CDP Supply Chain Forum — 2026年CDP供应链论坛
-DTSTART;VALUE=DATE:20260825
-DTEND;VALUE=DATE:20260826
-UID:7b9f6b398c6a@esg-event-radar
-CATEGORIES:供应链可持续性,碳披露,Scope 3排放,供应商参与
-DESCRIPTION:主办方: CDP (Carbon Disclosure Project)\n形式: online\n
- 费用: free\n议程: 聚焦供应链碳管理、Scope 3披露与供应商
- 协作，分享最佳实践与CDP最新框架更新。\n高管价值: ★
- ★★☆☆\n评分依据: D1-CDP为全球披露标准制定者，D3-与T
- CFD/ISSB监管路径关联，D4-行业参与广泛但D2-CEO出席密度低
- 。综合评3分。\n报名: https://www.cdp.net/en/events/supply-chain-fo
- rum-2026\n来源: https://example.com/rss/cdp-supply-chain-forum
+SUMMARY:Global Sustainable Finance Conference — 全球可持续金融会
+ 议
+DTSTART;VALUE=DATE:20260622
+DTEND;VALUE=DATE:20260624
+UID:c59fe073966f@esg-event-radar
+CATEGORIES:CSRD,CSRD合规,CSRD实施,ESG投资,ESG评级
+DESCRIPTION:主办方: 联合国环境规划署金融倡议（UNEP FI）\n
+ 形式: hybrid\n费用: paid\n议程: 探讨欧盟绿色分类法更新、
+ 自然相关财务披露（TNFD）试点成果，以及新兴市场可持
+ 续债券创新。\n高管价值: ★★★★★\n评分依据: D1-UNEP F
+ I为联合国倡议组织，D2-往届含全球主要银行CEO出席，D3-
+ 与EU分类法/CSRD直接挂钩。综合评5分。\n报名: https://www.un
+ epfi.org/events/gsfc-2026\n来源: https://www.unepfi.org/feed/gsfc-2026
+LOCATION:伦敦\, GB\, 伦敦金融城会议中心
+URL:https://www.unepfi.org/events/gsfc-2026
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Climate Week NYC 2026 — 2026年纽约气候周
+DTSTART;VALUE=DATE:20260921
+DTEND;VALUE=DATE:20260927
+UID:ca3f7cfe5a41@esg-event-radar
+CATEGORIES:净零排放,可再生能源,政策倡导,气候变化,气候
+ 融资
+DESCRIPTION:主办方: 气候组织（Climate Group）\n形式: hybrid\n
+ 费用: paid\n议程: 与联合国大会同期举行，包含企业净零
+ 承诺更新、碳边境调节机制(CBAM)影响分析、以及自然资
+ 本核算专题。\n高管价值: ★★★★★\n评分依据: D1-与UNF
+ CCC及联合国议程联动，D2-全球政商领袖密集出席，D3-直
+ 接关联CBAM/CSRD等监管，D5-受邀制核心活动。综合评5分。\
+ n报名: https://www.climateweeknyc.org/register\n来源: https://www.clim
+ ateweeknyc.org/feed
+LOCATION:纽约\, US\, 多个场馆（含联合国总部）
+URL:https://www.climateweeknyc.org/register
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Sustainable Supply Chain Forum — 可持续供应链论坛
+DTSTART;VALUE=DATE:20260708
+DTEND;VALUE=DATE:20260709
+UID:a746377a2053@esg-event-radar
+CATEGORIES:供应链脱碳,范围三排放,供应商参与,TCFD
+DESCRIPTION:主办方: CDP\n形式: online\n费用: free\n议程: 探讨
+ 如何利用CDP披露数据推动供应链减排，分享领先企业范
+ 围三管理案例及数字化工具应用。\n高管价值: ★★★☆
+ ☆\n评分依据: D1-CDP为全球披露标准制定者，D3-与TCFD及自
+ 愿性披露挂钩，D2-受众偏操作层，D4-行业参与广泛。综
+ 合评3分。\n报名: https://www.cdp.net/en/events/sustainable-supply-ch
+ ain-forum-2026\n来源: https://www.cdp.net/en/events/rss
+URL:https://www.cdp.net/en/events/sustainable-supply-chain-forum-2026
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:BSR Conference 2026 — 2026年BSR大会
+DTSTART;VALUE=DATE:20261026
+DTEND;VALUE=DATE:20261029
+UID:69b261d9e98f@esg-event-radar
+CATEGORIES:ESG报告,ESG披露,ESG数据,ESG数据治理,ESG整合
+DESCRIPTION:主办方: BSR (Business for Social Responsibility)\n形式: i
+ n-person\n费用: paid\n议程: 深度探讨CSDDD与欧盟可持续供应
+ 链法规影响，发布行业脱碳路线图，并提供定向高管社
+ 交晚宴。\n高管价值: ★★★★☆\n评分依据: D1-BSR为专业
+ 协会，D2-受众含CSO/VP级别，D3-与CSDDD监管议程直接关联，
+ D5-付费注册但参会名单含核心决策者。综合评4分。\n报
+ 名: https://www.bsr.org/conference-2026\n来源: https://www.bsr.org/conf
+ erence-2026
+LOCATION:旧金山\, US\, 旧金山万豪酒店
+URL:https://www.bsr.org/conference-2026
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:GreenBiz Forum 2026 — 2026年GreenBiz论坛
+DTSTART;VALUE=DATE:20260714
+DTEND;VALUE=DATE:20260716
+UID:e5d0d1aaf698@esg-event-radar
+CATEGORIES:ESG报告,ESG数据,企业气候战略,净零排放,可再生
+ 能源
+DESCRIPTION:主办方: GreenBiz Group\n形式: in-person\n费用: paid\n
+ 议程: 深度探讨自然相关财务披露(TNFD)实施，展示AI在ESG
+ 数据管理中的应用案例，设首席气候官闭门会议。\n高管
+ 价值: ★★★★☆\n评分依据: D1-GreenBiz为行业头部媒体，
+ D2-往届含多家Fortune 500 CSO出席，D3-与TNFD/ISSB自愿披露标
+ 准关联。综合评4分。\n报名: https://www.greenbiz.com/forum/2026\
+ n来源: https://www.greenbiz.com/rss
+LOCATION:凤凰城\, US\, 凤凰城会议中心
+URL:https://www.greenbiz.com/forum/2026
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:CDP Supply Chain Forum 2026 — 2026年CDP供应链论坛
+DTSTART;VALUE=DATE:20260805
+DTEND;VALUE=DATE:20260806
+UID:ae5ce5f805e5@esg-event-radar
+CATEGORIES:供应链脱碳,范围三排放,供应商参与,气候风险,CD
+ P披露
+DESCRIPTION:主办方: CDP (碳信息披露项目)\n形式: hybrid\n费用
+ : paid\n议程: 探讨范围三排放测量方法、供应商数据收集
+ 最佳实践与CDP评分提升策略。\n高管价值: ★★★☆☆\n
+ 评分依据: D1-CDP为全球披露标准机构，D2-受众以经理/总
+ 监为主，D3-与自愿性披露标准挂钩。综合评3分。\n报名: 
+ https://www.cdp.net/en/events/supply-chain-forum-2026\n来源: https://www
+ .cdp.net/en/events/supply-chain-forum-2026
+LOCATION:伦敦\, GB\, 伦敦金融城希尔顿酒店
 URL:https://www.cdp.net/en/events/supply-chain-forum-2026
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:WBCSD Year-in-Review Webinar 2026 — WBCSD 2026年度回顾网络
- 研讨会
-DTSTART;VALUE=DATE:20260618
-DTEND;VALUE=DATE:20260618
-UID:c75940f04154@esg-event-radar
-CATEGORIES:ESG趋势,会员成果,可持续商业,循环经济,政策更
- 新
-DESCRIPTION:主办方: 世界可持续发展工商理事会 (WBCSD)\n形
- 式: online\n费用: free\n议程: 回顾2026上半年ESG政策与市场
- 动态，展望下半年趋势，设Q&A环节。\n高管价值: ★★★
- ☆☆\n评分依据: D1-WBCSD为全球商业联盟，D3-与ISSB/CSRD政
- 策关联，D2-无CEO硬承诺，D5-开放注册。综合评3分。\n报
- 名: https://www.wbcsd.org/events/year-in-review-2026\n来源: https://www
- .example-rss.com/wbcsd-webinar-2026
-URL:https://www.wbcsd.org/events/year-in-review-2026
+SUMMARY:CDP Supply Chain Forum 2026 — 2026年CDP供应链论坛
+DTSTART;VALUE=DATE:20261110
+DTEND;VALUE=DATE:20261111
+UID:d36229567f6f@esg-event-radar
+CATEGORIES:供应链脱碳,范围三排放,供应商参与,气候风险,
+ 绿色采购
+DESCRIPTION:主办方: CDP (Carbon Disclosure Project)\n形式: hybrid\n
+ 费用: paid\n议程: 探讨如何通过CDP披露推动供应链减排，
+ 分享最佳实践与创新工具。\n高管价值: ★★★☆☆\n评
+ 分依据: D1-CDP为全球披露标准机构，D2-受众以操作层为主
+ ，D3-与自愿性披露标准关联，D4-行业一般参与。综合评3
+ 分。\n报名: https://www.cdp.net/en/supply-chain-forum-2026\n来源: ht
+ tps://www.cdp.net/en/supply-chain-forum-2026
+LOCATION:伦敦\, GB\, 伦敦金融城
+URL:https://www.cdp.net/en/supply-chain-forum-2026
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:2026 Reuters Events Net Zero Festival — 2026年路透社净零
- 节
-DTSTART;VALUE=DATE:20260908
-DTEND;VALUE=DATE:20260910
-UID:d948433ea761@esg-event-radar
-CATEGORIES:净零排放,气候金融,碳市场,清洁技术
-DESCRIPTION:主办方: Reuters Events\n形式: hybrid\n费用: paid\n议
- 程: 汇聚全球净零领袖，探讨脱碳路径、碳市场创新与气
- 候融资，提供高管级社交与商业对接。\n高管价值: ★★
- ★★☆\n评分依据: D1-路透社为行业头部媒体，D2-往届含C
- EO/CSO演讲，D3-与净零监管议程挂钩，D4-同业参与广泛。
- 综合评4分。\n报名: https://events.reutersevents.com/net-zero-festiv
- al-2026\n来源: https://example.com/rss/reuters-net-zero-festival
-LOCATION:伦敦\, GB\, 伦敦ExCeL展览中心
-URL:https://events.reutersevents.com/net-zero-festival-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:2026 RBA Responsible Business Forum — 2026年RBA负责任商业
- 论坛
-DTSTART;VALUE=DATE:20260728
-DTEND;VALUE=DATE:20260730
-UID:a97a0006af11@esg-event-radar
-CATEGORIES:负责任供应链,劳工权益,环境合规,电子行业可持
- 续
-DESCRIPTION:主办方: RBA (Responsible Business Alliance)\n形式: in-per
- son\n费用: paid\n议程: 聚焦电子与制造业供应链可持续性
- ，探讨劳工标准、环境合规与负责任采购最佳实践。\n高
- 管价值: ★★★☆☆\n评分依据: D1-RBA为行业专业协会，D3
- -与EU CSDDD等监管关联，D4-同业参与集中，但D2-CEO出席密
- 度中等。综合评3分。\n报名: https://www.responsiblebusiness.org/
- events/forum-2026\n来源: https://example.com/rss/rba-forum-2026
-LOCATION:上海\, CN\, 上海国际会议中心
-URL:https://www.responsiblebusiness.org/events/forum-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Responsible Business Summit Europe — 欧洲负责任商业峰会
-DTSTART;VALUE=DATE:20260609
-DTEND;VALUE=DATE:20260610
-UID:1f33b444bb0b@esg-event-radar
-CATEGORIES:负责任商业,ESG战略,人权尽职调查,供应链透明度
-DESCRIPTION:主办方: Ethical Corporation (Reuters Events)\n形式: in-pe
- rson\n费用: paid\n议程: 聚焦欧洲CSDDD、CSRD等法规下的企业
- 责任实践，探讨人权与环境尽职调查。\n高管价值: ★★
- ★★☆\n评分依据: D1-路透社旗下品牌，D3-直接关联CSDDD/C
- SRD监管，D4-欧洲头部企业参与。综合评4分。\n来源: https:
- //events.reutersevents.com/responsible-business-summit-europe
-LOCATION:伦敦\, GB
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Reuters Events Net Zero Festival 2026 — 2026年路透社净零
- 节
-DTSTART;VALUE=DATE:20261020
-DTEND;VALUE=DATE:20261022
-UID:7096c3f74cf6@esg-event-radar
-CATEGORIES:企业气候战略,净零排放,清洁技术,碳市场,碳捕
- 获
-DESCRIPTION:主办方: Reuters Events 路透社活动\n形式: hybrid\n费
- 用: paid\n议程: 全球最大净零主题峰会之一，涵盖技术、
- 金融与政策三大支柱，设有闭门CEO圆桌与创新技术展示
- 区。\n高管价值: ★★★★☆\n评分依据: D1-路透社为行业
- 头部媒体，D2-往届含多家Fortune 500 CEO演讲，D3-与净零监
- 管议程挂钩，D4-主要同业参与度高。综合评4分。\n报名: 
- https://events.reutersevents.com/net-zero-festival-2026\n来源: https://e
- vents.reutersevents.com/net-zero-festival-2026
-LOCATION:伦敦\, GB\, 伦敦ExCeL展览中心
-URL:https://events.reutersevents.com/net-zero-festival-2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Sustainable Finance Summit 2026 — 2026年可持续金融峰会
-DTSTART;VALUE=DATE:20261118
-DTEND;VALUE=DATE:20261119
-UID:1bc221532685@esg-event-radar
-CATEGORIES:绿色分类法,ESG评级,转型债券,碳市场,气候压力
- 测试
-DESCRIPTION:主办方: 法国巴黎银行 (BNP Paribas) 与法国金融市
- 场监管局 (AMF)\n形式: in-person\n费用: paid\n议程: 聚焦欧盟
- 绿色分类法实施进展、法国可持续金融标签改革及气候
- 风险压力测试方法论更新。\n高管价值: ★★★★☆\n评
- 分依据: D1-AMF为监管机构，D2-受众含银行高管，D3-与EU分
- 类法/CSRD监管直接挂钩，D4-主要金融机构参与。综合评4
- 分。\n报名: https://www.sommet-finance-durable.fr/2026\n来源: https:
- //www.sommet-finance-durable.fr/2026
-LOCATION:巴黎\, FR\, 巴黎凡尔赛门展览中心
-URL:https://www.sommet-finance-durable.fr/2026
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Global Sustainable Finance Forum 2026 — 2026年全球可持续
- 金融论坛
-DTSTART;VALUE=DATE:20260708
-DTEND;VALUE=DATE:20260710
-UID:9b7a9c2437e0@esg-event-radar
-CATEGORIES:可持续金融,绿色分类法,EU CSRD,气候融资,生物多
- 样性金融
-DESCRIPTION:主办方: 联合国环境规划署金融倡议（UNEP FI）\n
- 形式: hybrid\n费用: paid\n议程: 探讨全球可持续金融标准统
- 一、EU CSRD实施影响、自然资本核算与转型金融工具创新
- 。\n高管价值: ★★★★★\n评分依据: D1-UNEP FI为国际倡
- 议组织，D2-往届含全球大型银行CEO出席，D3-与EU CSRD/绿色
- 分类法直接挂钩，D5-受邀制精英网络。综合评5分。\n报
- 名: https://www.unepfi.org/events/global-sustainable-finance-forum-2026/\
- n来源: https://www.example-rss-feed.com/unep-fi-forum-2026
-LOCATION:伦敦\, GB\, 伦敦金融城会议中心
-URL:https://www.unepfi.org/events/global-sustainable-finance-forum-2026/
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Indonesia Sustainability Conference 2026 — 2026年印度尼西
- 亚可持续发展会议
+SUMMARY:CDP Supply Chain Forum 2026 — 2026年CDP供应链论坛
 DTSTART;VALUE=DATE:20260622
 DTEND;VALUE=DATE:20260623
-UID:b10e8e434d3f@esg-event-radar
-CATEGORIES:可持续发展,ESG报告,绿色经济,可再生能源,循环
- 经济
-DESCRIPTION:主办方: 印尼工商会（KADIN）与印尼证券交易所
- （IDX）\n形式: in-person\n费用: paid\n议程: 聚焦印尼ESG披露
- 新规、可再生能源投资机遇与循环经济实践，推动印尼
- 企业绿色转型。\n高管价值: ★★★☆☆\n评分依据: D1-主
- 办方为国家级机构，权威度中；D2-受众含企业高管但无CE
- O硬承诺；D3-与印尼ESG监管关联，D4-同业竞争情报价值中
- 。综合评3分。\n报名: https://www.konferensikeberlanjutan.id/2026\n
- 来源: https://www.example-rss-feed.com/indonesia-sustainability-conferen
- ce-2026
-LOCATION:雅加达\, ID\, 雅加达会议中心
-URL:https://www.konferensikeberlanjutan.id/2026
+UID:5ff9c8a9f468@esg-event-radar
+CATEGORIES:供应链脱碳,范围三排放,供应商参与,气候风险披
+ 露,绿色采购
+DESCRIPTION:主办方: CDP (碳信息披露项目)\n形式: hybrid\n费用
+ : paid\n议程: 聚焦范围三排放测量与供应商数据收集最佳
+ 实践，探讨欧盟CBAM对供应链成本的影响，以及CDP披露平
+ 台新功能。\n高管价值: ★★★☆☆\n评分依据: D1-CDP为全
+ 球披露标准制定者，D2-受众以总监/经理为主，D3-与CBAM监
+ 管议程间接关联，D4-行业头部企业参与。综合评3分。\n
+ 报名: https://www.cdp.net/en/supply-chain-forum-2026\n来源: https://ww
+ w.cdp.net/en/supply-chain-forum-2026
+LOCATION:伦敦\, GB\, 伦敦金融城希尔顿酒店
+URL:https://www.cdp.net/en/supply-chain-forum-2026
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:International Summit on Sustainable Finance 2026 — 2026年国际
- 可持续金融峰会
-DTSTART;VALUE=DATE:20260914
-DTEND;VALUE=DATE:20260915
-UID:0c8c5a84fa9e@esg-event-radar
-CATEGORIES:可持续金融,EU分类法,CSRD,绿色债券,碳市场
-DESCRIPTION:主办方: 法国巴黎银行（BNP Paribas）与法国财政
- 部\n形式: in-person\n费用: paid\n议程: 深入探讨EU可持续金
- 融分类法实施、CSRD合规挑战、碳边境调节机制（CBAM）影
- 响及绿色债券市场创新。\n高管价值: ★★★★☆\n评分
- 依据: D1-法国财政部与头部银行联合主办，权威度高；D2-
- 往届含多家欧洲银行CEO出席；D3-与EU CSRD/CBAM直接挂钩；D4
- -同业竞争情报价值高。综合评4分。\n报名: https://www.somme
- t-finance-durable.com/2026\n来源: https://www.example-rss-feed.com/somme
- t-finance-durable-2026
-LOCATION:巴黎\, FR\, 巴黎凡尔赛门展览中心
-URL:https://www.sommet-finance-durable.com/2026
+SUMMARY:Global Climate Action Forum — 全球气候行动论坛
+DTSTART;VALUE=DATE:20260620
+DTEND;VALUE=DATE:20260622
+UID:17aca24bc83e@esg-event-radar
+CATEGORIES:净零排放,国家自主贡献,国家自主贡献（NDC）,气
+ 候变化,气候融资
+DESCRIPTION:主办方: 联合国气候变化框架公约（UNFCCC）\n形
+ 式: hybrid\n费用: invite-only\n议程: 讨论COP30后续行动、全球
+ 碳定价机制、气候融资新目标，多国环境部长及企业领
+ 袖参与闭门会议。\n高管价值: ★★★★★\n评分依据: D1-
+ UNFCCC为1级国际倡议组织，D2-往届含多国部长及CEO出席，D
+ 3-与全球气候监管议程直接挂钩，D5-受邀制精英网络。综
+ 合评5分。\n报名: https://unfccc.int/global-climate-action-forum-2026
+ \n来源: https://www.example.com/rss/climate-forum-2026
+LOCATION:柏林\, DE\, 柏林会议中心
+URL:https://unfccc.int/global-climate-action-forum-2026
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:World Sustainable Development Summit — 世界可持续发展峰
- 会
-DTSTART;VALUE=DATE:20260605
-DTEND;VALUE=DATE:20260607
-UID:79d30f4eee4a@esg-event-radar
-CATEGORIES:可持续发展,气候变化,气候融资,生物多样性,绿
- 色金融
-DESCRIPTION:主办方: 能源与资源研究所 (TERI)\n形式: in-person\
- n费用: paid\n议程: 汇聚全球领导人讨论可持续发展议程，
- 涵盖气候行动、能源转型、生物多样性保护及绿色金融
- 创新，推动2030年可持续发展目标实现。\n高管价值: ★★
- ★★☆\n评分依据: D1-国际知名智库主办，D2-含政府首脑
- 及CEO级别出席，D3-与全球可持续发展监管议程挂钩，D5-
- 高端闭门会议。综合评4分。\n报名: https://wsds.teriin.org\n
- 来源: https://wsds.teriin.org
-LOCATION:新德里\, IN\, 印度国际中心
-URL:https://wsds.teriin.org
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:GreenFin — 绿色金融峰会
-DTSTART;VALUE=DATE:20260624
+SUMMARY:Sustainable Supply Chain Conference — 可持续供应链大会
+DTSTART;VALUE=DATE:20260625
 DTEND;VALUE=DATE:20260626
-UID:580d369928ce@esg-event-radar
-CATEGORIES:ESG投资,气候风险,绿色金融,自然资本,转型金融
-DESCRIPTION:主办方: GreenBiz Group\n形式: in-person\n费用: paid\n
- 议程: 聚焦绿色金融创新、ESG投资策略、气候风险管理及
- 自然资本核算，汇聚金融界与可持续发展专家，探讨资
- 本配置与净零转型。\n高管价值: ★★★★☆\n评分依据: 
- D1-行业头部媒体主办，D2-含CFO及投资高管，D3-与TCFD/ISSB
- 监管关联，D4-金融同业参与度高。综合评4分。\n报名: htt
- ps://www.greenbiz.com/events/greenfin\n来源: https://www.greenbiz.com/ev
- ents/greenfin
-LOCATION:纽约\, US\, 纽约时代中心
-URL:https://www.greenbiz.com/events/greenfin
+UID:32835ed1d96f@esg-event-radar
+CATEGORIES:CBAM,人权尽职调查,供应商ESG评估,供应商ESG评级,
+ 供应商管理
+DESCRIPTION:主办方: BSR（商业社会责任组织）\n形式: in-perso
+ n\n费用: paid\n议程: 聚焦欧盟CSDDD合规、供应链脱碳策略
+ 、以及数字化追溯技术。\n高管价值: ★★★★☆\n评分
+ 依据: D1-BSR为专业协会，D2-受众含CSO及VP级别，D3-与CSDDD/C
+ BAM监管议程直接挂钩。综合评4分。\n报名: https://www.bsr.or
+ g/sustainable-supply-chain-2026\n来源: https://www.bsr.org/sustainable-s
+ upply-chain-2026
+LOCATION:上海\, CN\, 上海浦东嘉里大酒店
+URL:https://www.bsr.org/sustainable-supply-chain-2026
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Green Finance and Taxonomy Conference — 绿色金融与分类法
- 会议
-DTSTART;VALUE=DATE:20260618
-DTEND;VALUE=DATE:20260618
-UID:1b6924b212c2@esg-event-radar
-CATEGORIES:CSRD,EU Taxonomy,TCFD,可持续投资,可持续金融
-DESCRIPTION:主办方: 法国巴黎银行 (BNP Paribas) 与欧盟委员会
- \n形式: in-person\n费用: invite-only\n议程: 欧盟委员会官员详
- 解分类法最新修订，探讨CSRD对金融机构的影响，闭门圆
- 桌讨论转型融资。\n高管价值: ★★★★★\n评分依据: D1-
- 欧盟委员会为1级监管机构，D2-受邀制含CFO/CSO，D3-与CSRD/
- 分类法直接挂钩，D5-封闭精英网络。综合评5分。\n报名: 
- https://group.bnpparibas/en/event/green-taxonomy-conference-2026\n来源: 
- https://group.bnpparibas/en/event/green-taxonomy-conference-2026
-LOCATION:巴黎\, FR\, 法国巴黎银行总部
-URL:https://group.bnpparibas/en/event/green-taxonomy-conference-2026
+SUMMARY:2026 Sustainable Future Summit — 2026年可持续发展未来峰
+ 会
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+UID:c73fead40248@esg-event-radar
+CATEGORIES:净零排放,ESG披露,气候金融,供应链可持续性
+DESCRIPTION:主办方: Reuters Events\n形式: in-person\n费用: paid\n
+ 议程: 聚焦ISSB与SEC气候披露规则落地，探讨CBAM合规路径
+ ，头部企业CEO闭门圆桌。\n高管价值: ★★★★☆\n评分
+ 依据: D1-路透社为行业头部媒体，D2-往届含多家Fortune 500 
+ CEO出席，D3-与ISSB/SEC监管直接挂钩。综合评4分。\n报名: h
+ ttps://events.reutersevents.com/sustainable-future-summit-2026\n来源: ht
+ tps://www.reutersevents.com/rss/sustainable-future-summit
+LOCATION:纽约\, US\, 纽约希尔顿酒店
+URL:https://events.reutersevents.com/sustainable-future-summit-2026
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:GreenBiz Forum 2026 — GreenBiz 2026论坛
+DTSTART;VALUE=DATE:20260622
+DTEND;VALUE=DATE:20260624
+UID:741672ed5d93@esg-event-radar
+CATEGORIES:企业气候战略,自然资本,ESG报告,绿色供应链
+DESCRIPTION:主办方: GreenBiz Group\n形式: in-person\n费用: paid\n
+ 议程: TCFD与TNFD整合路径，Scope 3减排最佳实践，绿色采购
+ 圆桌。\n高管价值: ★★★☆☆\n评分依据: D1-行业头部媒
+ 体，D2-受众含总监/VP级别，D3-涉及TCFD/TNFD自愿性标准。
+ 综合评3分。\n报名: https://www.greenbiz.com/events/greenbiz-forum-2
+ 026\n来源: https://www.greenbiz.com/events/greenbiz-forum-2026
+LOCATION:凤凰城\, US\, 凤凰城会议中心
+URL:https://www.greenbiz.com/events/greenbiz-forum-2026
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:CDP Supply Chain Forum 2026 — CDP 2026供应链论坛
+DTSTART;VALUE=DATE:20260712
+DTEND;VALUE=DATE:20260713
+UID:670af75ad88d@esg-event-radar
+CATEGORIES:供应链碳排放,供应商参与,CDP披露,Scope 3
+DESCRIPTION:主办方: CDP (Carbon Disclosure Project)\n形式: hybrid\n
+ 费用: paid\n议程: CDP新评分标准解读，供应商数据收集自
+ 动化方案，行业协作案例。\n高管价值: ★★★☆☆\n评
+ 分依据: D1-CDP为全球披露标准机构，D3-与自愿性披露标准
+ 直接关联，D4-行业头部企业参与。综合评3分。\n报名: htt
+ ps://www.cdp.net/en/events/supply-chain-forum-2026\n来源: https://www.cd
+ p.net/en/events/supply-chain-forum-2026
+LOCATION:伦敦\, GB\, 伦敦金融城希尔顿酒店
+URL:https://www.cdp.net/en/events/supply-chain-forum-2026
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Asia Sustainability Conference 2026 — 2026年亚洲可持续发
@@ -871,119 +286,245 @@ SUMMARY:Asia Sustainability Conference 2026 — 2026年亚洲可持续发
 DTSTART;VALUE=DATE:20260625
 DTEND;VALUE=DATE:20260626
 UID:0daf56348bca@esg-event-radar
-CATEGORIES:可持续发展,净零排放,循环经济,生物多样性,ESG
+CATEGORIES:可持续发展,绿色金融,循环经济,生物多样性,ESG
  报告
-DESCRIPTION:主办方: 印尼可持续发展论坛 (Indonesia Sustainabili
- ty Forum)\n形式: in-person\n费用: paid\n议程: 聚焦东南亚净零
- 转型路径，印尼政府发布国家可持续金融路线图，企业
- 案例分享。\n高管价值: ★★★☆☆\n评分依据: D1-区域性
- 机构，D2-含政府官员与CSO，D3-与印尼可持续金融监管关
- 联，D4-同业参与中等。综合评3分。\n报名: https://www.sustai
- nabilityforum.id/asia-conference-2026\n来源: https://www.sustainabilityf
- orum.id/asia-conference-2026
+DESCRIPTION:主办方: 印尼可持续发展协会（ISSA）\n形式: in-p
+ erson\n费用: paid\n议程: 聚焦东盟地区ESG披露标准统一、棕
+ 榈油供应链可持续转型、绿色债券市场发展，邀请印尼
+ 及东南亚主要企业参与。\n高管价值: ★★★☆☆\n评分
+ 依据: D1-区域性协会主办，权威度中等；D2-受众含企业高
+ 管但无CEO硬承诺；D3-涉及自愿性披露标准，监管关联中
+ 等。综合评3分。\n报名: https://issa.or.id/konferensi-keberlanjuta
+ n-2026\n来源: https://issa.or.id/berita/konferensi-keberlanjutan-asia-20
+ 26
 LOCATION:雅加达\, ID\, 雅加达会议中心
-URL:https://www.sustainabilityforum.id/asia-conference-2026
+URL:https://issa.or.id/konferensi-keberlanjutan-2026
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Global Climate Week 2026 — 2026年全球气候周
-DTSTART;VALUE=DATE:20260921
-DTEND;VALUE=DATE:20260925
-UID:07e49826502d@esg-event-radar
-CATEGORIES:气候变化,净零排放,碳市场,气候融资,适应与韧
- 性
-DESCRIPTION:主办方: 联合国气候变化框架公约（UNFCCC）\n形
- 式: hybrid\n费用: paid\n议程: 包括COP30预备会议、SBTi最新目
- 标更新、以及CBAM对全球贸易影响的专题讨论。\n高管价
- 值: ★★★★★\n评分依据: D1-UNFCCC为1级国际倡议组织，D
- 2-往届含多国元首及全球CEO出席，D3-与巴黎协定监管路径
- 直接挂钩。综合评5分。\n报名: https://climateweek.global/regist
- er-2026\n来源: https://www.example-rss-feed.com/climate-week-2026
-LOCATION:柏林\, DE\, 柏林会展中心
-URL:https://climateweek.global/register-2026
+SUMMARY:CDP Supply Chain Forum 2026 — 2026年CDP供应链论坛
+DTSTART;VALUE=DATE:20260818
+DTEND;VALUE=DATE:20260819
+UID:8572f1e84237@esg-event-radar
+CATEGORIES:Scope 3,供应商参与,供应链碳排放,供应链脱碳,气
+ 候数据
+DESCRIPTION:主办方: CDP (碳信息披露项目)\n形式: hybrid\n费用
+ : paid\n议程: 聚焦Scope 3排放管理与供应商脱碳策略，分享
+ CDP披露平台最新功能与行业案例。\n高管价值: ★★★☆
+ ☆\n评分依据: D1-CDP为全球披露标准机构，D3-与TCFD/ISSB间
+ 接关联，D2-受众以操作层为主，D4-行业一般参与。综合
+ 评3分。\n报名: https://www.cdp.net/en/supply-chain-forum-2026\n来源
+ : https://www.cdp.net/en/supply-chain-forum-2026
+LOCATION:伦敦\, GB\, 伦敦金融城希尔顿酒店
+URL:https://www.cdp.net/en/supply-chain-forum-2026
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Sustainable Supply Chain Forum — 可持续供应链论坛
-DTSTART;VALUE=DATE:20260712
-DTEND;VALUE=DATE:20260713
-UID:42e904aa948b@esg-event-radar
-CATEGORIES:供应链尽职调查,CSDDD合规,人权,环境审计,数字化
- 追溯
-DESCRIPTION:主办方: 负责任商业联盟（RBA）\n形式: in-person\n
- 费用: paid\n议程: 深入解读欧盟CSDDD法案，分享最佳实践
- 案例，以及供应商数字化管理工具展示。\n高管价值: ★
- ★★☆☆\n评分依据: D1-RBA为行业专业协会，D2-受众定位
- 为VP/Director级别，D3-与CSDDD监管直接关联。综合评3分。\n
- 报名: https://www.responsiblebusiness.org/forum-2026\n来源: https://ww
- w.example-rss-feed.com/rba-forum-2026
-LOCATION:上海\, CN\, 上海浦东嘉里大酒店
-URL:https://www.responsiblebusiness.org/forum-2026
+SUMMARY:Net Zero Supply Chain Summit — 净零供应链峰会
+DTSTART;VALUE=DATE:20260628
+DTEND;VALUE=DATE:20260629
+UID:d6f6587aac1e@esg-event-radar
+CATEGORIES:供应链脱碳,范围3排放,供应商参与,循环经济
+DESCRIPTION:主办方: CDP & 世界经济论坛\n形式: in-person\n费用
+ : paid\n议程: 聚焦范围3排放测量与减排路径，分享苹果、
+ 沃尔玛等企业供应商净零承诺案例，提供CDP供应链数据
+ 平台实操培训。\n高管价值: ★★★★☆\n评分依据: D1-CDP
+ 为全球披露标准制定者，D2-往届含苹果/沃尔玛供应链高
+ 管出席，D3-与TCFD/CDP自愿披露标准关联，D4-主要同业参与
+ 度高。综合评4分。\n报名: https://www.cdp.net/net-zero-supply-cha
+ in-summit-2026\n来源: https://www.cdp.net/en/articles/events/net-zero-su
+ pply-chain-summit-2026
+LOCATION:新加坡\, SG\, 滨海湾金沙会展中心
+URL:https://www.cdp.net/net-zero-supply-chain-summit-2026
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Net Zero Leaders Summit — 净零领导者峰会
-DTSTART;VALUE=DATE:20260910
-DTEND;VALUE=DATE:20260911
-UID:88c3368a7dfd@esg-event-radar
-CATEGORIES:企业气候战略,净零排放,政策倡导,气候技术,碳
- 移除
-DESCRIPTION:主办方: 世界经济论坛（WEF）\n形式: in-person\n费
- 用: invite-only\n议程: 闭门会议，聚焦加速净零转型的突破
- 性技术和政策杠杆，仅限受邀CEO及政策制定者参与。\n高
- 管价值: ★★★★★\n评分依据: D1-WEF为1级国际组织，D2-
- 仅限CEO/董事会主席级别，D3-与全球气候政策议程挂钩，D
- 5-封闭受邀制。综合评5分。\n报名: https://example.com/nzls-202
- 6\n来源: https://www.example-rss-feed.com/net-zero-leaders-summit-2026
-LOCATION:日内瓦\, CH\, 日内瓦国际会议中心
-URL:https://example.com/nzls-2026
+SUMMARY:CBAM Workshop — 碳边境调节机制（CBAM）研讨会
+DTSTART;VALUE=DATE:20260618
+DTEND;VALUE=DATE:20260618
+UID:05a68bf1afd0@esg-event-radar
+CATEGORIES:CBAM,碳定价,欧盟绿色协议,国际贸易,碳排放核算
+DESCRIPTION:主办方: 欧盟委员会气候行动总司\n形式: online\n
+ 费用: free\n议程: 详解CBAM过渡期报告要求、默认值计算方
+ 法及2027年正式实施后的财务影响。\n高管价值: ★★★☆
+ ☆\n评分依据: D1-欧盟委员会为高权威监管机构，D3-与CBAM
+ 监管直接挂钩，D2-受众偏操作层，CEO出席密度低。综合
+ 评3分。\n报名: https://ec.europa.eu/clima/events/cbam-workshop-2026\n
+ 来源: https://ec.europa.eu/clima/events/cbam-workshop-2026
+URL:https://ec.europa.eu/clima/events/cbam-workshop-2026
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:ESG and Climate World Summit — ESG与气候世界峰会
+SUMMARY:Green Finance and Taxonomy Forum — 绿色金融与分类法论
+ 坛
+DTSTART;VALUE=DATE:20260705
+DTEND;VALUE=DATE:20260706
+UID:ea508f90918f@esg-event-radar
+CATEGORIES:绿色分类法,可持续金融,ESG投资,欧盟绿色新政,
+ 气候转型
+DESCRIPTION:主办方: 欧盟委员会（European Commission）\n形式: h
+ ybrid\n费用: free\n议程: 解读欧盟绿色分类法最新修订、可
+ 持续金融披露要求、以及转型金融框架。\n高管价值: ★
+ ★★★★\n评分依据: D1-欧盟委员会为G20官方附属机构，D
+ 2-含政策制定者及金融机构CEO出席，D3-与EU Taxonomy/CSRD监
+ 管议程直接挂钩。综合评5分。\n报名: https://ec.europa.eu/gre
+ en-finance-forum-2026\n来源: https://ec.europa.eu/green-finance-forum-20
+ 26
+LOCATION:布鲁塞尔\, BE\, 欧盟总部
+URL:https://ec.europa.eu/green-finance-forum-2026
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:CSR and Sustainable Finance Summit — 企业社会责任与可持
+ 续金融峰会
 DTSTART;VALUE=DATE:20260715
 DTEND;VALUE=DATE:20260716
-UID:e1d82da84ef2@esg-event-radar
-CATEGORIES:ESG,气候变化,可持续金融,净零排放,碳市场
-DESCRIPTION:主办方: ESG World Summit\n形式: in-person\n费用: paid\n
- 议程: 聚焦ISSB与CSRD合规路径、范围三排放核算、转型金
- 融策略，汇聚全球200+企业CSO与政策制定者。\n高管价值: 
- ★★★★☆\n评分依据: D1-行业头部媒体主办，D2-往届含
- 多家Fortune 500 CSO出席，D3-与ISSB/CSRD监管直接挂钩。综合
- 评4分。\n报名: https://example.com/esg-climate-summit-2026\n来源: h
- ttps://example.com/rss/esg-news
-LOCATION:伦敦\, GB\, 伦敦市中心会议中心
-URL:https://example.com/esg-climate-summit-2026
+UID:c74dda450bc2@esg-event-radar
+CATEGORIES:企业社会责任,可持续金融,CSRD,绿色分类法,非财
+ 务报告
+DESCRIPTION:主办方: 法国企业运动（MEDEF）\n形式: in-person\n
+ 费用: paid\n议程: 探讨CSRD实施挑战、法国可持续金融标签
+ 改革、以及企业社会责任的战略整合。\n高管价值: ★★
+ ★★☆\n评分依据: D1-MEDEF为法国头部商业协会，D2-含CEO
+ 及CSO出席，D3-与CSRD/法国分类法监管议程直接挂钩。综合
+ 评4分。\n报名: https://www.medef.com/sommet-rse-2026\n来源: https:/
+ /www.medef.com/sommet-rse-2026
+LOCATION:巴黎\, FR\, 巴黎凡尔赛门展览中心
+URL:https://www.medef.com/sommet-rse-2026
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Asia Sustainability Conference 2026 — 2026年亚洲可持续发
  展会议
 DTSTART;VALUE=DATE:20260712
 DTEND;VALUE=DATE:20260713
-UID:e066f8f0f4c7@esg-event-radar
-CATEGORIES:绿色金融,可再生能源,循环经济,生物多样性,ESG
- 报告
-DESCRIPTION:主办方: 亚洲开发银行 (ADB) 与印尼工商会\n形式
- : in-person\n费用: paid\n议程: 聚焦东南亚绿色转型、碳市场
- 发展及ISSB在亚洲的落地实践。\n高管价值: ★★★☆☆\n
- 评分依据: D1-亚开行为区域性权威机构，D2-受众含CSO及总
- 监级，D3-涉及ISSB自愿性标准。综合评3分。\n报名: https://
- adb.org/asia-sustainability-conference-2026\n来源: https://example.com/r
- ss/asia-sustainability-conference-2026
+UID:6109769b5510@esg-event-radar
+CATEGORIES:东盟绿色分类法,可持续金融,循环经济,棕榈油供
+ 应链,棕榈油可持续性
+DESCRIPTION:主办方: 印尼可持续发展论坛 (ISF)\n形式: in-perso
+ n\n费用: paid\n议程: 聚焦印尼及东南亚地区ESG监管趋势，
+ 探讨棕榈油行业净零路径与碳交易机制。\n高管价值: ★
+ ★★☆☆\n评分依据: D1-区域性机构，D2-受众含总监级，D
+ 3-涉及碳市场与自愿性标准，D4-行业覆盖面中等。综合评
+ 3分。\n报名: https://isf.or.id/konferensi-keberlanjutan-2026\n来源: 
+ https://isf.or.id/feed/konferensi-keberlanjutan-2026
 LOCATION:雅加达\, ID\, 雅加达会议中心
-URL:https://adb.org/asia-sustainability-conference-2026
+URL:https://isf.or.id/konferensi-keberlanjutan-2026
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:GreenBiz Forum 2026 — GreenBiz 2026论坛
-DTSTART;VALUE=DATE:20261103
-DTEND;VALUE=DATE:20261105
-UID:98a8ea1519f8@esg-event-radar
-CATEGORIES:净零排放,循环经济,ESG数据,绿色营销,生物多样
+SUMMARY:Southeast Asia Sustainability Conference — 东南亚可持续发
+ 展会议
+DTSTART;VALUE=DATE:20260628
+DTEND;VALUE=DATE:20260629
+UID:d2c5c2087c7a@esg-event-radar
+CATEGORIES:棕榈油可持续供应链,碳信用,社区参与,生物多样
  性
+DESCRIPTION:主办方: 印尼可持续发展论坛 (ISF)\n形式: in-perso
+ n\n费用: paid\n议程: 聚焦印尼及东南亚地区 deforestation-free
+  法规合规，分享 RSPO 认证最新进展，设有中小农户转型
+ 融资专场。\n高管价值: ★★★☆☆\n评分依据: D1-区域性
+ 机构，权威度中等；D2-受众含CSO及VP级别；D3-与EUDR监管
+ 关联，但非全球倡议。综合评3分。\n报名: https://www.isf.or
+ .id/konferensi-keberlanjutan-2026\n来源: https://www.example.com/rss/kon
+ ferensi-keberlanjutan-asia-tenggara
+LOCATION:雅加达\, ID\, 雅加达会议中心
+URL:https://www.isf.or.id/konferensi-keberlanjutan-2026
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:CDP Supply Chain Forum 2026 — 2026年CDP供应链论坛
+DTSTART;VALUE=DATE:20260720
+DTEND;VALUE=DATE:20260721
+UID:87704e180d35@esg-event-radar
+CATEGORIES:供应链碳排放,供应商参与,范围三排放,气候风险
+ ,绿色采购
+DESCRIPTION:主办方: CDP (Carbon Disclosure Project)\n形式: online\n
+ 费用: free\n议程: 分享CDP供应链项目最新数据，探讨如何
+ 通过供应商合作降低范围三排放。\n高管价值: ★★★☆
+ ☆\n评分依据: D1-CDP为全球披露标准机构，D3-与自愿性披
+ 露标准关联，D2-受众偏操作层，D4-行业一般参与。综合
+ 评3分。\n报名: https://www.cdp.net/en/events/supply-chain-forum-2026\
+ n来源: https://www.cdp.net/en/events/supply-chain-forum-2026
+URL:https://www.cdp.net/en/events/supply-chain-forum-2026
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Asia Pacific ESG Forum — 亚太ESG论坛
+DTSTART;VALUE=DATE:20260628
+DTEND;VALUE=DATE:20260629
+UID:28a424e7822f@esg-event-radar
+CATEGORIES:ESG,净零排放,循环经济,供应链韧性,绿色技术
+DESCRIPTION:主办方: 世界经济论坛（WEF）\n形式: in-person\n费
+ 用: invite-only\n议程: 聚焦亚太地区净零转型路径，探讨CBA
+ M对出口导向型经济体的影响，以及自然资本核算区域实
+ 践。\n高管价值: ★★★★★\n评分依据: D1-WEF为顶级国际
+ 组织，D2-往届含多国CEO与部长出席，D3-与全球监管议程
+ 挂钩，D5-受邀制核心决策网络。综合评5分。\n报名: https:
+ //www.weforum.org/events/asia-pacific-esg-forum-2026\n来源: https://www.
+ weforum.org/events/asia-pacific-esg-forum-2026
+LOCATION:新加坡\, SG\, 滨海湾金沙会展中心
+URL:https://www.weforum.org/events/asia-pacific-esg-forum-2026
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Carbon Accounting and Net Zero Summit — 碳核算与净零峰会
+DTSTART;VALUE=DATE:20260712
+DTEND;VALUE=DATE:20260713
+UID:8524ee88851a@esg-event-radar
+CATEGORIES:碳核算,净零排放,范围三排放,SBTi,碳信用
 DESCRIPTION:主办方: GreenBiz Group\n形式: in-person\n费用: paid\n
- 议程: 探讨ESG数据质量与AI应用，设首席可持续发展官闭
- 门会，发布年度绿色商业趋势报告。\n高管价值: ★★★
- ★☆\n评分依据: D1-GreenBiz为行业头部媒体，D2-往届含多
- 家Fortune 500 CSO出席，D3-与ESG数据监管关联。综合评4分。\
- n报名: https://www.greenbiz.com/events/greenbiz-forum-2026\n来源: http
- s://www.example-rss.com/greenbiz-forum-2026
-LOCATION:凤凰城\, US\, 凤凰城会议中心
-URL:https://www.greenbiz.com/events/greenbiz-forum-2026
+ 议程: 深入探讨范围三排放核算方法学，SBTi最新验证标
+ 准，以及碳信用市场质量评估。\n高管价值: ★★★☆☆\
+ n评分依据: D1-GreenBiz为行业头部媒体，D2-受众以技术层为
+ 主，D3-与SBTi自愿标准关联，D4-行业一般参与。综合评3分
+ 。\n报名: https://www.greenbiz.com/events/carbon-accounting-summit-2026
+ \n来源: https://www.greenbiz.com/events/carbon-accounting-summit-2026
+LOCATION:旧金山\, US\, 旧金山莫斯康展览中心
+URL:https://www.greenbiz.com/events/carbon-accounting-summit-2026
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Sustainable Supply Chain Forum — 可持续供应链论坛
+DTSTART;VALUE=DATE:20260718
+DTEND;VALUE=DATE:20260719
+UID:0fdf0bb1a9b4@esg-event-radar
+CATEGORIES:供应链可持续性,人权尽职调查,CSDDD,循环经济,供
+ 应商参与
+DESCRIPTION:主办方: BSR (Business for Social Responsibility)\n形式: h
+ ybrid\n费用: paid\n议程: 重点解读EU CSDDD合规要求，分享供
+ 应链脱碳最佳实践，以及数字化工具在供应商管理中的
+ 应用。\n高管价值: ★★★★☆\n评分依据: D1-BSR为专业协
+ 会，D2-往届含多家跨国公司CSO出席，D3-与CSDDD监管直接挂
+ 钩，D5-付费开放但社交机会密集。综合评4分。\n报名: htt
+ ps://www.bsr.org/events/sustainable-supply-chain-forum-2026\n来源: https
+ ://www.bsr.org/events/sustainable-supply-chain-forum-2026
+LOCATION:巴黎\, FR\, 巴黎会议宫
+URL:https://www.bsr.org/events/sustainable-supply-chain-forum-2026
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:CDP Supply Chain Forum 2026 — 2026年CDP供应链论坛
+DTSTART;VALUE=DATE:20260908
+DTEND;VALUE=DATE:20260909
+UID:bf168fd2c5bc@esg-event-radar
+CATEGORIES:供应链碳排放,供应商参与,Scope 3,气候风险,绿色
+ 采购
+DESCRIPTION:主办方: CDP (碳信息披露项目)\n形式: hybrid\n费用
+ : paid\n议程: 聚焦Scope 3排放测量与供应商脱碳策略，发布
+ 《2026年全球供应链气候报告》，设采购商-供应商对接会
+ 。\n高管价值: ★★★☆☆\n评分依据: D1-CDP为全球披露标
+ 准机构，D2-受众以运营层为主，D3-与TCFD/CDP自愿性披露挂
+ 钩，D4-行业一般参与。综合评3分。\n报名: https://www.cdp.ne
+ t/en/supply-chain-forum-2026\n来源: https://www.cdp.net/en/supply-chain-
+ forum-2026
+LOCATION:伦敦\, GB\, 伦敦金融城希尔顿酒店
+URL:https://www.cdp.net/en/supply-chain-forum-2026
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Global Climate Week 2026 — 2026年全球气候周
+DTSTART;VALUE=DATE:20260921
+DTEND;VALUE=DATE:20260925
+UID:07e49826502d@esg-event-radar
+CATEGORIES:气候融资,国家自主贡献（NDC）,碳市场,适应与韧
+ 性
+DESCRIPTION:主办方: 联合国气候变化框架公约（UNFCCC）\n形
+ 式: hybrid\n费用: invite-only\n议程: 与联合国大会高级别周
+ 同期举行，聚焦全球盘点进展与加速气候行动路径。\n高
+ 管价值: ★★★★★\n评分依据: D1-UNFCCC为1级国际倡议组
+ 织，D2-多国元首与CEO出席，D3-与巴黎协定监管路径直接
+ 挂钩，D5-受邀制精英网络。综合评5分。\n报名: https://www.
+ globalclimateweek.org/register\n来源: https://unfccc.int/events/global-c
+ limate-week-2026
+LOCATION:纽约\, US\, 联合国总部
+URL:https://www.globalclimateweek.org/register
 END:VEVENT
 END:VCALENDAR
