@@ -16,7 +16,7 @@ A multilingual intelligence agent that monitors global ESG, sustainability, and 
 - **Notion database upsert** — Full-field sync with auto-created Notion properties
 - **ICS calendar generation** — `esg_events.ics` subscription file for calendar apps
 - **DingTalk alerts** — Top-10 event push notifications (optional)
-- **Automated weekly sync** — GitHub Actions cron runs every Monday 08:00 Beijing time, with manual trigger support
+- **Automated weekly sync** — GitHub Actions cron runs every Monday 06:00 Beijing time, with manual trigger support
 
 ## Architecture
 
@@ -84,7 +84,7 @@ The workflow `.github/workflows/run.yml` runs **once a week** on a cron schedule
 
 | UTC | Beijing (UTC+8) |
 |-----|-----------------|
-| Mon 00:00 | Mon 08:00 |
+| Sun 22:00 | Mon 06:00 |
 
 Each run performs three steps:
 

@@ -2,8 +2,8 @@ name: Event Radar Weekly Sync
 
 on:
   schedule:
-    # 每周一 UTC 00:00 → 北京时间 08:00
-    - cron: "0 0 * * 1"
+    # 每周一北京时间 06:00（周日 UTC 22:00）
+    - cron: "0 22 * * 0"
   workflow_dispatch: # 允许手动触发
 
 permissions:
