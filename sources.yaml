@@ -199,6 +199,43 @@ sources:
     tags: ["nickel", "cobalt", "Indonesia", "mining", "Bahasa-Indonesia"]
     active: true
 
+  # ── APNI ESG Forum & 印尼镍业 ESG 活动 ──
+  - name: "GNews: APNI ESG Forum Indonesia"
+    url: "https://news.google.com/rss/search?q=APNI+%28%22ESG+Forum%22+OR+%22ESG+Standard%22+OR+%22nickel%22%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: apac
+    org: "APNI"
+    tags: ["APNI", "ESG-Forum", "Indonesia", "nickel", "ESG-standard"]
+    active: true
+
+  - name: "GNews: APNI ESG Forum (Bahasa Indonesia)"
+    url: "https://news.google.com/rss/search?q=APNI+%28%22ESG+Forum%22+OR+%22Forum+ESG%22+OR+%22Standar+ESG%22%29+2026&hl=id&gl=ID&ceid=ID:id"
+    type: google_news
+    tier: 1
+    region: apac
+    org: "APNI"
+    tags: ["APNI", "ESG-Forum", "Indonesia", "nickel", "Bahasa-Indonesia"]
+    active: true
+
+  - name: "GNews: PNIA Philippines Nickel ESG Events"
+    url: "https://news.google.com/rss/search?q=%22Philippines+Nickel+Industry+Association%22+OR+PNIA+%28ESG+OR+sustainability+OR+conference+OR+forum%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 1
+    region: apac
+    org: "PNIA"
+    tags: ["PNIA", "Philippines", "nickel", "ESG", "Global-South"]
+    active: true
+
+  - name: "GNews: Indonesia Nickel ESG Country Standard"
+    url: "https://news.google.com/rss/search?q=%28Indonesia+OR+Jakarta%29+%28%22country-specific+ESG%22+OR+%22ESG+standard%22+OR+%22ESG+questionnaire%22%29+%28nickel+OR+mining%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: apac
+    org: "Google News"
+    tags: ["Indonesia", "ESG-standard", "country-specific", "nickel", "questionnaire"]
+    active: true
+
   # ══════════════════════════════════════════════════════════
   # 轨道 C+ — 关键 NGO/INGO/协会 GNews 定向（替代 html_calendar 爬虫）
   # 原则: 每个组织一条精准查询，锚定 (summit|conference|forum|event) + 2026
