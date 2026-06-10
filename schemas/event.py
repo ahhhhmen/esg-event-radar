@@ -18,6 +18,10 @@ class EventItem(BaseModel):
     # ── 核心身份 ──────────────────────────────────────────
     event_id: str = Field(description="SHA256[:12](standard_name_en+start_date)，Notion Upsert 去重主键")
     name: str = Field(description="活动展示名称，推荐格式 'English Name — 中文名称'")
+    original_name: str = Field(
+        default="",
+        description="原始语言名称，保留源语言（英文/印尼文/法文/中文原文），用于 Notion 原文名称列",
+    )
     standard_name_en: str = Field(
         default="",
         description="标准英文名，用于跨语言精确去重。无论原文什么语言，统一翻译为英文",

@@ -665,6 +665,7 @@ class EventRadarAgent:
 {{
   "event_id": "占位，系统会覆盖",
   "name": "活动展示名称，格式: '英文名称 — 中文名称'（与原 standard_name_en / display_name_zh 对应）",
+  "original_name": "活动原文名称（保留源语言），如果源语言是英文/印尼文/法文则保留原文，如果源语言是中文则保留中文原文",
   "standard_name_en": "标准英文名，用于去重。无论原文是什么语言（中文/印尼语/法语/英语），统一翻译为简洁的英文名称",
   "display_name_zh": "中文展示名，用于中文显示。无论原文是什么语言，统一翻译为中文",
   "organizer": "主办方（中文或中英双语）",
@@ -1422,6 +1423,7 @@ class EventRadarAgent:
     # 需要在数据库中创建的属性（title 属性"Name"由 Notion 自动创建）
     _NOTION_REQUIRED_PROPS: dict = {
         "Event ID":            {"rich_text": {}},
+        "Original Name":       {"rich_text": {}},
         "Organizer":           {"rich_text": {}},
         "Start Date":          {"date": {}},
         "End Date":            {"date": {}},
@@ -1559,6 +1561,7 @@ class EventRadarAgent:
         props: dict = {
             title_prop_name:        {"title": [{"text": {"content": notion_title[:200]}}]},
             "Event ID":             txt(ev.event_id),
+            "Original Name":        txt(ev.original_name),
             "Organizer":            txt(ev.organizer),
             "Start Date":           dt(ev.start_date),
             "End Date":             dt(ev.end_date),
