@@ -49,6 +49,7 @@ jobs:
             git add output/esg_events.ics
             if ! git diff-index --quiet HEAD; then
               git commit -m "chore: auto-update calendar file [skip ci]"
+              git pull --rebase origin main
               git push
             else
               echo "No calendar changes detected."
