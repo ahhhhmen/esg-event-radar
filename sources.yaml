@@ -331,10 +331,10 @@ sources:
     tags: ["RBA", "responsible-sourcing", "supply-chain-audit"]
     active: true
 
-  # ── 环境 NGO/INGO（新增）──
+  # ── 环境 NGO/INGO（扩展覆盖：Greenpeace、EDF、NRDC、Friends of the Earth 等）──
 
   - name: "GNews: WWF Conservation Events"
-    url: "https://news.google.com/rss/search?q=WWF+%28conference+OR+forum+OR+summit+OR+event%29+2026+sustainability&hl=en-US&gl=US&ceid=US:en"
+    url: "https://news.google.com/rss/search?q=WWF+%28conference+OR+forum+OR+summit+OR+event+OR+training+OR+webinar%29+2026+sustainability&hl=en-US&gl=US&ceid=US:en"
     type: google_news
     tier: 2
     region: global
@@ -342,8 +342,71 @@ sources:
     tags: ["WWF", "conservation", "biodiversity", "nature-positive"]
     active: true
 
+  - name: "GNews: Greenpeace Global Events & Campaigns"
+    url: "https://news.google.com/rss/search?q=Greenpeace+%28conference+OR+forum+OR+summit+OR+event+OR+training+OR+webinar+OR+campaign+OR+workshop%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "Greenpeace"
+    tags: ["Greenpeace", "climate-action", "oceans", "forests", "renewable-energy"]
+    active: true
+
+  - name: "GNews: Greenpeace Asia Pacific Events"
+    url: "https://news.google.com/rss/search?q=Greenpeace+%28Indonesia+OR+India+OR+Philippines+OR+Thailand+OR+%22Southeast+Asia%22+OR+%22East+Asia%22%29+%28event+OR+training+OR+workshop+OR+campaign+OR+conference%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: apac
+    org: "Greenpeace"
+    tags: ["Greenpeace", "Asia-Pacific", "Indonesia", "Southeast-Asia", "climate"]
+    active: true
+
+  - name: "GNews: Greenpeace Europe Events (EN/FR)"
+    url: "https://news.google.com/rss/search?q=Greenpeace+%28EU+OR+Brussels+OR+France+OR+Germany+OR+UK+OR+Netherlands%29+%28event+OR+training+OR+workshop+OR+campaign+OR+conference%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: emea
+    org: "Greenpeace"
+    tags: ["Greenpeace", "Europe", "EU", "climate-policy", "CSRD"]
+    active: true
+
+  - name: "GNews: Environmental Defense Fund EDF Events"
+    url: "https://news.google.com/rss/search?q=%22Environmental+Defense+Fund%22+OR+EDF+%28conference+OR+forum+OR+summit+OR+event+OR+training+OR+webinar%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "EDF"
+    tags: ["EDF", "methane", "climate-science", "satellite-monitoring", "carbon-markets"]
+    active: true
+
+  - name: "GNews: NRDC Natural Resources Defense Council Events"
+    url: "https://news.google.com/rss/search?q=%22Natural+Resources+Defense+Council%22+OR+NRDC+%28conference+OR+forum+OR+summit+OR+event+OR+training+OR+webinar%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "NRDC"
+    tags: ["NRDC", "clean-energy", "climate-litigation", "environmental-justice"]
+    active: true
+
+  - name: "GNews: Friends of the Earth Global Events"
+    url: "https://news.google.com/rss/search?q=%22Friends+of+the+Earth%22+%28conference+OR+forum+OR+summit+OR+event+OR+training+OR+campaign%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "Friends of the Earth"
+    tags: ["Friends-of-the-Earth", "climate-justice", "biodiversity", "corporate-accountability"]
+    active: true
+
+  - name: "GNews: 350.org Climate Movement Events"
+    url: "https://news.google.com/rss/search?q=350.org+%28conference+OR+forum+OR+summit+OR+event+OR+training+OR+campaign+OR+%22global+day+of+action%22%29+2026&hl=en-US&gl=US&ceid=US:en"
+    type: google_news
+    tier: 2
+    region: global
+    org: "350.org"
+    tags: ["350.org", "fossil-fuel-divestment", "climate-movement", "renewable-energy"]
+    active: true
+
   - name: "GNews: IUCN Congress & Conservation Events"
-    url: "https://news.google.com/rss/search?q=IUCN+%28congress+OR+conference+OR+forum+OR+summit+OR+event%29+2026&hl=en-US&gl=US&ceid=US:en"
+    url: "https://news.google.com/rss/search?q=IUCN+%28congress+OR+conference+OR+forum+OR+summit+OR+event+OR+training%29+2026&hl=en-US&gl=US&ceid=US:en"
     type: google_news
     tier: 2
     region: global
