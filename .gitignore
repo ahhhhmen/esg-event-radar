@@ -1,4 +1,15 @@
+# 忽略敏感的密钥文件（极其重要！）
 .env
-venv/
+
+# 忽略 Python 运行产生的缓存文件
 __pycache__/
 *.pyc
+.pytest_cache/
+
+# 忽略本地运行产生的临时数据和日志
+logs/
+data/
+
+# 忽略本地虚拟环境（如果本地创建了 venv）
+venv/
+.venv/

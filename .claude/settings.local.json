@@ -20,7 +20,11 @@
       "Bash(git commit -m 'ci: GitHub Actions 每周一早8点自动运行 ESG Event Radar *)",
       "Bash(./venv/bin/pip install *)",
       "Bash(git commit -m 'feat: Phase 7 .ics 日历生成实现 *)",
-      "Bash(git commit -m 'ci: Workflow 自动回传 .ics 日历文件到仓库；解除 .gitignore 对 .ics 的排除 *)"
+      "Bash(git commit -m 'ci: Workflow 自动回传 .ics 日历文件到仓库；解除 .gitignore 对 .ics 的排除 *)",
+      "Bash(git commit -m 'feat: 新增 15 条 NGO/INGO/协会 GNews 源（UNGC/WBCSD/CDP/SBTi/GRI/PRI/BSR/RBA/WWF/IUCN/Ceres/WRI/TNC/UNEP/ILO）；LLM 容错补全 source_url 为 None 的边界情况 *)",
+      "Bash(git commit -m 'perf: Phase 1/4/6 三阶段并发改造；ContentExtractor 超时降至 3s *)",
+      "Bash(git commit -m 'perf: Phase 3 跳过 Google News 源正文提取（305条直接回退），69s→12s \\(5.8x\\) *)",
+      "Bash(git commit -m 'feat: 新增 13 条源 — 关键矿产协会\\(IRMA/RMI/Nickel/Cobalt/Copper/CopperMark/CMSI/LME\\) + 中文ESG媒体\\(财新/新浪/21世纪/关键矿产中文\\) *)"
     ]
   }
 }

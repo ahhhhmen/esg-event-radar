@@ -1,0 +1,36 @@
+{
+  "started_at": "2026-06-10T12:59:57.575764+00:00",
+  "sources_used": [
+    "ESG Today (RSS EN)",
+    "GNews: Tier1 Org Events",
+    "UNGC Events Page (HTML Calendar)"
+  ],
+  "stages": {
+    "fetch": {
+      "raw_items": 21,
+      "elapsed_s": 23.9
+    },
+    "content": {
+      "total": 21,
+      "bodies": 21,
+      "elapsed_s": 5.6
+    },
+    "llm": {
+      "total": 9,
+      "normal": 9,
+      "degraded": 0,
+      "elapsed_s": 24.7
+    },
+    "dedup": {
+      "before": 9,
+      "after": 9,
+      "removed": 0
+    }
+  },
+  "env_status": {
+    "DEEPSEEK_API_KEY": true,
+    "NOTION_TOKEN": true,
+    "NOTION_DATABASE_ID": true
+  },
+  "success": true
+}

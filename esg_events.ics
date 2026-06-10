@@ -7,166 +7,248 @@ X-WR-CALDESC:自动扫描全球 ESG 与可持续发展会议，高管参
  会决策参考
 X-WR-CALNAME:ESG 全球会议日历
 BEGIN:VEVENT
-SUMMARY:Climate Group Opportunity Summit
-UID:297cbaf45442@esg-event-radar
-DESCRIPTION:主办方: Climate Group\n形式: unknown\n费用: unknown\n
- 议程: New summit supported by the Mayor of London\, focusing on climate 
- opportunities.\n高管价值: ★★★☆☆\n评分依据: D1-权威度
- 中（国际NGO），D2-CEO出席信息不足，D3-与气候监管间接
- 关联，D4-竞争情报价值中。综合评3分。\n来源: https://www.
- theclimategroup.org
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:WBCSD Connect at Ecosperity Week 2026
-UID:f425cc603315@esg-event-radar
-DESCRIPTION:主办方: World Business Council for Sustainable Development 
- (WBCSD)\n形式: in-person\n费用: unknown\n议程: WBCSD networking even
- t held during Ecosperity Week\, connecting business leaders on sustainabil
- ity.\n高管价值: ★★★☆☆\n评分依据: D1-权威度中（WBCSD
- ），D2-受众含高管，D3-与自愿性披露标准关联，D4-竞争
- 情报价值中。综合评3分。\n来源: https://www.wbcsd.org
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Bonn Climate Conference 2026 (SB64)
+SUMMARY:Net Zero Conference 2026
 DTSTART;VALUE=DATE:20260601
-DTEND;VALUE=DATE:20260612
-UID:119a69a3d6e4@esg-event-radar
-CATEGORIES:Climate Finance,COP31,Carbon Accounting,Adaptation,Fossil Fuels
-DESCRIPTION:主办方: UNFCCC\n形式: in-person\n费用: unknown\n议程:
-  Mid-year UN climate talks setting stage for COP31\, focusing on adaptatio
- n\, fossil fuel phase-down\, climate finance\, and carbon accounting progr
- ess.\n高管价值: ★★★★★\n评分依据: D1-UNFCCC为1级国际
- 倡议组织，D3-直接挂钩COP31监管议程，D2-多国部长级官员
- 出席。综合评5分。\n来源: https://www.downtoearth.org.in
-LOCATION:Bonn\, DE\, World Conference Center Bonn
+DTEND;VALUE=DATE:20260601
+UID:200be1d75326@esg-event-radar
+CATEGORIES:net zero,climate action,sustainability,media partnership
+DESCRIPTION:主办方: Net Zero Conference\n形式: unknown\n费用: unkno
+ wn\n议程: Net Zero Conference announces official PR & Media Partner for 
+ 2026\, signaling preparations for the upcoming event.\n高管价值: ★
+ ★★☆☆\n评分依据: D1-主办方为专业会议组织者，权威
+ 度中等；D2-受众含企业高管，但CEO出席未明确；D3-与净
+ 零目标挂钩，监管关联中等。综合评3分。\n来源: https://w
+ ww.prweb.com
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Summer Davos 2026 (World Economic Forum Annual Meeting of the New 
- Champions)
-DTSTART;VALUE=DATE:20260625
-DTEND;VALUE=DATE:20260627
-UID:d31b7389b65b@esg-event-radar
-CATEGORIES:Global Economy,Climate Action,Energy Transition,Geopolitics,Tec
- hnology
-DESCRIPTION:主办方: World Economic Forum\n形式: in-person\n费用: in
- vite-only\n议程: High-level gathering of global leaders discussing econo
- mic outlook\, climate priorities\, and energy security ahead of COP31.\n
- 高管价值: ★★★★★\n评分依据: D1-WEF为顶级全球论坛
- ，D2-明确CEO/政府首脑出席，D5-受邀制精英网络。综合评5
- 分。\n来源: https://www.weforum.org
-LOCATION:Tianjin\, CN
+SUMMARY:COP31 (31st Conference of the Parties to the UNFCCC)
+DTSTART;VALUE=DATE:20261109
+DTEND;VALUE=DATE:20261120
+UID:57b8a3a89243@esg-event-radar
+CATEGORIES:Climate Change,Electrification,Energy Efficiency,Waste Targets,
+ Global Policy
+DESCRIPTION:主办方: United Nations Framework Convention on Climate Chan
+ ge (UNFCCC) / Turkey\n形式: in-person\n费用: unknown\n议程: Host Tur
+ key proposes 35% by 2035 global electrification goal\; new building energy
+  efficiency and waste targets to be discussed.\n高管价值: ★★★★
+ ★\n评分依据: D1-UNFCCC最高权威国际气候会议\; D2-全球元
+ 首/CEO/CSO密集出席\; D3-直接挂钩全球气候监管议程\; D5-受
+ 邀制核心决策网络。综合评5分。\n来源: https://www.businessg
+ reen.com
+LOCATION:Antalya\, TR
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:RIAA 2026 (Responsible Investment Association Australasia Conferen
- ce)
-DTSTART;VALUE=DATE:20260604
-DTEND;VALUE=DATE:20260605
-UID:4c34e79ea960@esg-event-radar
-CATEGORIES:ESG Investing,Sustainable Finance,Climate Risk,Regulatory Lands
- cape
-DESCRIPTION:主办方: Responsible Investment Association Australasia\n形
- 式: in-person\n费用: paid\n议程: Australian investors discuss ESG res
- ilience amid US backlash\, focusing on sustainable finance and climate ris
- k integration.\n高管价值: ★★★☆☆\n评分依据: D1-RIAA为区
- 域专业协会，D2-受众含高管但无CEO硬承诺，D3-涉及ESG监
- 管趋势。综合评3分。\n来源: https://www.netzeroinvestor.net
-LOCATION:Sydney\, AU
+SUMMARY:US Leaders' Forum
+DTSTART;VALUE=DATE:20260610
+DTEND;VALUE=DATE:20260610
+UID:ff74004f2e26@esg-event-radar
+CATEGORIES:Climate Leadership,Corporate Action,US Policy
+DESCRIPTION:主办方: Climate Group\n形式: in-person\n费用: unknown\n
+ 议程: High-level forum convening US business and policy leaders to accel
+ erate climate action and drive net-zero commitments.\n高管价值: ★★
+ ★★☆\n评分依据: D1-Climate Group为国际权威气候倡议组织
+ \; D2-定位为领袖论坛，CEO/CSO出席密度高\; D3-与US气候政
+ 策及企业披露关联。综合评4分。\n报名: https://www.theclimat
+ egroup.org\n来源: https://www.theclimategroup.org
+LOCATION:US
+URL:https://www.theclimategroup.org
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Sustainability LIVE at Climate Week NYC
+DTSTART;VALUE=DATE:20260921
+DTEND;VALUE=DATE:20260923
+UID:f82999087005@esg-event-radar
+CATEGORIES:sustainability,climate week,ESG,net zero
+DESCRIPTION:主办方: BizClik Media\n形式: in-person\n费用: paid\n议
+ 程: Third consecutive year during Climate Week NYC\, featuring major bran
+ ds and sustainability leaders.\n高管价值: ★★★★☆\n评分依
+ 据: D1-主办方为行业头部媒体BizClik，D2-往届含品牌高管
+ 出席，D3-与气候周监管议程挂钩，D4-多家大品牌参与。
+ 综合评4分。\n来源: https://www.manilatimes.net
+LOCATION:New York City\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Sustainability LIVE at LCAW 2026
 DTSTART;VALUE=DATE:20260601
 DTEND;VALUE=DATE:20260630
 UID:2ef66bffedef@esg-event-radar
-CATEGORIES:Sustainability,Climate Action,London Climate Action Week
-DESCRIPTION:主办方: Sustainability Magazine\n形式: unknown\n费用: u
- nknown\n议程: Major brands join Sustainability LIVE event during London 
- Climate Action Week 2026.\n高管价值: ★★★★☆\n评分依据: D1
- -主办方为行业头部媒体，权威度中；D2-往届含品牌高管
- 出席；D3-与伦敦气候周及监管议程挂钩。综合评4分。\n
- 来源: https://sustainabilitymag.com
+CATEGORIES:sustainability,climate,LCAW,brands
+DESCRIPTION:主办方: Sustainability Magazine / BizClik Media\n形式: in
+ -person\n费用: paid\n议程: Major brands join Sustainability LIVE durin
+ g London Climate Action Week 2026.\n高管价值: ★★★★☆\n评分
+ 依据: D1-行业媒体主办，D2-含品牌高管出席，D3-与LCAW气
+ 候议程挂钩，D4-多家大品牌参与。综合评4分。\n来源: htt
+ ps://sustainabilitymag.com
 LOCATION:London\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Net Zero Conference 2026
-DTSTART;VALUE=DATE:20260601
-DTEND;VALUE=DATE:20260630
-UID:200be1d75326@esg-event-radar
-CATEGORIES:Net Zero,Climate,Sustainability
-DESCRIPTION:主办方: Kathy Berardi (PR & Media Partner)\n形式: unknown
- \n费用: unknown\n议程: Annual net zero conference with official PR and
-  media partner announcement for 2026.\n高管价值: ★★★☆☆\n评
- 分依据: D1-主办方信息有限，权威度中；D2-受众定位高管
- ，但无CEO硬承诺；D3-与净零监管趋势相关。综合评3分。\
- n来源: https://www.prweb.com
+SUMMARY:SB'26 San Diego: All Rise
+DTSTART;VALUE=DATE:20260527
+DTEND;VALUE=DATE:20260529
+UID:62341f6b2dd5@esg-event-radar
+CATEGORIES:sustainability,brands,innovation,leadership
+DESCRIPTION:主办方: Sustainable Brands\n形式: in-person\n费用: paid
+ \n议程: Calls leaders to 'All Rise' at a critical moment for business\, 
+ focusing on sustainable brand leadership.\n高管价值: ★★★★☆\n
+ 评分依据: D1-专业协会Sustainable Brands，D2-受众含高管，D3-
+ 与品牌可持续监管相关，D4-同业情报价值高。综合评4分
+ 。\n来源: https://csrwire.com
+LOCATION:San Diego\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:SFi Impact Week 2026
-DTSTART;VALUE=DATE:20260526
-DTEND;VALUE=DATE:20260526
-UID:0a01e7b69195@esg-event-radar
-CATEGORIES:Impact Investing,Sustainable Finance,Capital Markets
-DESCRIPTION:主办方: SFi\n形式: in-person\n费用: unknown\n议程: Gl
- obal capital leaders convene in Hong Kong to accelerate purpose-driven inv
- estment.\n高管价值: ★★★★☆\n评分依据: D1-主办方为专
- 业影响力投资机构，权威度中；D2-全球资本领袖参会，
- 高管密度高；D3-与可持续金融监管趋势相关。综合评4分
- 。\n来源: https://www.manilatimes.net
-LOCATION:Hong Kong\, HK
+SUMMARY:Procurement LIVE: The London Summit 2026
+DTSTART;VALUE=DATE:20260610
+DTEND;VALUE=DATE:20260610
+UID:3241c81bd4ac@esg-event-radar
+CATEGORIES:procurement,supply chain,sustainability,digital transformation
+DESCRIPTION:主办方: Supply Chain Digital\n形式: in-person\n费用: pa
+ id\n议程: Summit focused on procurement and supply chain strategies\, li
+ kely covering sustainability and digitalization.\n高管价值: ★★★
+ ☆☆\n评分依据: D1-行业头部媒体主办，D2-受众含高管，D
+ 3-供应链可持续性与监管间接相关，D4-同业参与可能高。
+ 综合评3分。\n来源: https://supplychaindigital.com
+LOCATION:London\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:NYC Climate Week 2026
-DTSTART;VALUE=DATE:20260921
-DTEND;VALUE=DATE:20260927
-UID:b6ca3bb0baa1@esg-event-radar
-CATEGORIES:Climate Change,Sustainability,Net Zero
-DESCRIPTION:主办方: WBCSD\n形式: hybrid\n费用: unknown\n议程: WBC
- SD participation in NYC Climate Week\, focusing on climate action and sust
- ainable business transformation.\n高管价值: ★★★★☆\n评分依
- 据: D1-WBCSD为全球权威商业可持续发展组织；D2-往届含CEO/
- CSO出席；D3-与全球气候监管议程挂钩；D4-头部企业参与
- 。综合评4分。\n报名: https://www.wbcsd.org\n来源: https://www.wb
- csd.org
-LOCATION:New York City\, US
-URL:https://www.wbcsd.org
+SUMMARY:Indonesia Critical Minerals 2026
+DTSTART;VALUE=DATE:20260610
+DTEND;VALUE=DATE:20260610
+UID:098e33437c80@esg-event-radar
+CATEGORIES:critical minerals,nickel,sustainable development,multi-stakehol
+ der collaboration,ESG
+DESCRIPTION:主办方: VOI.id\n形式: in-person\n费用: unknown\n议程:
+  Tsingshan Group promotes green and sustainable nickel development through
+  multi-stakeholder collaboration.\n高管价值: ★★★☆☆\n评分
+ 依据: D1-区域性行业论坛，D2-含企业高管，D3-与ESG及可持
+ 续采矿相关，D4-头部镍企参与。综合评3分。\n来源: https:
+ //voi.id
+LOCATION:ID
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Fastmarkets Battery and Energy Storage Conference
+DTSTART;VALUE=DATE:20260528
+DTEND;VALUE=DATE:20260528
+UID:0daae9ad8703@esg-event-radar
+CATEGORIES:battery materials,energy storage,critical minerals,supply chain
+DESCRIPTION:主办方: Fastmarkets\n形式: in-person\n费用: paid\n议
+ 程: Industry conference covering battery raw materials\, energy storage t
+ echnologies\, and market outlook for 2026.\n高管价值: ★★★☆☆\
+ n评分依据: D1-行业权威媒体主办，D2-受众含高管，D3-与
+ 关键矿产监管关联，D4-同业参与度高。综合评3分。\n来
+ 源: https://www.fastmarkets.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:18th Global Lithium\, Battery and Critical Materials Conference
+DTSTART;VALUE=DATE:20260529
+DTEND;VALUE=DATE:20260529
+UID:d2922fd05e17@esg-event-radar
+CATEGORIES:lithium,battery,critical minerals,national security,industrial 
+ policy
+DESCRIPTION:主办方: Fastmarkets\n形式: in-person\n费用: paid\n议
+ 程: Convenes global critical minerals leaders to discuss market shifts dr
+ iven by national security and industrial policy.\n高管价值: ★★★
+ ★☆\n评分依据: D1-行业权威媒体主办，D2-明确提及全球
+ 领导者参会，D3-与关键矿产国家安全政策直接挂钩，D4-
+ 头部企业参与。综合评4分。\n来源: https://batteriesnews.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Fastmarkets Global Lithium Battery and Critical Materials Conferen
+ ce 2026
+DTSTART;VALUE=DATE:20260527
+DTEND;VALUE=DATE:20260527
+UID:cddc49ddae61@esg-event-radar
+CATEGORIES:lithium,battery,critical materials,supply chain
+DESCRIPTION:主办方: Fastmarkets\n形式: in-person\n费用: paid\n议
+ 程: Global conference focusing on lithium\, battery\, and critical materi
+ als market trends and supply chain dynamics.\n高管价值: ★★★☆
+ ☆\n评分依据: D1-行业权威媒体主办，D2-受众含高管，D3-
+ 与关键矿产供应链监管关联，D4-同业参与度高。综合评3
+ 分。\n来源: https://discoveryalert.com.au
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Critical Minerals Conference 2026
+DTSTART;VALUE=DATE:20260603
+DTEND;VALUE=DATE:20260603
+UID:1f72173cadd3@esg-event-radar
+CATEGORIES:critical minerals,nickel,downstream,sustainability
+DESCRIPTION:主办方: Unknown\n形式: in-person\n费用: unknown\n议程
+ : Conference opened in Jakarta focusing on critical minerals\, with discus
+ sions on downstream processing and sustainable practices.\n高管价值: 
+ ★★★☆☆\n评分依据: D1-主办方为行业媒体，权威度中
+ ；D2-标题含'opens'暗示开幕，高管参与可能；D3-与关键矿
+ 产监管相关，中档。综合评3分。\n来源: https://www.petromind
+ o.com
+LOCATION:Jakarta\, ID
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Indonesia Critical Minerals 2026
+DTSTART;VALUE=DATE:20260610
+DTEND;VALUE=DATE:20260610
+UID:098e33437c80@esg-event-radar
+CATEGORIES:critical minerals,green nickel,sustainability,multi-stakeholder
+  collaboration
+DESCRIPTION:主办方: VOI.id\n形式: in-person\n费用: unknown\n议程:
+  Tsingshan Group promotes green and sustainable nickel development through
+  multi-stakeholder collaboration.\n高管价值: ★★★☆☆\n评分
+ 依据: D1-主办方为新闻媒体，权威度中；D2-提及Tsingshan Gr
+ oup高管参与，中档；D3-与绿色矿产监管相关，中档。综
+ 合评3分。\n来源: https://voi.id
+LOCATION:Jakarta\, ID
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2nd ESG Forum 2026
+DTSTART;VALUE=DATE:20260529
+DTEND;VALUE=DATE:20260529
+UID:149e9f6fe5b1@esg-event-radar
+CATEGORIES:ESG,nickel,sustainability,standardization,Indonesia
+DESCRIPTION:主办方: APNI (Asosiasi Penambang Nikel Indonesia)\n形式: 
+ in-person\n费用: unknown\n议程: APNI's 2nd ESG Forum aims to strengthe
+ n the competitiveness of Indonesian nickel through ESG standardization.\n
+ 高管价值: ★★★☆☆\n评分依据: D1-主办方APNI为行业头
+ 部协会，权威度中；D2-论坛定位行业高管，中档；D3-与ES
+ G标准化监管直接相关，中档。综合评3分。\n来源: https://
+ apni.id
+LOCATION:Jakarta\, ID
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:SDG Global Business Forum 2026
+UID:cb7224f7bbf9@esg-event-radar
+DESCRIPTION:主办方: UN Global Compact\n形式: unknown\n费用: unknown
+ \n议程: Annual forum convening global business leaders to advance the Su
+ stainable Development Goals.\n高管价值: ★★★★★\n评分依据:
+  D1-UNGC为1级国际倡议组织，D2-往届含全球CEO出席，D3-与SD
+ Gs监管路径直接挂钩。综合评5分。\n来源: https://sdg.iisd.or
+ g
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:WBCSD at NYC Climate Week
+UID:88698d8beb83@esg-event-radar
+DESCRIPTION:主办方: WBCSD\n形式: in-person\n费用: unknown\n议程: 
+ WBCSD-led sessions and networking events during NYC Climate Week\, focusin
+ g on business climate leadership.\n高管价值: ★★★★☆\n评分
+ 依据: D1-WBCSD为全球权威商业可持续发展组织；D2-受众含C
+ SO/高管；D3-与气候监管议程直接挂钩。综合评4分。\n来
+ 源: https://www.wbcsd.org
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:WBCSD Connect at Ecosperity Week 2026
+UID:0c09fccd02a3@esg-event-radar
+DESCRIPTION:主办方: WBCSD\n形式: in-person\n费用: unknown\n议程: 
+ WBCSD networking and knowledge-sharing event at Ecosperity Week\, connecti
+ ng business leaders on sustainability.\n高管价值: ★★★★☆\n评
+ 分依据: D1-WBCSD权威度高；D2-受众含CSO/高管；D3-与亚洲可
+ 持续监管趋势关联；D4-同业参与度高。综合评4分。\n来
+ 源: https://www.wbcsd.org
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:LCAW 2026: Climate cooperation in a fragmented world
-DTSTART;VALUE=DATE:20260603
-DTEND;VALUE=DATE:20260603
-UID:449c1e55e175@esg-event-radar
-CATEGORIES:Climate Cooperation,Geopolitics,Sustainability
+UID:e1be2066aee1@esg-event-radar
 DESCRIPTION:主办方: E3G\n形式: unknown\n费用: unknown\n议程: Lond
- on Climate Action Week session discussing climate cooperation in a fragmen
- ted geopolitical landscape.\n高管价值: ★★★☆☆\n评分依据: 
- D1-E3G为知名气候智库，权威度中；D2-受众含政策制定者
- ，CEO出席不确定；D3-与气候政策直接相关；D4-竞争情报
- 价值中。综合评3分。\n报名: https://www.e3g.org\n来源: https:/
- /www.e3g.org
-URL:https://www.e3g.org
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Global Carbon Markets Conference
-DTSTART;VALUE=DATE:20260608
-DTEND;VALUE=DATE:20260608
-UID:619d5638486d@esg-event-radar
-CATEGORIES:Carbon Markets,Climate Finance,ESG
-DESCRIPTION:主办方: S&P Global\n形式: unknown\n费用: paid\n议程: 
- Conference covering global carbon market trends\, pricing\, and regulatory
-  developments.\n高管价值: ★★★☆☆\n评分依据: D1-S&P Global
- 为权威金融数据机构；D2-受众含高级管理层；D3-与碳市
- 场监管直接挂钩；D4-同业情报价值中。综合评3分。\n报
- 名: https://www.spglobal.com\n来源: https://www.spglobal.com
-URL:https://www.spglobal.com
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Our Ocean Conference 2026
-UID:10c7dbff030e@esg-event-radar
-DESCRIPTION:主办方: WWF\n形式: unknown\n费用: unknown\n议程: Annu
- al global conference focused on ocean conservation and sustainable blue ec
- onomy solutions.\n高管价值: ★★★★☆\n评分依据: D1-WWF为
- 全球顶级环保组织，权威度高；D3-与海洋监管议程直接
- 挂钩；D4-头部企业及政府参与度高。综合评4分。\n来源: 
- https://wwf.panda.org
+ on Climate Action Week event exploring climate cooperation amid geopolitic
+ al fragmentation.\n高管价值: ★★★★☆\n评分依据: D1-E3G为
+ 权威气候政策智库；D2-受众含政策制定者与商业领袖；D3
+ -与全球气候监管议程直接挂钩。综合评4分。\n来源: https
+ ://www.e3g.org
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Western Balkans Restoration Conference: Advancing Nature-based Sol
@@ -174,102 +256,26 @@ SUMMARY:Western Balkans Restoration Conference: Advancing Nature-based Sol
 DTSTART;VALUE=DATE:20260527
 DTEND;VALUE=DATE:20260527
 UID:64f26c912843@esg-event-radar
-CATEGORIES:nature-based solutions,ecosystem restoration,Green Agenda,Weste
- rn Balkans
+CATEGORIES:nature-based solutions,restoration,Green Agenda,Western Balkans
 DESCRIPTION:主办方: IUCN\n形式: in-person\n费用: unknown\n议程: C
  onference advancing nature-based solutions under the Green Agenda for the 
- Western Balkans region.\n高管价值: ★★★☆☆\n评分依据: D1-I
- UCN为全球权威自然保护组织；D3-与欧盟绿色议程监管挂
- 钩；D4-区域性活动，竞争情报价值中等。综合评3分。\n
- 来源: https://iucn.org
+ Western Balkans.\n高管价值: ★★★☆☆\n评分依据: D1-IUCN为
+ 全球权威自然保护组织，权威度高；D2-受众含政策制定
+ 者，CEO出席不明确；D3-与欧盟绿色议程监管挂钩；D4-区
+ 域性强。综合评3分。\n来源: https://iucn.org
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:EU Green Week 2026 – IUCN Partner Events
 DTSTART;VALUE=DATE:20260528
 DTEND;VALUE=DATE:20260528
 UID:1869364a31d5@esg-event-radar
-CATEGORIES:EU Green Deal,environmental policy,sustainability,biodiversity
+CATEGORIES:EU Green Week,environment,sustainability,nature
 DESCRIPTION:主办方: IUCN\n形式: hybrid\n费用: unknown\n议程: IUCN
-  partner events during EU Green Week\, focusing on environmental policy an
- d sustainability.\n高管价值: ★★★★☆\n评分依据: D1-IUCN权
- 威组织，EU Green Week为高规格政策平台；D3-直接关联EU Gree
- n Deal监管议程；D2-政策制定者与高管密集参与。综合评4
- 分。\n来源: https://iucn.org
-LOCATION:Brussels\, BE
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:2026 Global Fashion Summit
-DTSTART;VALUE=DATE:20260527
-DTEND;VALUE=DATE:20260527
-UID:110b8d18d70e@esg-event-radar
-CATEGORIES:sustainable fashion,bio-spandex,textile innovation,ESG
-DESCRIPTION:主办方: Global Fashion Agenda\n形式: in-person\n费用: p
- aid\n议程: Hyosung TNC highlighted progress on bio-spandex at the 2026 G
- lobal Fashion Summit\, showcasing sustainable textile innovations.\n高管
- 价值: ★★★★☆\n评分依据: D1-行业顶级峰会，D2-往届
- 含CEO/CSO出席，D3-与时尚业ESG监管趋势挂钩，D4-头部品牌
- 参与。综合评4分。\n来源: https://www.msn.com
-LOCATION:Copenhagen\, DK
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Intersolar Europe 2026
-DTSTART;VALUE=DATE:20260602
-DTEND;VALUE=DATE:20260602
-UID:8234b4474098@esg-event-radar
-CATEGORIES:solar energy,photovoltaics,renewable energy,TNC 3.0 series
-DESCRIPTION:主办方: Solar Promotion GmbH\n形式: in-person\n费用: pa
- id\n议程: Tongwei to showcase TNC 3.0 series at Intersolar Europe 2026\,
-  highlighting solar technology advancements.\n高管价值: ★★★☆
- ☆\n评分依据: D1-行业知名展会，D2-参展商为主，CEO出席
- 不确定，D3-与可再生能源政策相关，D4-同业竞争情报价
- 值中。综合评3分。\n来源: https://www.pv-magazine.com
-LOCATION:Munich\, DE
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:World Environment Day 2026
-DTSTART;VALUE=DATE:20260605
-DTEND;VALUE=DATE:20260605
-UID:35277e208cf4@esg-event-radar
-CATEGORIES:environment,climate action,circular economy,World Environment D
- ay
-DESCRIPTION:主办方: UNEP\n形式: hybrid\n费用: free\n议程: Global 
- celebration of World Environment Day 2026\, focusing on building circular 
- cities for a healthier planet.\n高管价值: ★★★★☆\n评分依
- 据: D1-UNEP为顶级国际组织，D2-多国政要及CEO参与，D3-与
- 全球环境监管议程直接挂钩，D5-全球性网络接入。综合
- 评4分。\n来源: https://www.unep.org
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:World Environment Day and World Oceans Day 2026: Building Circular
-  Cities for a Healthier Planet
-DTSTART;VALUE=DATE:20260605
-DTEND;VALUE=DATE:20260608
-UID:0c45f7eb2a32@esg-event-radar
-CATEGORIES:environment,oceans,circular cities,climate action,World Environ
- ment Day
-DESCRIPTION:主办方: UNEP\n形式: hybrid\n费用: free\n议程: Joint c
- elebration of World Environment Day and World Oceans Day 2026\, focusing o
- n circular cities and ocean health.\n高管价值: ★★★★☆\n评分
- 依据: D1-UNEP为顶级国际组织，D2-多国政要及CEO参与，D3-
- 与全球环境监管议程直接挂钩，D5-全球性网络接入。综
- 合评4分。\n来源: https://www.unep.org
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:World Environment Day Celebration 2026 | Multilateral Geneva Drivi
- ng Collective Climate Action
-DTSTART;VALUE=DATE:20260605
-DTEND;VALUE=DATE:20260605
-UID:4d873253ac34@esg-event-radar
-CATEGORIES:climate action,multilateral cooperation,World Environment Day,G
- eneva
-DESCRIPTION:主办方: Geneva Environment Network\n形式: in-person\n费
- 用: free\n议程: Geneva-based celebration of World Environment Day 2026\
- , focusing on multilateral climate action and collective efforts.\n高管
- 价值: ★★★★☆\n评分依据: D1-UNEP及日内瓦多边机构背
- 书，D2-高级别官员参与，D3-与全球气候监管议程直接挂
- 钩，D5-日内瓦外交网络。综合评4分。\n来源: https://www.gen
- evaenvironmentnetwork.org
-LOCATION:Geneva\, CH
+  partner events during EU Green Week 2026\, focusing on environmental sust
+ ainability.\n高管价值: ★★★★☆\n评分依据: D1-IUCN权威度
+ 高；D2-受众含欧盟政策制定者，高管参与可能；D3-与EU Gr
+ een Deal监管直接挂钩；D4-欧盟层面竞争情报价值高。综合
+ 评4分。\n来源: https://iucn.org
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:World Environment Day 2026
@@ -277,43 +283,269 @@ DTSTART;VALUE=DATE:20260605
 DTEND;VALUE=DATE:20260605
 UID:35277e208cf4@esg-event-radar
 CATEGORIES:climate action,environment,sustainability
-DESCRIPTION:主办方: UNEP\n形式: in-person\n费用: unknown\n议程: G
- lobal event hosted in Baku\, focusing on urgent climate action with perfor
- mances and high-level speeches.\n高管价值: ★★★☆☆\n评分依
- 据: D1-UNEP权威度高；D2-有国家元首及UN高层出席可能；D3-
- 与全球气候议程挂钩。综合评3分。\n来源: https://www.azerne
- ws.az
-LOCATION:Baku\, AZ
+DESCRIPTION:主办方: UNEP\n形式: hybrid\n费用: free\n议程: Global 
+ event focusing on urgent climate action with UNEP leadership.\n高管价
+ 值: ★★★★☆\n评分依据: D1-UNEP为联合国机构，权威度
+ 高；D2-全球活动，CEO/CSO参与可能中；D3-与全球气候监管
+ 议程直接挂钩。综合评4分。\n来源: https://www.unep.org
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:World Environment Day and World Oceans Day 2026: Building Circular
+  Cities for a Healthier Planet
+DTSTART;VALUE=DATE:20260605
+DTEND;VALUE=DATE:20260608
+UID:0c45f7eb2a32@esg-event-radar
+CATEGORIES:circular cities,oceans,environment,sustainability
+DESCRIPTION:主办方: UNEP\n形式: hybrid\n费用: free\n议程: Joint c
+ elebration focusing on building circular cities for a healthier planet.\n
+ 高管价值: ★★★★☆\n评分依据: D1-UNEP为联合国机构，
+ 权威度高；D2-全球活动，CEO/CSO参与可能中；D3-与全球环
+ 境监管议程直接挂钩。综合评4分。\n来源: https://www.unep.o
+ rg
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:World Environment Day Celebration 2026 | Multilateral Geneva Drivi
+ ng Collective Climate Action
+DTSTART;VALUE=DATE:20260605
+DTEND;VALUE=DATE:20260605
+UID:4d873253ac34@esg-event-radar
+CATEGORIES:climate action,multilateralism,environment
+DESCRIPTION:主办方: Geneva Environment Network\n形式: in-person\n费
+ 用: free\n议程: Geneva-based celebration driving collective climate act
+ ion through multilateral cooperation.\n高管价值: ★★★★☆\n评
+ 分依据: D1-Geneva Environment Network为联合国合作网络，权威
+ 度高；D2-受众含外交官，CEO出席可能中；D3-与全球气候
+ 监管议程直接挂钩。综合评4分。\n来源: https://www.genevaenv
+ ironmentnetwork.org
+LOCATION:Geneva\, CH
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:EU Green Week 2026
+DTSTART;VALUE=DATE:20260528
+DTEND;VALUE=DATE:20260528
+UID:c6cd98ee6bd4@esg-event-radar
+CATEGORIES:nature-positive,EU Green Deal,biodiversity
+DESCRIPTION:主办方: European Commission\n形式: hybrid\n费用: free\n
+ 议程: UN participation in EU Green Week focusing on shaping a nature-pos
+ itive future.\n高管价值: ★★★★★\n评分依据: D1-欧盟委
+ 员会主办，权威度高；D2-受众含商业领袖，CEO出席可能
+ 高；D3-与EU Green Deal监管议程直接挂钩。综合评5分。\n来
+ 源: https://unric.org
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2026 Global Fashion Summit
+DTSTART;VALUE=DATE:20260527
+DTEND;VALUE=DATE:20260527
+UID:110b8d18d70e@esg-event-radar
+CATEGORIES:sustainable fashion,bio-spandex,textile innovation
+DESCRIPTION:主办方: Global Fashion Agenda\n形式: in-person\n费用: u
+ nknown\n议程: Hyosung TNC highlighted its bio-spandex progress at the 20
+ 26 Global Fashion Summit\, showcasing sustainable textile innovations.\n
+ 高管价值: ★★★☆☆\n评分依据: D1-主办方Global Fashion Ag
+ enda为行业头部平台，D2-有企业高管展示，D3-与可持续时
+ 尚监管趋势关联，D4-同业参与度高。综合评3分。\n来源: 
+ https://www.just-style.com
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:114th International Labour Conference
-DTSTART;VALUE=DATE:20260601
-DTEND;VALUE=DATE:20260612
-UID:4e4a62afa844@esg-event-radar
-CATEGORIES:labor rights,AI and labor,decent work,migrant workers,social ju
- stice
+DTSTART;VALUE=DATE:20260603
+DTEND;VALUE=DATE:20260608
+UID:4817384b9cfc@esg-event-radar
+CATEGORIES:labour rights,AI transition,trade union solidarity,social justi
+ ce
 DESCRIPTION:主办方: International Labour Organization (ILO)\n形式: in
- -person\n费用: invite-only\n议程: Annual ILO conference discussing AI 
- transition\, migrant worker rights\, and decent work. Features speeches fr
- om labor ministers and trade union leaders.\n高管价值: ★★★★☆
- \n评分依据: D1-ILO为联合国专门机构，权威度高；D2-多国
- 劳工部长及工会领袖出席；D3-与AI监管、劳工标准直接挂
- 钩。综合评4分。\n来源: https://www.indexbox.io
-LOCATION:Geneva\, CH\, International Labour Organization Headquarters
+ -person\n费用: invite-only\n议程: The 114th ILO Conference in Geneva f
+ eatured discussions on AI transition\, worker protections\, and diplomatic
+  resolutions.\n高管价值: ★★★★☆\n评分依据: D1-ILO为联
+ 合国专门机构，权威度极高；D2-多国政府及劳工领袖出
+ 席；D3-与全球劳工监管标准直接挂钩；D5-受邀制，网络
+ 密度高。综合评4分。\n来源: https://www.aa.com.tr
+LOCATION:Geneva\, CH
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:2026 ECOSOC Youth Forum
+SUMMARY:2026印尼矿业大会 (Indonesia Mining Conference 2026)
+DTSTART;VALUE=DATE:20260604
+DTEND;VALUE=DATE:20260604
+UID:d0b8293e4e68@esg-event-radar
+CATEGORIES:关键矿产,供应链,绿色转型,矿业
+DESCRIPTION:主办方: Unknown\n形式: in-person\n费用: unknown\n议程
+ : 全球聚力关键矿产供应链与绿色转型，聚焦印尼矿业发
+ 展与合作。\n高管价值: ★★★☆☆\n评分依据: D1-主办方
+ 信息不足，默认中档；D3-与关键矿产供应链及绿色转型
+ 相关，监管关联中等；D4-行业头部企业可能参与，竞争
+ 情报价值中等。\n来源: https://www.hepingribao.id
+LOCATION:Jakarta\, ID
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:印尼第二届ESG论坛 (2nd Indonesia ESG Forum)
+DTSTART;VALUE=DATE:20260602
+DTEND;VALUE=DATE:20260602
+UID:ff729c3d98a5@esg-event-radar
+CATEGORIES:ESG,可持续发展,论坛
+DESCRIPTION:主办方: Unknown\n形式: in-person\n费用: unknown\n议程
+ : 第二届ESG论坛在雅加达举行，聚焦ESG实践与可持续发展
+ 议题。\n高管价值: ★★★☆☆\n评分依据: D1-主办方信息
+ 不足，默认中档；D2-论坛性质，可能吸引高管参与；D3-ES
+ G主题与监管趋势相关，关联中等。\n来源: https://finance.si
+ na.com.cn
+LOCATION:Jakarta\, ID
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:RMI At London Climate Action Week
+DTSTART;VALUE=DATE:20260604
+DTEND;VALUE=DATE:20260604
+UID:42160519c686@esg-event-radar
+CATEGORIES:Climate Action,Energy Transition,Sustainability
+DESCRIPTION:主办方: RMI\n形式: in-person\n费用: unknown\n议程: RM
+ I's participation in London Climate Action Week\, likely featuring session
+ s on climate and energy topics.\n高管价值: ★★★☆☆\n评分依
+ 据: D1-RMI权威度中；D2-伦敦气候行动周通常吸引高管参与
+ ，但具体密度未知；D3-与全球气候议程挂钩，监管关联
+ 度高。综合评3分。\n来源: https://rmi.org
+LOCATION:London\, GB
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2026 ESG与高质量发展创新论坛
 DTSTART;VALUE=DATE:20260601
-DTEND;VALUE=DATE:20260603
-UID:a5115338db28@esg-event-radar
-CATEGORIES:youth employment,sustainable development,decent work,SDGs
-DESCRIPTION:主办方: International Labour Organization (ILO) & UN ECOSOC
- \n形式: hybrid\n费用: invite-only\n议程: ILO backs youth voices and 
- jobs at the forum\, focusing on quality employment and sustainable develop
- ment for young people.\n高管价值: ★★★☆☆\n评分依据: D1-UN
-  ECOSOC与ILO联合主办，权威度中高；D2-青年领袖为主，CEO
- 级参与有限；D3-与SDGs监管路径挂钩。综合评3分。\n来源:
-  https://www.miragenews.com
-LOCATION:New York\, US\, United Nations Headquarters
+DTEND;VALUE=DATE:20260601
+UID:00d39579b083@esg-event-radar
+CATEGORIES:ESG,可持续发展,高质量发展
+DESCRIPTION:主办方: 21财经\n形式: in-person\n费用: unknown\n议
+ 程: 各界嘉宾共探可持续发展新路径，从看见到抵达。\n
+ 高管价值: ★★★☆☆\n评分依据: D1-主办方为财经媒体
+ ，权威度中；D2-受众含企业高管，但CEO出席不明确；D3-
+ 与ESG监管趋势相关，但非直接挂钩。综合评3分。\n来源: 
+ https://www.21jingji.com
+LOCATION:CN
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2026印尼矿业大会 (SMM Indonesia Mining Conference)
+DTSTART;VALUE=DATE:20260602
+DTEND;VALUE=DATE:20260604
+UID:d84b22ddf75e@esg-event-radar
+CATEGORIES:镍,钴,电池回收,矿业投资,供应链
+DESCRIPTION:主办方: SMM 上海有色网\n形式: in-person\n费用: pai
+ d\n议程: 涵盖全球镍钴市场展望、红土镍矿与废旧电池提
+ 炼技术、印尼投资风险与长期价值等议题。\n高管价值: 
+ ★★★☆☆\n评分依据: D1-行业媒体主办，权威度中；D2-
+ 含SMM副总裁演讲，高管密度中；D3-涉及印尼矿业政策与
+ 供应链，监管关联中。综合评3分。\n来源: https://news.smm.c
+ n
+LOCATION:雅加达\, ID
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:非洲锂电峰会 (Africa Lithium Battery Summit)
+DTSTART;VALUE=DATE:20260604
+DTEND;VALUE=DATE:20260605
+UID:fc660acd6845@esg-event-radar
+CATEGORIES:电池回收,关键材料,欧洲电池制造,摩洛哥,供应
+ 链
+DESCRIPTION:主办方: SMM 上海有色网\n形式: in-person\n费用: pai
+ d\n议程: 探讨电池回收新路径、欧洲电池制造崛起及摩洛
+ 哥的催化剂角色。\n高管价值: ★★★☆☆\n评分依据: D1-
+ 行业媒体主办，权威度中；D2-含ACC前CEO演讲，高管密度
+ 中；D3-涉及电池回收与关键材料政策，监管关联中。综
+ 合评3分。\n来源: https://news.smm.cn
+LOCATION:卡萨布兰卡\, MA
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2026清华五道口全球金融论坛：绿色金融与可持续
+ 发展
+DTSTART;VALUE=DATE:20260529
+DTEND;VALUE=DATE:20260529
+UID:6ec89f8f1139@esg-event-radar
+CATEGORIES:绿色金融,可持续发展,全球金融
+DESCRIPTION:主办方: 清华大学五道口金融学院\n形式: in-perso
+ n\n费用: unknown\n议程: 探讨绿色金融创新与可持续发展路
+ 径，推动金融支持低碳转型。\n高管价值: ★★★★☆\n
+ 评分依据: D1-清华主办权威高，D2-往届含金融监管高层，
+ D3-绿色金融与ESG监管挂钩，D4-头部金融机构参与。综合
+ 评4分。\n来源: https://www.tsinghua.edu.cn
+LOCATION:北京\, CN\, 清华大学
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2026中国社会责任投资大会
+DTSTART;VALUE=DATE:20260605
+DTEND;VALUE=DATE:20260605
+UID:4bdb55717a86@esg-event-radar
+CATEGORIES:社会责任投资,可持续发展,ESG投资
+DESCRIPTION:主办方: 上海高级金融学院（SAIF）\n形式: in-pers
+ on\n费用: unknown\n议程: 探讨社会责任投资趋势与可持续发
+ 展出路，推动资本向善。\n高管价值: ★★★☆☆\n评分
+ 依据: D1-知名学术机构主办权威中，D2-投资机构高管参与
+ ，D3-与ESG投资监管关联，D4-行业头部参与。综合评3分。\
+ n来源: https://finance.sina.com.cn
+LOCATION:CN
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2026企业ESG生态大会
+DTSTART;VALUE=DATE:20260529
+DTEND;VALUE=DATE:20260529
+UID:5db370d93c3a@esg-event-radar
+CATEGORIES:ESG,企业生态,新质生产力,可持续发展
+DESCRIPTION:主办方: 《半月谈》/相关机构\n形式: in-person\n
+ 费用: unknown\n议程: 探讨ESG生态建设与新质生产力，推动
+ 企业可持续发展。\n高管价值: ★★★☆☆\n评分依据: D1-
+ 权威媒体主办权威中，D2-含企业高管主旨发言，D3-ESG与
+ 监管关联，D4-行业头部参与。综合评3分。\n来源: http://ww
+ w.banyuetan.org
+LOCATION:常州\, CN
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2026中国社会责任投资大会
+DTSTART;VALUE=DATE:20260605
+DTEND;VALUE=DATE:20260605
+UID:4bdb55717a86@esg-event-radar
+CATEGORIES:社会责任投资,可持续发展,ESG投资
+DESCRIPTION:主办方: cb.com.cn\n形式: in-person\n费用: unknown\n议
+ 程: 社会各界热议可持续发展，探讨社会责任投资趋势与
+ 实践。\n高管价值: ★★★☆☆\n评分依据: D1-主办方为财
+ 经媒体，权威度中；D2-受众含投资机构高管；D3-与ESG投
+ 资监管趋势相关。综合评3分。\n来源: http://www.cb.com.cn
+LOCATION:CN
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2026中兴通讯“创兴日”ESG可持续发展论坛： 智行
+ 向善，绿见未来
+DTSTART;VALUE=DATE:20260529
+DTEND;VALUE=DATE:20260529
+UID:97dfab848979@esg-event-radar
+CATEGORIES:ESG,可持续发展,企业社会责任
+DESCRIPTION:主办方: ZTE\n形式: in-person\n费用: unknown\n议程: 
+ 智行向善，绿见未来，聚焦ESG可持续发展战略与实践。\n
+ 高管价值: ★★★☆☆\n评分依据: D1-主办方为头部科技
+ 企业，权威度中；D2-受众含企业高管；D3-与ESG披露监管
+ 趋势相关。综合评3分。\n来源: https://www.zte.com.cn
+LOCATION:CN
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2026年国际“碳中和与能源智联”论坛
+DTSTART;VALUE=DATE:20260529
+DTEND;VALUE=DATE:20260529
+UID:cdbd9fce3eab@esg-event-radar
+CATEGORIES:碳中和,能源智联,可持续发展
+DESCRIPTION:主办方: tsinghua.edu.cn\n形式: in-person\n费用: unknown
+ \n议程: 聚焦碳中和与能源智联，探讨能源转型与技术创
+ 新路径。\n高管价值: ★★★☆☆\n评分依据: D1-主办方为
+ 顶尖高校，权威度高；D2-受众含学术与企业高管；D3-与
+ 碳中和监管趋势直接挂钩。综合评3分。\n来源: https://www.
+ tsinghua.edu.cn
+LOCATION:CN
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Forum national sur l'environnement et le climat 2026 (National For
+ um on Environment and Climate 2026)
+DTSTART;VALUE=DATE:20260605
+DTEND;VALUE=DATE:20260605
+UID:34c23516992c@esg-event-radar
+CATEGORIES:environment,climate,sustainability
+DESCRIPTION:主办方: Unknown (Petrolimex is partner)\n形式: in-person\
+ n费用: unknown\n议程: National forum on environment and climate with P
+ etrolimex as partner. Likely covers Vietnam's climate commitments and gree
+ n transition.\n高管价值: ★★★☆☆\n评分依据: D1-国家论
+ 坛，政府背书，权威度中高；D3-与越南国家气候议程挂
+ 钩，监管关联度中；D4-头部国企Petrolimex参与，竞争情报
+ 价值中。综合评3分。\n来源: https://www.vietnam.vn
+LOCATION:Hanoi\, VN
 END:VEVENT
 END:VCALENDAR

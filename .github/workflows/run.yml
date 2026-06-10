@@ -1,0 +1,58 @@
+name: Event Radar Daily Sync
+
+on:
+  schedule:
+    # 每天 UTC 00:00 和 12:00 → 北京时间 08:00 和 20:00
+    - cron: "0 0,12 * * *"
+  workflow_dispatch: # 允许手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Event Radar Agent
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          OUTPUT_DIR: "./output"
+          LOG_LEVEL: "INFO"
+          TZ: "Asia/Shanghai"
+        run: |
+          mkdir -p output
+          python main.py
+
+      - name: Commit and Push Calendar File
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          if [ -f "./output/esg_events.ics" ]; then
+            cp ./output/esg_events.ics ./esg_events.ics
+            git add esg_events.ics
+            git add output/esg_events.ics
+            if ! git diff-index --quiet HEAD; then
+              git commit -m "chore: auto-update calendar file [skip ci]"
+              git push
+            else
+              echo "No calendar changes detected."
+            fi
+          else
+            echo "No .ics file found in output/."
+          fi
