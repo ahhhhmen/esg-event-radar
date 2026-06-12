@@ -24,7 +24,24 @@ class EventItem(BaseModel):
     )
     standard_name_en: str = Field(
         default="",
-        description="标准英文名，用于跨语言精确去重。无论原文什么语言，统一翻译为英文",
+        description=(
+            "标准英文名，用于跨语言精确去重。无论原文什么语言，统一翻译为英文。"
+            "【实体消解约束 v2 — Few-Shot 精细规则】"
+            "规则1（强制剥离）：移除年份（2024-2028）、频次修饰词（Annual/Biannual/Biennial）、"
+            "届数（8th/2nd/第X届/annuel）及所有标点。"
+            "规则2（领域白名单保护）：以下核心机构简称是品牌不可分割部分，严禁剥离——"
+            "UN、UNGC、SBTi、CDP、COP、WBCSD、GRI、PRI、RBA、IRMA、ISSB、IUCN、UNEP、ILO、WRI、TNC、RMI。"
+            "规则3（媒体/主办方前缀剔除）：Reuters、Bloomberg、GreenBiz、S&P Global 等媒体/主办方前缀必须移除。"
+            "规则4（反过度泛化）：若剥离后剩余名称仅由通用名词构成"
+            "（如 'Annual Summit'、'Leaders Forum'、'Global Conference'、'Council Meeting'），"
+            "则必须将核心机构简称加回以保持实体唯一性。"
+            "Few-Shot 示例："
+            "'Reuters Responsible Business Europe 2026' → 'Responsible Business Europe'；"
+            "'SBTi Annual Summit 2026' → 'SBTi Summit'（Annual 强制剥离，SBTi 是白名单）；"
+            "'WBCSD Council Meeting 2025' → 'WBCSD Council Meeting'（WBCSD 白名单，保留）；"
+            "'UN Global Compact Leaders Summit 2026' → 'UN Global Compact Leaders Summit'（UNGC 白名单保护）；"
+            "'Annual Summit' 这种纯泛化名称若出现，必须加回机构 → 'SBTi Summit'（而非 'Annual Summit'）"
+        ),
     )
     display_name_zh: str = Field(
         default="",

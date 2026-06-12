@@ -735,7 +735,7 @@ class EventRadarAgent:
   "event_id": "占位，系统会覆盖",
   "name": "活动展示名称，格式: '英文名称 — 中文名称'（与原 standard_name_en / display_name_zh 对应）",
   "original_name": "活动原文名称（保留源语言），如果源语言是英文/印尼文/法文则保留原文，如果源语言是中文则保留中文原文",
-  "standard_name_en": "标准英文名，用于去重。无论原文是什么语言（中文/印尼语/法语/英语），统一翻译为简洁的英文名称",
+  "standard_name_en": "标准英文名，用于去重。无论原文是什么语言，统一翻译为英文。【实体消解约束 v2】规则1（强制剥离）：移除年份(2024-2028)、频次修饰词(Annual/Biannual/Biennial)、届数(8th/2nd/第X届/annuel)及标点。规则2（白名单保护）：UN/UNGC/SBTi/CDP/COP/WBCSD/GRI/PRI/RBA/IRMA/ISSB/IUCN/UNEP/ILO/WRI/TNC/RMI 是品牌核心，严禁剥离。规则3（前缀剔除）：移除 Reuters/Bloomberg/GreenBiz/S&P Global 等媒体前缀。规则4（反过度泛化）：剥离后若仅剩通用名词(Annual Summit/Leaders Forum/Global Conference/Council Meeting)，必须加回机构简称。Few-Shot: 'Reuters Responsible Business Europe 2026'→'Responsible Business Europe'; 'SBTi Annual Summit 2026'→'SBTi Summit'; 'WBCSD Council Meeting 2025'→'WBCSD Council Meeting'; 'UN Global Compact Leaders Summit 2026'→'UN Global Compact Leaders Summit'",
   "display_name_zh": "中文展示名，用于中文显示。无论原文是什么语言，统一翻译为中文",
   "organizer": "主办方（中文或中英双语）",
   "start_date": "YYYY-MM-DD（无法确定时填 unknown）",
@@ -1257,21 +1257,59 @@ class EventRadarAgent:
 
     # ── Phase 4.3: 跨源/跨语言事件去重 ──────────────────────
 
+    @staticmethod
+    def _tokenize_name(name: str) -> set[str]:
+        """将事件名称转为词根集合，用于 Jaccard 相似度计算。
+
+        处理步骤：
+        1. 全小写
+        2. 移除年份数字（2024-2028）和所有标点符号
+        3. 移除停用词（the/in/of/on/at + 会议通用后缀）
+        4. 按空格拆分为 set
+        """
+        if not name:
+            return set()
+        n = name.strip().lower()
+        # 移除年份数字（独立词或连在词边）
+        n = re.sub(r"\b20(2[4-9]|3[0-9]|4[0-8])\b", " ", n)
+        # 移除标点
+        n = re.sub(r"[^\w\s]", " ", n)
+        # 移除停用词
+        stopwords = {
+            "the", "in", "of", "on", "at",
+            "summit", "conference", "forum", "annual", "event", "seminar",
+        }
+        tokens = [w for w in n.split() if w and w not in stopwords]
+        if not tokens:
+            tokens = n.split()
+        return set(tokens)
+
+    @staticmethod
+    def _jaccard_similarity(a: set[str], b: set[str]) -> float:
+        """计算两个词根集合的 Jaccard 相似度。分母为 0 时返回 0.0。"""
+        if not a or not b:
+            return 0.0
+        intersection = a & b
+        union = a | b
+        if not union:
+            return 0.0
+        return len(intersection) / len(union)
+
     def _deduplicate_events(self) -> None:
         """合并来自不同语言/来源的同一活动。
 
-        策略（v1.5 — 基于 standard_name_en 精确去重）：
-        1. 主策略：standard_name_en 完全相同 + 日期窗口 ±3 天 → 合并
-           （这是 100% 多语种合并的关键：
-             "EU ESG Summit" 和 "欧盟 ESG 峰会" 的 standard_name_en 都是 "EU ESG Summit"）
-        2. 退避策略：standard_name_en 按去后缀后的关键词 Jaccard 匹配（阈值 0.70）
-           （用于 LLM 未严格遵守 standard_name_en 输出格式的情况）
-        3. 每个聚类保留信息最完整的一条，合并互补标签
+        策略（v2.0 — 时空锚点碰撞消解）：
+        策略A（绝对主策略）：standard_name_en 完全一致（忽略大小写）
+            + start_date 相差 ≤3 天 → 合并。
+        策略B（三维时空退避）：city 字段均非空且一致（忽略大小写）
+            + start_date 相差 ≤1 天
+            + 名称 Jaccard 相似度 ≥0.35 → 合并。
+        每个聚类保留信息最完整的一条，合并互补标签。
         """
         if len(self._events) <= 1:
             return
 
-        from datetime import date as date_type, timedelta
+        from datetime import date as date_type
 
         # 解析所有事件的日期
         parsed_dates: dict[int, Optional[date_type]] = {}
@@ -1298,77 +1336,64 @@ class EventRadarAgent:
             if rx != ry:
                 parent[rx] = ry
 
-        # 预处理：每个事件的标准化 key
-        def _std_key(ev: EventItem) -> str:
-            """提取 standard_name_en 并做轻量标准化（小写、去前后空格）。"""
-            s = (ev.standard_name_en or ev.name).strip().lower()
-            # 移除常见后缀词（让 "EU ESG Summit 2026" 和 "EU ESG Summit" 匹配）
-            for suffix in ["conference", "summit", "forum", "meeting", "event",
-                           "workshop", "webinar", "symposium", "congress", "assembly",
-                           "seminar", "expo", "roundtable", "dialogue",
-                           "annual", "international", "global", "world",
-                           "2024", "2025", "2026", "2027", "2028"]:
-                s = re.sub(rf"\b{re.escape(suffix)}\b", "", s)
-            s = re.sub(r"[^\w\s]", " ", s)
-            s = re.sub(r"\s+", " ", s).strip()
-            return s
-
-        # ── 策略 1: standard_name_en 精确匹配 + 日期 ±3 天 ──
+        # ── 策略A: standard_name_en 精确匹配（忽略大小写）+ 日期 ±3 天 ──
         for i in range(n):
             for j in range(i + 1, n):
                 if find(i) == find(j):
                     continue
                 ev_a, ev_b = self._events[i], self._events[j]
 
-                # 日期窗口检查
+                # 日期窗口 ±3 天
                 date_a = parsed_dates.get(i)
                 date_b = parsed_dates.get(j)
-                dates_close = False
                 if date_a is not None and date_b is not None:
-                    diff = abs((date_a - date_b).days)
-                    dates_close = diff <= 3
+                    if abs((date_a - date_b).days) > 3:
+                        continue
                 elif date_a is None and date_b is None:
-                    dates_close = True
+                    pass  # 双方日期未知，通过
                 else:
-                    dates_close = False
+                    continue  # 一方未知一方已知，不通
 
-                if not dates_close:
-                    continue
-
-                # 精确匹配 standard_name_en（标准化后）
-                key_a = _std_key(ev_a)
-                key_b = _std_key(ev_b)
-                if key_a == key_b:
+                # standard_name_en 忽略大小写完全一致
+                key_a = (ev_a.standard_name_en or "").strip().lower()
+                key_b = (ev_b.standard_name_en or "").strip().lower()
+                if key_a and key_b and key_a == key_b:
                     union(i, j)
                     logger.debug(
-                        f"  [精确去重] std_en='{key_a}' | "
+                        f"  [策略A 精确去重] std_en='{key_a}' | "
                         f"{ev_a.name[:50]} <-> {ev_b.name[:50]}"
                     )
 
-        # ── 策略 2: 退避 — 关键词 Jaccard 相似度 ≥ 0.70 + 日期 ±7 天 ──
+        # ── 策略B: 三维时空退避 — city + 日期 ±1 天 + Jaccard ≥0.35 ──
         for i in range(n):
             for j in range(i + 1, n):
                 if find(i) == find(j):
                     continue
                 ev_a, ev_b = self._events[i], self._events[j]
+
+                # 空间校验：city 均非空且完全一致（忽略大小写）
+                city_a = (ev_a.city or "").strip().lower()
+                city_b = (ev_b.city or "").strip().lower()
+                if not city_a or not city_b or city_a != city_b:
+                    continue
+
+                # 时间校验：start_date 相差 ≤1 天
                 date_a = parsed_dates.get(i)
                 date_b = parsed_dates.get(j)
                 if date_a is None or date_b is None:
                     continue
-                diff = abs((date_a - date_b).days)
-                if diff > 7:
+                if abs((date_a - date_b).days) > 1:
                     continue
 
-                # 用 normalized 关键词做 Jaccard
-                words_a = set(_std_key(ev_a).split())
-                words_b = set(_std_key(ev_b).split())
-                if not words_a or not words_b:
-                    continue
-                jaccard = len(words_a & words_b) / len(words_a | words_b)
-                if jaccard >= 0.70:
+                # 文本弱校验：standard_name_en 经 _tokenize_name 后 Jaccard ≥0.35
+                tokens_a = self._tokenize_name(ev_a.standard_name_en or "")
+                tokens_b = self._tokenize_name(ev_b.standard_name_en or "")
+                jaccard = self._jaccard_similarity(tokens_a, tokens_b)
+                if jaccard >= 0.35:
                     union(i, j)
                     logger.debug(
-                        f"  [退避去重] jaccard={jaccard:.2f} diff={diff}d | "
+                        f"  [策略B 时空退避] city='{city_a}' jaccard={jaccard:.2f} "
+                        f"diff={abs((date_a - date_b).days)}d | "
                         f"{ev_a.name[:50]} <-> {ev_b.name[:50]}"
                     )
 
