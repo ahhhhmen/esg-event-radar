@@ -1,0 +1,43 @@
+# ESG Event Radar — Phase 0 上游供料摄入层 (缩小测试集)
+#
+# 仅保留 2 个源，limit=2
+
+sources:
+
+  - id: "global_esg_summits"
+    type: google_news_rss
+    query: >
+      (
+        WBCSD OR "UN Global Compact" OR SBTi OR CDP OR GRI OR
+        "Climate Group" OR BSR OR PRI OR "COP31" OR "COP 2026" OR
+        "Climate Week NYC" OR "Davos 2026" OR "GreenBiz Forum" OR
+        "BSR Conference" OR "Sustainable Brands" OR
+        "Net Zero Festival" OR "Reuters Events Sustainability"
+      )
+      (summit OR forum OR conference OR "leaders summit" OR "annual meeting")
+      2026
+    time_window: 14
+    limit: 2
+    enabled: true
+
+  - id: "asean_regional_events"
+    type: google_news_rss
+    query: >
+      (
+        Indonesia OR Jakarta OR Philippines OR Vietnam OR
+        Thailand OR Malaysia OR "Southeast Asia" OR ASEAN
+      )
+      (
+        nickel OR cobalt OR "battery metals" OR
+        "critical minerals" OR "palm oil" OR
+        "sustainable finance" OR "green finance"
+      )
+      (
+        ESG OR sustainability OR "responsible sourcing" OR
+        "responsible mining" OR "just transition" OR "supply chain"
+      )
+      (conference OR summit OR forum OR meeting OR "annual congress")
+      2026
+    time_window: 14
+    limit: 2
+    enabled: true

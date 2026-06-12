@@ -65,6 +65,10 @@ load_dotenv()
 
 from schemas.event import EventItem
 
+# Phase 0 供应侧引擎
+from sourcing_engine import load_sources as _phase0_load_sources
+from sourcing_engine import fetch_rss as _phase0_fetch_rss
+
 # ─────────────────────────────────────────────────────────
 # 日志
 # ─────────────────────────────────────────────────────────
@@ -364,6 +368,71 @@ class EventRadarAgent:
             data = yaml.safe_load(f)
         self._sources = [s for s in data.get("sources", []) if s.get("active", True)]
         logger.info(f"[源清单] 已加载 {len(self._sources)} 条活跃源")
+
+    # ── Phase 0 (新): 上游供料摄入层 — 透传至 raw_items ─────
+
+    def _run_phase0_ingestion(self) -> None:
+        """
+        加载 config/sources.yaml 中 enabled 的 google_news_rss 源，
+        调用 sourcing_engine 抓取并脱壳，将结果注入 self._raw_items。
+        
+        输出格式兼容现有 Phase 1-8 管道，不需要修改下游代码。
+        """
+        try:
+            phase0_sources = _phase0_load_sources()
+        except Exception as exc:
+            logger.warning(f"[Phase 0] 加载 config/sources.yaml 失败: {exc}")
+            return
+
+        if not phase0_sources:
+            logger.info("[Phase 0] 无启用源，跳过供料摄入。")
+            return
+
+        logger.info(f"🚀 [Pipeline Start] Fetching from {len(phase0_sources)} Phase 0 source(s)…")
+
+        total_injected = 0
+        for src in phase0_sources:
+            sid = src["id"]
+            try:
+                items = _phase0_fetch_rss(src)
+            except Exception as exc:
+                logger.error(f"[Phase 0] {sid} 抓取异常: {exc}")
+                continue
+
+            for item in items:
+                title = item.get("title", "")
+                title_key = title.strip().lower()
+                # 去重：与已有 raw_items 做标题+URL 双重去重
+                if item.get("link", "") in self._seen_urls:
+                    continue
+                if title_key in self._seen_titles:
+                    continue
+
+                # 映射到 raw_items 字典格式（兼容 Phase 3-8 下游管线）
+                raw_entry = {
+                    "title":       title,
+                    "date":        item.get("published_date", ""),
+                    "source":      sid,
+                    "source_href": sid,
+                    "url":         item.get("real_url", item.get("link", "")),
+                    "description": item.get("clean_text", "")[:500],
+                    "body":        item.get("clean_text", "")[:300],       # 预填充正文，跳过 Phase 3 正文提取
+                    "source_org":  sid,
+                    "source_tags": [],
+                    "source_tier": 2,
+                    "parsed_date": parse_rss_date(item.get("published_date", "")),
+                    "_is_google_news": True,
+                    "_phase0_source_id": sid,
+                }
+
+                self._seen_urls.add(item.get("link", ""))
+                self._seen_titles.add(title_key)
+                self._raw_items.append(raw_entry)
+                total_injected += 1
+
+            logger.info(f"  [Phase 0] {sid}: 注入 {len(items)} 条")
+
+        logger.info(f"[Phase 0] 供料完成。总注入 {total_injected} 条纯文本条目")
 
     # ── Phase 1a: HTML Calendar 爬虫（轨道 A — Tier 1 组织官网 Events 页）──
 
@@ -932,6 +1001,7 @@ class EventRadarAgent:
             prompt = self._build_extraction_prompt(batch)
 
             # ─── 首次 LLM 调用 ───
+            logger.info(f"发送批次 {batch_idx} 至 LLM...")
             parsed = _call_llm(prompt, batch_idx, attempt=1)
             if parsed is None:
                 # ─── Layer 1-self-heal: 自愈重试（上限 1 次）───
@@ -979,6 +1049,7 @@ class EventRadarAgent:
                 extracted += norm
                 degraded_total += deg
 
+            logger.info(f"批次 {batch_idx} 解析完成，提取到 {extracted + degraded_total} 个实体")
             if degraded_total:
                 logger.warning(
                     f"  批次 {batch_idx}: {extracted} 条正常 + {degraded_total} 条降级"
@@ -1904,7 +1975,10 @@ class EventRadarAgent:
         t0 = time.monotonic()
         logger.info("══ ESG Event Radar v1.3 | 周频扫描启动 ══")
 
-        # Phase 0: 加载源清单
+        # Phase 0 (新): 上游供料摄入层 — sourcing_engine 抓取 + 脱壳
+        self._run_phase0_ingestion()
+
+        # Phase 0 (原): 加载源清单
         self._load_sources()
 
         # Phase 1a: HTML Calendar 爬虫（先跑，为 RSS 补充 Tier 1 数据）
