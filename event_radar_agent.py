@@ -166,7 +166,7 @@ def resolve_news_url(url: str, timeout: int = 6) -> str:
 
 
 def make_event_id(name: str, start_date: str) -> str:
-    """SHA256[:12] 作为 Notion Upsert 去重主键。"""
+    """SHA256[:12] 作为 Notion Upsert 去重主键（v1 兼容，内部使用）。"""
     raw = f"{name.strip().lower()}|{start_date.strip()}"
     return hashlib.sha256(raw.encode()).hexdigest()[:12]
 
@@ -222,7 +222,12 @@ class NewsFetcher:
     def fetch(cls, url: str, resolve_google: bool = False) -> list[dict]:
         articles: list[dict] = []
         try:
-            feed = feedparser.parse(url)
+            # 先用 requests 带 timeout 获取内容，避免 feedparser.parse(url) 无超时挂起
+            resp = requests.get(
+                url, headers=FETCH_HEADERS, timeout=cls.TIMEOUT, allow_redirects=True
+            )
+            resp.raise_for_status()
+            feed = feedparser.parse(resp.text)
             if feed.bozo and not feed.entries:
                 # bozo 为非致命错误（如非标准 XML），有 entries 仍可使用
                 logger.debug(f"RSS parse warning [{url[:60]}]: {feed.bozo_exception}")
@@ -945,8 +950,10 @@ class EventRadarAgent:
             else:
                 obj["name"] = std_en or disp_zh or raw_name
 
-            # 用 standard_name_en 生成 event_id
-            obj["event_id"] = make_event_id(std_en, obj.get("start_date", ""))
+            # 用确定性主键生成 event_id（tokenized 名称 + 月份）
+            obj["event_id"] = self._make_deterministic_event_id(
+                std_en, obj.get("start_date", "")
+            )
 
             # 确保源代码风格字段完整性
             score = obj.get("exec_value_score", 3)
@@ -1241,7 +1248,9 @@ class EventRadarAgent:
                 translated = self._translate_event_name(en_part)
                 if translated and translated != en_part:
                     ev.name = f"{en_part} — {translated}"
-                    ev.event_id = make_event_id(ev.name, ev.start_date)
+                    ev.event_id = self._make_deterministic_event_id(
+                        ev.standard_name_en, ev.start_date
+                    )
                     fixed += 1
                     logger.warning(f"  [翻译后补] '{en_part[:60]}' → '{ev.name[:80]}'")
             else:
@@ -1249,11 +1258,33 @@ class EventRadarAgent:
                 translated = self._translate_event_name(ev.name)
                 if translated and translated != ev.name:
                     ev.name = f"{ev.name} — {translated}"
-                    ev.event_id = make_event_id(ev.name, ev.start_date)
+                    ev.event_id = self._make_deterministic_event_id(
+                        ev.standard_name_en, ev.start_date
+                    )
                     fixed += 1
                     logger.warning(f"  [翻译后补] '{ev.name[:60]}' → 已补充中文")
         if fixed:
             logger.info(f"[Phase 4.1] 名称中文化后处理: 修正 {fixed} 个事件名称")
+
+    # ── 确定性主键生成 ────────────────────────────────────
+
+    @staticmethod
+    def _make_deterministic_event_id(standard_name_en: str, start_date: str, city: Optional[str] = None) -> str:
+        """基于 tokenized 名称 + 月份 生成稳定的 MD5[:12] 主键。
+
+        与 v1 的关键区别：
+        - 使用 _tokenize_name 对 standard_name_en 做词根化
+        - 对词根排序后拼接，保证哈希稳定（不受原始词序波动影响）
+        - 去除 city 因子：city 提取不稳定（有的新闻有城市，有的没有），
+          会导致同构事件产生不同 event_id
+        - start_date 截断到月份（YYYY-MM）：容忍同月内日期的微小漂移
+          （实际举办日与新闻发布日可能有几天差异），防止同一事件因日期漂移而重复创建
+        """
+        tokens = sorted(EventRadarAgent._tokenize_name(standard_name_en))
+        name_key = " ".join(tokens)
+        month_key = (start_date or "").strip()[:7]  # YYYY-MM
+        raw = f"{name_key}|{month_key}"
+        return hashlib.md5(raw.encode()).hexdigest()[:12]
 
     # ── Phase 4.3: 跨源/跨语言事件去重 ──────────────────────
 
@@ -1484,7 +1515,9 @@ class EventRadarAgent:
                 best.source_url = u
                 break
         # 更新 event_id（因为 name/source 可能变了）
-        best.event_id = make_event_id(best.name, best.start_date)
+        best.event_id = EventRadarAgent._make_deterministic_event_id(
+            best.standard_name_en, best.start_date
+        )
 
         return best
 
@@ -1743,14 +1776,72 @@ class EventRadarAgent:
         # 应用 tenacity 装饰器：指数退避 + 随机抖动
         _notion_api_request = self._retry_on_notion_rate_limit(_notion_api_request)
 
+        # ── 内存级防刷缓存：免疫 Notion 索引延迟导致的重复创建 ──
+        # 结构: {event_id: notion_page_id}
+        # 在一次运行中，同一 event_id 首次查到/创建后即缓存，
+        # 后续同 ID 事件直接走 Update，不再查询 Notion Query API。
+        local_page_cache: dict[str, str] = {}
+        import threading
+        cache_lock = threading.Lock()
+
         def _upsert_one(ev: EventItem) -> str:
             """返回 "created" / "updated" / "failed"
 
             每次操作包含 1-2 个 API 调用（查询 + 创建/更新）。
             每次 API 调用后主动 time.sleep(_NOTION_TRAFFIC_SHAPE_DELAY) 平滑曲线。
+
+            优先检查本地缓存 local_page_cache，命中则直接走 Update，
+            避免 Notion Query API 最终一致性延迟导致同 ID 重复创建。
             """
             try:
-                # 查重：查询数据库
+                page_props = self._build_notion_page_props(ev, title_prop_name)
+
+                # ── 步骤 0: 检查本地缓存 ──
+                with cache_lock:
+                    cached_page_id = local_page_cache.get(ev.event_id)
+                if cached_page_id:
+                    # 缓存命中：本次运行已创建/查询过，直接 Update 追加 Highlights
+                    # 先 GET 已有页面获取旧 Agenda Highlights 用于追加
+                    try:
+                        get_resp = _notion_api_request(
+                            "GET",
+                            f"{self._NOTION_API}/pages/{cached_page_id}",
+                        )
+                        time.sleep(self._NOTION_TRAFFIC_SHAPE_DELAY)
+                        if get_resp.status_code == 200:
+                            existing_page = get_resp.json()
+                            existing_agenda_prop = existing_page.get("properties", {}).get("Agenda Highlights", {})
+                            existing_texts = []
+                            for rt in existing_agenda_prop.get("rich_text", []):
+                                txt = rt.get("plain_text", "")
+                                if txt.strip():
+                                    existing_texts.append(txt)
+                            old_agenda = "; ".join(existing_texts)
+                            new_agenda = ev.agenda_highlights.strip() if ev.agenda_highlights else ""
+                            if new_agenda and old_agenda and new_agenda not in old_agenda:
+                                merged_agenda = f"{old_agenda}\n\n[更新 {self._run_ts[:10]}] {new_agenda}"[:2000]
+                                page_props["Agenda Highlights"] = {
+                                    "rich_text": [{"text": {"content": merged_agenda}}]
+                                }
+                    except Exception:
+                        pass  # GET 失败时直接用新值覆盖
+
+                    ur = _notion_api_request(
+                        "PATCH",
+                        f"{self._NOTION_API}/pages/{cached_page_id}",
+                        json={"properties": page_props},
+                    )
+                    time.sleep(self._NOTION_TRAFFIC_SHAPE_DELAY)
+                    if ur.status_code not in (200, 201):
+                        logger.warning(
+                            f"  Notion 更新失败(缓存) HTTP {ur.status_code}: "
+                            f"{ur.text[:200]} | Event: {ev.name[:40]}"
+                        )
+                        return "failed"
+                    logger.debug(f"  更新(缓存): {ev.name}")
+                    return "updated"
+
+                # ── 步骤 1: 缓存未命中 → 查询 Notion 数据库 ──
                 qr = _notion_api_request(
                     "POST",
                     f"{self._NOTION_API}/databases/{notion_db_id}/query",
@@ -1766,10 +1857,33 @@ class EventRadarAgent:
                     return "failed"
 
                 results = qr.json().get("results", [])
-                page_props = self._build_notion_page_props(ev, title_prop_name)
 
                 if results:
                     page_id = results[0]["id"]
+                    # 缓存回填：查询到的 page_id 存入本地缓存
+                    with cache_lock:
+                        local_page_cache[ev.event_id] = page_id
+
+                    # 读取已有页面的 Agenda Highlights，追加而非覆盖
+                    existing_page = results[0]
+                    existing_agenda_prop = existing_page.get("properties", {}).get("Agenda Highlights", {})
+                    existing_texts = []
+                    for rt in existing_agenda_prop.get("rich_text", []):
+                        txt = rt.get("plain_text", "")
+                        if txt.strip():
+                            existing_texts.append(txt)
+                    old_agenda = "; ".join(existing_texts)
+
+                    new_agenda = ev.agenda_highlights.strip() if ev.agenda_highlights else ""
+                    if new_agenda and old_agenda and new_agenda not in old_agenda:
+                        merged_agenda = f"{old_agenda}\n\n[更新 {self._run_ts[:10]}] {new_agenda}"[:2000]
+                        page_props["Agenda Highlights"] = {
+                            "rich_text": [{"text": {"content": merged_agenda}}]
+                        }
+                    elif new_agenda and not old_agenda:
+                        # 已有页无高光，首次填充
+                        pass  # page_props 已含新值
+
                     ur = _notion_api_request(
                         "PATCH",
                         f"{self._NOTION_API}/pages/{page_id}",
@@ -1799,6 +1913,11 @@ class EventRadarAgent:
                             f"{cr.text[:200]} | Event: {ev.name[:40]}"
                         )
                         return "failed"
+                    # 缓存回填：新创建的 page_id 存入本地缓存
+                    new_page_id = cr.json().get("id", "")
+                    if new_page_id:
+                        with cache_lock:
+                            local_page_cache[ev.event_id] = new_page_id
                     logger.debug(f"  新建: {ev.name}")
                     return "created"
             except self.NotionAPIError as exc:
