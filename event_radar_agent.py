@@ -726,6 +726,26 @@ class EventRadarAgent:
 输出为 JSON Array，每个对象对应 EventItem schema。
 
 ## 筛选规则
+
+### ⛔ 时间约束红线 (CRITICAL TEMPORAL RULES — 必须逐条执行，严禁违反)
+
+**规则 1 — 拒绝过去 (Reject Past Events)**
+- 如果新闻原文使用了明确的过去时态描述（如 "at last month's summit"、"recently concluded"、"was held on"、"took place"、"刚刚落幕"、"已闭幕"、"已在…举办"），说明该事件**已经结束**
+- 对于已结束的事件：**彻底忽略，不输出到 JSON Array 中**
+- 注意：不要被"回顾文章"或"事后报道"所迷惑 — 事后报道 ≠ 活动预告
+
+**规则 2 — 拒绝推测 (No Speculation on Dates)**
+- **严禁**将文章的"发稿日期"（published date）当作会议的举办日期
+- **严禁**将"研究报告的发布日期"当作会议的举办日期
+- **严禁**在新闻只提及年份（如 "2026 年的 GreenBiz 大会"）时自行编造具体月份和日期
+- 如果你推测出某个日期，但没有原文直接证据，该日期被视为幻觉，必须丢弃
+
+**规则 3 — 宁缺毋滥 (Default to Unknown)**
+- 如果你**无法在原文中找到明确的未来举办日期**，`start_date` **必须填 "unknown"**，绝不允许编造
+- 如果新闻只说了 "即将举办"、"coming soon"、"2026 年" 但没有具体日期，start_date = "unknown"
+- "unknown" 是合法输出，编造的日期不是
+
+### 通用筛选规则
 - **只提取未来将举办或近 14 天内刚结束的活动**（今天是 {datetime.now(timezone.utc).strftime("%Y-%m-%d")}）
 - 3 个月以上的历史活动 → 跳过
 - 只提取确实公告了具体活动（有日期线索）的条目
@@ -1282,7 +1302,7 @@ class EventRadarAgent:
         """
         tokens = sorted(EventRadarAgent._tokenize_name(standard_name_en))
         name_key = " ".join(tokens)
-        month_key = (start_date or "").strip()[:7]  # YYYY-MM
+        month_key = (start_date or "").strip()[:4]  # YYYY
         raw = f"{name_key}|{month_key}"
         return hashlib.md5(raw.encode()).hexdigest()[:12]
 
@@ -1692,8 +1712,6 @@ class EventRadarAgent:
             "Event ID":             txt(ev.event_id),
             "Original Name":        txt(ev.original_name),
             "Organizer":            txt(ev.organizer),
-            "Start Date":           dt(ev.start_date),
-            "End Date":             dt(ev.end_date),
             "Format":               {"select": {"name": ev.format}},
             "City":                 txt(ev.city or ""),
             "Country":              txt(ev.country or ""),
@@ -1704,10 +1722,18 @@ class EventRadarAgent:
             "Exec Value Rationale": txt(ev.exec_value_rationale),
             "Agenda Highlights":    txt(ev.agenda_highlights),
             "Source Org":           txt(ev.source_org),
-            "Discovered At":        dt(ev.discovered_at),
             "Registration URL":     safe_url(ev.registration_url),
             "Source URL":           safe_url(ev.source_url),
         }
+
+        # 日期字段：仅当值为有效 ISO 8601 日期时才写入 Notion Date 属性，
+        # "unknown" / 空字符串 等占位符一律拦截，避免 HTTP 400 Bad Request
+        if ev.start_date and ev.start_date not in ("unknown", ""):
+            props["Start Date"] = dt(ev.start_date)
+        if ev.end_date and ev.end_date not in ("unknown", ""):
+            props["End Date"] = dt(ev.end_date)
+        if ev.discovered_at and ev.discovered_at not in ("unknown", ""):
+            props["Discovered At"] = dt(ev.discovered_at)
         return props
 
     def _upsert_to_notion(self) -> None:
