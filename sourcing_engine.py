@@ -3,6 +3,8 @@ sourcing_engine.py
 Phase 0 — 上游供料摄入层 (Ingestion Layer)
 轻量级动态矩阵供料：YAML 配置驱动，高信噪比纯文本输出。
 
+配置来源: sources.yaml（仓库根）
+
 核心技术栈:
   - YAML   → 配置驱动，无硬编码爬虫
   - requests + feedparser → RSS 抓取
@@ -28,7 +30,7 @@ logger = logging.getLogger(__name__)
 # ───────────────────────── 配置常量 ─────────────────────────
 
 CONFIG_PATH = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "config", "sources.yaml"
+    os.path.dirname(os.path.abspath(__file__)), "sources.yaml"
 )
 GOOGLE_NEWS_RSS_BASE = "https://news.google.com/rss/search?q="
 USER_AGENT = (
@@ -53,13 +55,13 @@ UNWRAP_TAGS = ["a", "span", "b", "strong", "i", "em", "u", "code", "pre"]
 
 def load_sources(config_path: str = CONFIG_PATH) -> List[Dict]:
     """
-    读取 config/sources.yaml，仅返回 enabled: true 的数据源。
+    读取 sources.yaml，仅返回 active: true 的数据源。
     """
     with open(config_path, "r", encoding="utf-8") as fh:
         config = yaml.safe_load(fh)
 
     all_sources = config.get("sources", [])
-    enabled = [s for s in all_sources if s.get("enabled", False)]
+    enabled = [s for s in all_sources if s.get("active", True)]
 
     logger.info(
         "加载 sources.yaml：共 %d 源，激活 %d 个",
@@ -70,26 +72,32 @@ def load_sources(config_path: str = CONFIG_PATH) -> List[Dict]:
 
 def fetch_rss(source: Dict) -> List[Dict]:
     """
-    针对 google_news_rss 类型源：
-    1. 用 urllib.parse.quote 对 query 做 URL-encode
-    2. 构建 Google News RSS URL 并发起 GET
-    3. 调用 clean_and_strip 做深度脱壳
-    4. 返回标准化 List[Dict]
+    针对 rss / google_news / google_news_rss 类型源抓取 RSS 条目，
+    进行 HTML 脱壳清洗并返回标准化条目列表。
+
+    支持两种源格式:
+      - 旧格式 (config/sources.yaml): 含 query/time_window/limit，动态拼接 Google News RSS URL
+      - 根格式 (sources.yaml): 含 url 字段（已编码的 RSS URL），直接抓取
     """
-    source_id = source["id"]
-    raw_query = source["query"]
+    source_id = source.get("id") or source.get("name", "")
     time_window = source.get("time_window", 14)
     limit = source.get("limit", 50)
 
-    # 压缩空白字符后做 URL-encode
-    query_compact = " ".join(raw_query.split())
-    query_encoded = quote(query_compact, safe="")
+    url = source.get("url", "")
 
-    # 拼接完整 RSS URL（hl/gl/ceid 固定为英文美国）
-    url = (
-        f"{GOOGLE_NEWS_RSS_BASE}{query_encoded}"
-        f"&hl=en-US&gl=US&ceid=US:en"
-    )
+    if not url:
+        # 旧格式：从 query 拼接 Google News RSS URL
+        raw_query = source.get("query", "")
+        if not raw_query:
+            logger.error("[%s] 无 url 且无 query，跳过", source_id)
+            return []
+
+        query_compact = " ".join(raw_query.split())
+        query_encoded = quote(query_compact, safe="")
+        url = (
+            f"{GOOGLE_NEWS_RSS_BASE}{query_encoded}"
+            f"&hl=en-US&gl=US&ceid=US:en"
+        )
 
     headers = {"User-Agent": USER_AGENT}
     logger.info("[%s] GET %s…", source_id, url[:180])

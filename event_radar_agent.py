@@ -6,8 +6,8 @@
 ─────────
   EventRadarAgent.run()
     Phase 0  : 加载供料源清单（sources.yaml）
-    Phase 1a : 三轨 RSS 抓取（轨道 B 行业媒体 + 轨道 C Google News）
-    Phase 1b : HTML Calendar 爬虫（轨道 A — Tier 1 组织官网 Events 页）
+    Phase 1a : HTML Calendar 爬虫（轨道 A — Tier 1 组织官网 Events 页）
+    Phase 1b : 三轨 RSS 抓取（轨道 B 行业媒体 + 轨道 C Google News）
     Phase 2  : 去重（URL + 标题双键）+ 日期窗口过滤
     Phase 3  : 深度正文提取（ContentExtractor + 三级回退）
     Phase 4  : LLM 语义抽取 → EventItem JSON Array
@@ -65,9 +65,10 @@ load_dotenv()
 
 from schemas.event import EventItem
 
-# Phase 0 供应侧引擎
-from sourcing_engine import load_sources as _phase0_load_sources
-from sourcing_engine import fetch_rss as _phase0_fetch_rss
+# 交付层模块 (Phase 6-8)
+from sinks.notion_sync import NotionSink
+from sinks.ics_writer import write_ics as _ics_write
+from sinks.dingtalk_push import push_to_dingtalk as _dingtalk_push
 
 # ─────────────────────────────────────────────────────────
 # 日志
@@ -279,7 +280,7 @@ class NewsFetcher:
 class ContentExtractor:
     """向原始 URL 发送 GET，提取正文前 300 字纯文本（会议页正文比新闻短，适当放宽）。"""
 
-    TIMEOUT = 3  # 降低超时：正文提取非关键路径，快速失败即可
+    TIMEOUT = 5  # 正文提取超时（秒）；失败时有 RSS 摘要兜底，不影响主线
     MAX_CHARS = 300
     _SEMANTIC_RE = re.compile(r"article|content|post|story|body|main|event", re.I)
 
@@ -373,71 +374,6 @@ class EventRadarAgent:
             data = yaml.safe_load(f)
         self._sources = [s for s in data.get("sources", []) if s.get("active", True)]
         logger.info(f"[源清单] 已加载 {len(self._sources)} 条活跃源")
-
-    # ── Phase 0 (新): 上游供料摄入层 — 透传至 raw_items ─────
-
-    def _run_phase0_ingestion(self) -> None:
-        """
-        加载 config/sources.yaml 中 enabled 的 google_news_rss 源，
-        调用 sourcing_engine 抓取并脱壳，将结果注入 self._raw_items。
-        
-        输出格式兼容现有 Phase 1-8 管道，不需要修改下游代码。
-        """
-        try:
-            phase0_sources = _phase0_load_sources()
-        except Exception as exc:
-            logger.warning(f"[Phase 0] 加载 config/sources.yaml 失败: {exc}")
-            return
-
-        if not phase0_sources:
-            logger.info("[Phase 0] 无启用源，跳过供料摄入。")
-            return
-
-        logger.info(f"🚀 [Pipeline Start] Fetching from {len(phase0_sources)} Phase 0 source(s)…")
-
-        total_injected = 0
-        for src in phase0_sources:
-            sid = src["id"]
-            try:
-                items = _phase0_fetch_rss(src)
-            except Exception as exc:
-                logger.error(f"[Phase 0] {sid} 抓取异常: {exc}")
-                continue
-
-            for item in items:
-                title = item.get("title", "")
-                title_key = title.strip().lower()
-                # 去重：与已有 raw_items 做标题+URL 双重去重
-                if item.get("link", "") in self._seen_urls:
-                    continue
-                if title_key in self._seen_titles:
-                    continue
-
-                # 映射到 raw_items 字典格式（兼容 Phase 3-8 下游管线）
-                raw_entry = {
-                    "title":       title,
-                    "date":        item.get("published_date", ""),
-                    "source":      sid,
-                    "source_href": sid,
-                    "url":         item.get("real_url", item.get("link", "")),
-                    "description": item.get("clean_text", "")[:500],
-                    "body":        item.get("clean_text", "")[:300],       # 预填充正文，跳过 Phase 3 正文提取
-                    "source_org":  sid,
-                    "source_tags": [],
-                    "source_tier": 2,
-                    "parsed_date": parse_rss_date(item.get("published_date", "")),
-                    "_is_google_news": True,
-                    "_phase0_source_id": sid,
-                }
-
-                self._seen_urls.add(item.get("link", ""))
-                self._seen_titles.add(title_key)
-                self._raw_items.append(raw_entry)
-                total_injected += 1
-
-            logger.info(f"  [Phase 0] {sid}: 注入 {len(items)} 条")
-
-        logger.info(f"[Phase 0] 供料完成。总注入 {total_injected} 条纯文本条目")
 
     # ── Phase 1a: HTML Calendar 爬虫（轨道 A — Tier 1 组织官网 Events 页）──
 
@@ -853,22 +789,12 @@ class EventRadarAgent:
                 return None
 
         def _try_pydantic_parse(obj: dict) -> EventItem | None:
-            """Layer 1: 严格 Pydantic 校验。成功返回 EventItem，失败返回 None。"""
+            """Layer 1: Pydantic 校验（含字段级宽容归一化，在 schema 的 @field_validator 中完成）。
+            成功返回 EventItem，失败返回 None。"""
             try:
                 return EventItem(**obj)
             except Exception:
-                # 尝试字段级宽容修正后再解析一次
-                try:
-                    obj_coerced = dict(obj)
-                    if "format" in obj_coerced:
-                        obj_coerced["format"] = EventItem._coerce_format(obj_coerced["format"])
-                    if "fee_tier" in obj_coerced:
-                        obj_coerced["fee_tier"] = EventItem._coerce_fee_tier(obj_coerced["fee_tier"])
-                    if "exec_value_score" in obj_coerced:
-                        obj_coerced["exec_value_score"] = EventItem._clamp_score(obj_coerced["exec_value_score"])
-                    return EventItem(**obj_coerced)
-                except Exception:
-                    return None
+                return None
 
         def _degraded_event(obj: dict, reason: str) -> EventItem | None:
             """Layer 2: 确定性降级链路 — 用 MD5 生成 event_id，标记 is_degraded。"""
@@ -918,10 +844,7 @@ class EventRadarAgent:
                 raw = f"{id_key.strip().lower()}|{date_str.strip()}"
                 obj["event_id"] = md5(raw.encode()).hexdigest()[:12]
 
-                # 字段宽容修正
-                obj["format"] = EventItem._coerce_format(obj["format"])
-                obj["fee_tier"] = EventItem._coerce_fee_tier(obj["fee_tier"])
-                obj["exec_value_score"] = EventItem._clamp_score(obj["exec_value_score"])
+                # 字段宽容归一化由 EventItem 的 @field_validator 自动处理，无需手动调用。
 
                 # 标记退化
                 obj["is_degraded"] = True
@@ -976,8 +899,7 @@ class EventRadarAgent:
             )
 
             # 确保源代码风格字段完整性
-            score = obj.get("exec_value_score", 3)
-            obj["exec_value_score"] = max(1, min(5, int(score)))
+            # exec_value_score 的越界钳制由 EventItem 的 @field_validator 自动处理
             obj["source_url"] = obj.get("source_url") or obj.get("registration_url") or ""
             obj["source_org"] = obj.get("source_org") or "Unknown"
             obj["organizer"] = obj.get("organizer") or obj.get("source_org") or "Unknown"
@@ -989,16 +911,13 @@ class EventRadarAgent:
                     obj["display_name_zh"] = translated
                     obj["name"] = f"{std_en} — {translated}"
 
-            # Layer 1: Pydantic 严格校验
+            # Layer 1: Pydantic 校验（字段级宽容归一化在 schema 内自动完成）
             event = _try_pydantic_parse(obj)
             if event is not None:
-                # 校验通过 — 正常的 EventItem
+                # 校验通过 — 正常的 EventItem；强制标记非降级态
                 obj_coerced = dict(obj)
                 obj_coerced["is_degraded"] = False
                 obj_coerced["degrade_reason"] = ""
-                obj_coerced["format"] = EventItem._coerce_format(obj_coerced.get("format", "unknown"))
-                obj_coerced["fee_tier"] = EventItem._coerce_fee_tier(obj_coerced.get("fee_tier", "unknown"))
-                obj_coerced["exec_value_score"] = EventItem._clamp_score(obj_coerced.get("exec_value_score", 3))
                 event = EventItem(**obj_coerced)
                 if event.exec_value_score > 2:
                     self._events.append(event)
@@ -1298,11 +1217,12 @@ class EventRadarAgent:
         - 去除 city 因子：city 提取不稳定（有的新闻有城市，有的没有），
           会导致同构事件产生不同 event_id
         - start_date 截断到月份（YYYY-MM）：容忍同月内日期的微小漂移
-          （实际举办日与新闻发布日可能有几天差异），防止同一事件因日期漂移而重复创建
+          （实际举办日与新闻发布日可能有几天差异），防止同一事件因日期漂移而重复创建；
+          同年不同月举办的活动使用不同月份键，不会碰撞
         """
         tokens = sorted(EventRadarAgent._tokenize_name(standard_name_en))
         name_key = " ".join(tokens)
-        month_key = (start_date or "").strip()[:4]  # YYYY
+        month_key = (start_date or "").strip()[:7]  # YYYY-MM
         raw = f"{name_key}|{month_key}"
         return hashlib.md5(raw.encode()).hexdigest()[:12]
 
@@ -1566,578 +1486,31 @@ class EventRadarAgent:
 
     # ── Phase 6: Notion Upsert ────────────────────────────
 
-    _NOTION_API = "https://api.notion.com/v1"
-    _NOTION_VERSION = "2022-06-28"
-
-    # 需要在数据库中创建的属性（title 属性"Name"由 Notion 自动创建）
-    _NOTION_REQUIRED_PROPS: dict = {
-        "Event ID":            {"rich_text": {}},
-        "Original Name":       {"rich_text": {}},
-        "Organizer":           {"rich_text": {}},
-        "Start Date":          {"date": {}},
-        "End Date":            {"date": {}},
-        "Format":              {"select": {"options": [
-            {"name": "in-person", "color": "green"},
-            {"name": "online", "color": "blue"},
-            {"name": "hybrid", "color": "orange"},
-            {"name": "unknown", "color": "gray"},
-        ]}},
-        "City":                {"rich_text": {}},
-        "Country":             {"rich_text": {}},
-        "Registration URL":    {"url": {}},
-        "Fee Tier":            {"select": {"options": [
-            {"name": "free", "color": "green"},
-            {"name": "paid", "color": "yellow"},
-            {"name": "invite-only", "color": "red"},
-            {"name": "unknown", "color": "gray"},
-        ]}},
-        "Topics":              {"multi_select": {}},
-        "Audience":            {"multi_select": {}},
-        "Exec Value Score":    {"number": {"format": "number"}},
-        "Exec Value Rationale":{"rich_text": {}},
-        "Agenda Highlights":   {"rich_text": {}},
-        "Source URL":          {"url": {}},
-        "Source Org":          {"rich_text": {}},
-        "Discovered At":       {"date": {}},
-    }
-
-    # Notion API 速率限制：3 req/s，主动流量整形 + tenacity 指数退避
-    _NOTION_BASE_INTERVAL = 0.6        # 基础请求间隔（主动流量整形）
-    _NOTION_MAX_RETRIES = 5            # 最大重试次数
-    _NOTION_TRAFFIC_SHAPE_DELAY = 0.35 # 每次 API 调用后主动延迟（平滑请求曲线）
-
-    class NotionAPIError(Exception):
-        """Notion API 返回非 2xx 状态码时抛出。"""
-        def __init__(self, status_code: int, message: str, response_text: str = ""):
-            self.status_code = status_code
-            self.message = message
-            self.response_text = response_text
-            super().__init__(f"HTTP {status_code}: {message}")
-
-    @staticmethod
-    def _retry_on_notion_rate_limit(func):
-        """tenacity 装饰器：指数退避 + 随机抖动，专门处理 Notion 429/5xx。
-        
-        T_wait = min(10, base × 2^attempt + random_jitter)
-        带 before_sleep 日志，停止条件：5 次尝试或非可重试错误。
-        """
-        def _is_retryable(exception: BaseException) -> bool:
-            if isinstance(exception, EventRadarAgent.NotionAPIError):
-                return exception.status_code in (429, 500, 502, 503, 504)
-            if isinstance(exception, requests.RequestException):
-                return True
-            return False
-
-        return retry(
-            wait=wait_random_exponential(multiplier=0.6, max=10),
-            stop=stop_after_attempt(EventRadarAgent._NOTION_MAX_RETRIES),
-            retry=retry_if_exception_type((EventRadarAgent.NotionAPIError, requests.RequestException)),
-            before_sleep=before_sleep_log(logger, logging.WARNING),
-            reraise=True,
-        )(func)
-
-    def _notion_headers(self, token: str) -> dict:
-        return {
-            "Authorization": f"Bearer {token}",
-            "Notion-Version": self._NOTION_VERSION,
-            "Content-Type": "application/json",
-        }
-
-    def _ensure_notion_db_properties(self, db_id: str, headers: dict) -> Optional[str]:
-        """检查并补全数据库属性；返回 title 属性名（用于后续 Upsert），失败返回 None。"""
-        r = requests.get(f"{self._NOTION_API}/databases/{db_id}", headers=headers, timeout=15)
-        if r.status_code != 200:
-            logger.warning(
-                f"[Phase 6] 读取数据库失败 HTTP {r.status_code}: {r.text[:300]}"
-            )
-            return None
-
-        body = r.json()
-        properties = body.get("properties", {})
-
-        # 自动检测 title 列名（Notion 数据库的 title 属性名并非固定为 "Name"）
-        title_prop_name = "Name"  # 默认值
-        for prop_name, prop_info in properties.items():
-            if prop_info.get("type") == "title":
-                title_prop_name = prop_name
-                logger.info(f"[Phase 6] 检测到 title 属性: '{title_prop_name}'")
-                break
-
-        existing = set(properties.keys())
-        to_add = {k: v for k, v in self._NOTION_REQUIRED_PROPS.items() if k not in existing}
-        if not to_add:
-            return title_prop_name
-
-        logger.info(f"[Phase 6] 补全缺失字段: {list(to_add.keys())}")
-        pr = requests.patch(
-            f"{self._NOTION_API}/databases/{db_id}",
-            headers=headers,
-            json={"properties": to_add},
-            timeout=15,
-        )
-        if pr.status_code not in (200, 201):
-            logger.warning(
-                f"[Phase 6] 字段创建失败 HTTP {pr.status_code}: {pr.text[:300]}"
-            )
-            return None
-        return title_prop_name
-
-    @staticmethod
-    def _build_notion_page_props(ev: "EventItem", title_prop_name: str = "Name") -> dict:
-        """将 EventItem 映射到 Notion page properties dict。
-        
-        Args:
-            ev: 事件对象
-            title_prop_name: 数据库中 title 属性的实际名称（从数据库元数据检测获取）
-        """
-
-        def txt(val: str) -> dict:
-            return {"rich_text": [{"text": {"content": str(val or "")[:2000]}}]}
-
-        def dt(val: str) -> dict:
-            if not val or val == "unknown":
-                return {"date": None}
-            return {"date": {"start": val[:10]}}
-
-        def safe_url(val: Optional[str]) -> dict:
-            if not val or "news.google.com" in val:
-                return {"url": None}
-            return {"url": val[:2000]}
-
-        # 优先使用 display_name_zh 作为 Notion 标题，确保中文显示
-        notion_title = ev.display_name_zh or ev.name
-
-        props: dict = {
-            title_prop_name:        {"title": [{"text": {"content": notion_title[:200]}}]},
-            "Event ID":             txt(ev.event_id),
-            "Original Name":        txt(ev.original_name),
-            "Organizer":            txt(ev.organizer),
-            "Format":               {"select": {"name": ev.format}},
-            "City":                 txt(ev.city or ""),
-            "Country":              txt(ev.country or ""),
-            "Fee Tier":             {"select": {"name": ev.fee_tier}},
-            "Topics":               {"multi_select": [{"name": t[:100]} for t in (ev.topics or [])[:10]]},
-            "Audience":             {"multi_select": [{"name": a[:100]} for a in (ev.audience or [])[:10]]},
-            "Exec Value Score":     {"number": ev.exec_value_score},
-            "Exec Value Rationale": txt(ev.exec_value_rationale),
-            "Agenda Highlights":    txt(ev.agenda_highlights),
-            "Source Org":           txt(ev.source_org),
-            "Registration URL":     safe_url(ev.registration_url),
-            "Source URL":           safe_url(ev.source_url),
-        }
-
-        # 日期字段：仅当值为有效 ISO 8601 日期时才写入 Notion Date 属性，
-        # "unknown" / 空字符串 等占位符一律拦截，避免 HTTP 400 Bad Request
-        if ev.start_date and ev.start_date not in ("unknown", ""):
-            props["Start Date"] = dt(ev.start_date)
-        if ev.end_date and ev.end_date not in ("unknown", ""):
-            props["End Date"] = dt(ev.end_date)
-        if ev.discovered_at and ev.discovered_at not in ("unknown", ""):
-            props["Discovered At"] = dt(ev.discovered_at)
-        return props
-
     def _upsert_to_notion(self) -> None:
+        """委托 sinks/notion_sync.py 执行 Notion Upsert。"""
         notion_token = os.environ.get("NOTION_TOKEN", "")
         notion_db_id = os.environ.get("NOTION_DATABASE_ID", "")
 
         if not notion_token or not notion_db_id:
             logger.info("[Phase 6] Notion 密钥未就绪，跳过 Upsert。")
-            logger.info(
-                f"  NOTION_TOKEN={'已设置' if notion_token else '未设置'}, "
-                f"NOTION_DATABASE_ID={'已设置' if notion_db_id else '未设置'}"
-            )
             return
 
-        headers = self._notion_headers(notion_token)
-        logger.info(
-            f"[Phase 6] Notion Upsert: {len(self._events)} 个事件 "
-            f"(并发×3, 间隔 {self._NOTION_BASE_INTERVAL}s + 主动整形 {self._NOTION_TRAFFIC_SHAPE_DELAY}s)"
-        )
-
-        # 步骤 1: 确保数据库字段完整，并获取实际 title 属性名
-        title_prop_name = self._ensure_notion_db_properties(notion_db_id, headers)
-        if title_prop_name is None:
-            logger.error("[Phase 6] 数据库初始化失败，跳过 Upsert。")
-            return
-
-        # ── 线程安全的主动流量整形锁 ──────────────────────
-        import threading
-        rate_lock = threading.Lock()
-        last_request_time = [0.0]
-
-        def _notion_api_request(method: str, url: str, **kwargs) -> requests.Response:
-            """底层 Notion API 请求 — 由 tenacity 装饰器管理重试。
-
-            404 等不可重试错误直接抛出 NotionAPIError（不被 retry 捕获）。
-            429/5xx/网络异常由 tenacity wait_random_exponential 管理退避。
-            """
-            # 主动流量整形：确保每次请求间隔 ≥ _NOTION_BASE_INTERVAL（含抖动）
-            with rate_lock:
-                jitter = self._NOTION_BASE_INTERVAL * 0.15 * (random.random() * 2 - 1)
-                interval = max(0.1, self._NOTION_BASE_INTERVAL + jitter)
-                elapsed = time.monotonic() - last_request_time[0]
-                if elapsed < interval:
-                    time.sleep(interval - elapsed)
-                last_request_time[0] = time.monotonic()
-
-            resp = requests.request(method, url, headers=headers, timeout=15, **kwargs)
-
-            # 可重试错误：抛出 NotionAPIError → tenacity 捕获并退避
-            if resp.status_code == 429:
-                raise self.NotionAPIError(
-                    429,
-                    f"Rate limited",
-                    resp.text[:300],
-                )
-            if resp.status_code >= 500:
-                raise self.NotionAPIError(
-                    resp.status_code,
-                    f"Server error",
-                    resp.text[:300],
-                )
-
-            # 其他非 2xx（如 400/401/403/404）不可重试，直接返回
-            return resp
-
-        # 应用 tenacity 装饰器：指数退避 + 随机抖动
-        _notion_api_request = self._retry_on_notion_rate_limit(_notion_api_request)
-
-        # ── 内存级防刷缓存：免疫 Notion 索引延迟导致的重复创建 ──
-        # 结构: {event_id: notion_page_id}
-        # 在一次运行中，同一 event_id 首次查到/创建后即缓存，
-        # 后续同 ID 事件直接走 Update，不再查询 Notion Query API。
-        local_page_cache: dict[str, str] = {}
-        import threading
-        cache_lock = threading.Lock()
-
-        def _upsert_one(ev: EventItem) -> str:
-            """返回 "created" / "updated" / "failed"
-
-            每次操作包含 1-2 个 API 调用（查询 + 创建/更新）。
-            每次 API 调用后主动 time.sleep(_NOTION_TRAFFIC_SHAPE_DELAY) 平滑曲线。
-
-            优先检查本地缓存 local_page_cache，命中则直接走 Update，
-            避免 Notion Query API 最终一致性延迟导致同 ID 重复创建。
-            """
-            try:
-                page_props = self._build_notion_page_props(ev, title_prop_name)
-
-                # ── 步骤 0: 检查本地缓存 ──
-                with cache_lock:
-                    cached_page_id = local_page_cache.get(ev.event_id)
-                if cached_page_id:
-                    # 缓存命中：本次运行已创建/查询过，直接 Update 追加 Highlights
-                    # 先 GET 已有页面获取旧 Agenda Highlights 用于追加
-                    try:
-                        get_resp = _notion_api_request(
-                            "GET",
-                            f"{self._NOTION_API}/pages/{cached_page_id}",
-                        )
-                        time.sleep(self._NOTION_TRAFFIC_SHAPE_DELAY)
-                        if get_resp.status_code == 200:
-                            existing_page = get_resp.json()
-                            existing_agenda_prop = existing_page.get("properties", {}).get("Agenda Highlights", {})
-                            existing_texts = []
-                            for rt in existing_agenda_prop.get("rich_text", []):
-                                txt = rt.get("plain_text", "")
-                                if txt.strip():
-                                    existing_texts.append(txt)
-                            old_agenda = "; ".join(existing_texts)
-                            new_agenda = ev.agenda_highlights.strip() if ev.agenda_highlights else ""
-                            if new_agenda and old_agenda and new_agenda not in old_agenda:
-                                merged_agenda = f"{old_agenda}\n\n[更新 {self._run_ts[:10]}] {new_agenda}"[:2000]
-                                page_props["Agenda Highlights"] = {
-                                    "rich_text": [{"text": {"content": merged_agenda}}]
-                                }
-                    except Exception:
-                        pass  # GET 失败时直接用新值覆盖
-
-                    ur = _notion_api_request(
-                        "PATCH",
-                        f"{self._NOTION_API}/pages/{cached_page_id}",
-                        json={"properties": page_props},
-                    )
-                    time.sleep(self._NOTION_TRAFFIC_SHAPE_DELAY)
-                    if ur.status_code not in (200, 201):
-                        logger.warning(
-                            f"  Notion 更新失败(缓存) HTTP {ur.status_code}: "
-                            f"{ur.text[:200]} | Event: {ev.name[:40]}"
-                        )
-                        return "failed"
-                    logger.debug(f"  更新(缓存): {ev.name}")
-                    return "updated"
-
-                # ── 步骤 1: 缓存未命中 → 查询 Notion 数据库 ──
-                qr = _notion_api_request(
-                    "POST",
-                    f"{self._NOTION_API}/databases/{notion_db_id}/query",
-                    json={"filter": {"property": "Event ID", "rich_text": {"equals": ev.event_id}}},
-                )
-                time.sleep(self._NOTION_TRAFFIC_SHAPE_DELAY)  # 主动流量整形
-
-                if qr.status_code != 200:
-                    logger.warning(
-                        f"  Notion 查询失败 HTTP {qr.status_code}: "
-                        f"{qr.text[:200]} | Event: {ev.name[:40]}"
-                    )
-                    return "failed"
-
-                results = qr.json().get("results", [])
-
-                if results:
-                    page_id = results[0]["id"]
-                    # 缓存回填：查询到的 page_id 存入本地缓存
-                    with cache_lock:
-                        local_page_cache[ev.event_id] = page_id
-
-                    # 读取已有页面的 Agenda Highlights，追加而非覆盖
-                    existing_page = results[0]
-                    existing_agenda_prop = existing_page.get("properties", {}).get("Agenda Highlights", {})
-                    existing_texts = []
-                    for rt in existing_agenda_prop.get("rich_text", []):
-                        txt = rt.get("plain_text", "")
-                        if txt.strip():
-                            existing_texts.append(txt)
-                    old_agenda = "; ".join(existing_texts)
-
-                    new_agenda = ev.agenda_highlights.strip() if ev.agenda_highlights else ""
-                    if new_agenda and old_agenda and new_agenda not in old_agenda:
-                        merged_agenda = f"{old_agenda}\n\n[更新 {self._run_ts[:10]}] {new_agenda}"[:2000]
-                        page_props["Agenda Highlights"] = {
-                            "rich_text": [{"text": {"content": merged_agenda}}]
-                        }
-                    elif new_agenda and not old_agenda:
-                        # 已有页无高光，首次填充
-                        pass  # page_props 已含新值
-
-                    ur = _notion_api_request(
-                        "PATCH",
-                        f"{self._NOTION_API}/pages/{page_id}",
-                        json={"properties": page_props},
-                    )
-                    time.sleep(self._NOTION_TRAFFIC_SHAPE_DELAY)  # 主动流量整形
-
-                    if ur.status_code not in (200, 201):
-                        logger.warning(
-                            f"  Notion 更新失败 HTTP {ur.status_code}: "
-                            f"{ur.text[:200]} | Event: {ev.name[:40]}"
-                        )
-                        return "failed"
-                    logger.debug(f"  更新: {ev.name}")
-                    return "updated"
-                else:
-                    cr = _notion_api_request(
-                        "POST",
-                        f"{self._NOTION_API}/pages",
-                        json={"parent": {"database_id": notion_db_id}, "properties": page_props},
-                    )
-                    time.sleep(self._NOTION_TRAFFIC_SHAPE_DELAY)  # 主动流量整形
-
-                    if cr.status_code not in (200, 201):
-                        logger.warning(
-                            f"  Notion 创建失败 HTTP {cr.status_code}: "
-                            f"{cr.text[:200]} | Event: {ev.name[:40]}"
-                        )
-                        return "failed"
-                    # 缓存回填：新创建的 page_id 存入本地缓存
-                    new_page_id = cr.json().get("id", "")
-                    if new_page_id:
-                        with cache_lock:
-                            local_page_cache[ev.event_id] = new_page_id
-                    logger.debug(f"  新建: {ev.name}")
-                    return "created"
-            except self.NotionAPIError as exc:
-                # tenacity 重试耗尽后抛出 → 标记失败
-                logger.warning(
-                    f"  Upsert 重试耗尽 [HTTP {exc.status_code}]: "
-                    f"{exc.message} | Event: {ev.name[:40]}"
-                )
-                return "failed"
-            except Exception as exc:
-                logger.warning(f"  Upsert 异常 [{ev.name[:40]}]: {exc}")
-                return "failed"
-
-        created = updated = failed = 0
-        with ThreadPoolExecutor(max_workers=3) as pool:
-            futures = {pool.submit(_upsert_one, ev): ev for ev in self._events}
-            for fut in as_completed(futures):
-                try:
-                    result = fut.result()
-                    if result == "created":
-                        created += 1
-                    elif result == "updated":
-                        updated += 1
-                    else:
-                        failed += 1
-                except Exception as exc:
-                    failed += 1
-                    logger.debug(f"  Upsert 线程异常: {exc}")
-
-        logger.info(f"[Phase 6] 完成: 新建={created} 更新={updated} 失败={failed}")
-        if failed > 0:
-            logger.warning(
-                f"[Phase 6] {failed}/{len(self._events)} 个事件同步失败，"
-                f"请检查 Notion API 密钥和数据库权限"
-            )
+        sink = NotionSink(token=notion_token, database_id=notion_db_id)
+        sink.upsert(self._events, self._run_ts)
 
     # ── Phase 7: .ics 日历生成 ───────────────────────────
 
     def _generate_ics(self) -> Optional[str]:
-        """生成 ICS 日历文件，返回文件路径。失败或空事件时返回 None。"""
-        if not self._events:
-            return None
-
-        cal = Calendar()
-        cal.add("prodid", "-//ESG Event Radar//esg_event_radar//EN")
-        cal.add("version", "2.0")
-        cal.add("calscale", "GREGORIAN")
-        cal.add("method", "PUBLISH")
-        cal.add("x-wr-calname", "ESG 全球会议日历")
-        cal.add("x-wr-caldesc", "自动扫描全球 ESG 与可持续发展会议，高管参会决策参考")
-
-        added = 0
-        for ev in self._events:
-            try:
-                ical = ICalEvent()
-                ical.add("summary", ev.name)
-                ical.add("uid", f"{ev.event_id}@esg-event-radar")
-
-                # 解析日期
-                dt_start = self._parse_ics_date(ev.start_date)
-                dt_end = self._parse_ics_date(ev.end_date) if ev.end_date != ev.start_date else dt_start
-
-                if dt_start is None:
-                    # 日期未知的活动仍写入，但不设 DTSTART
-                    ical.add("description", self._build_ics_description(ev))
-                    cal.add_component(ical)
-                    added += 1
-                    continue
-
-                ical.add("dtstart", dt_start)
-                ical.add("dtend", dt_end)
-
-                # 地点
-                location_parts = [p for p in [ev.city, ev.country, ev.venue] if p]
-                if location_parts:
-                    ical.add("location", ", ".join(location_parts))
-
-                # 描述
-                ical.add("description", self._build_ics_description(ev))
-
-                # 报名链接
-                if ev.registration_url and "news.google.com" not in ev.registration_url:
-                    ical.add("url", ev.registration_url)
-
-                # 分类
-                if ev.topics:
-                    ical.add("categories", [t[:50] for t in ev.topics[:5]])
-
-                cal.add_component(ical)
-                added += 1
-            except Exception as exc:
-                logger.debug(f"[Phase 7] 事件 {ev.name[:40]} 写入失败: {exc}")
-
-        try:
-            OUTPUT_ICS_PATH.write_bytes(cal.to_ical())
-            logger.info(f"[Phase 7] .ics 生成完成: {added}/{len(self._events)} 个事件 → {OUTPUT_ICS_PATH}")
-            return str(OUTPUT_ICS_PATH)
-        except Exception as exc:
-            logger.error(f"[Phase 7] .ics 写入失败: {exc}")
-            return None
-
-    @staticmethod
-    def _parse_ics_date(date_str: str) -> Optional[date]:
-        """将 YYYY-MM-DD 字符串转为 date 对象。"""
-        if not date_str or date_str in ("unknown", ""):
-            return None
-        try:
-            return date.fromisoformat(date_str)
-        except (ValueError, TypeError):
-            return None
-
-    @staticmethod
-    def _build_ics_description(ev: "EventItem") -> str:
-        parts = [
-            f"主办方: {ev.organizer}",
-            f"形式: {ev.format}",
-        ]
-        if ev.fee_tier:
-            parts.append(f"费用: {ev.fee_tier}")
-        if ev.agenda_highlights:
-            parts.append(f"议程: {ev.agenda_highlights}")
-        parts.append(f"高管价值: {'★' * ev.exec_value_score}{'☆' * (5 - ev.exec_value_score)}")
-        parts.append(f"评分依据: {ev.exec_value_rationale}")
-        if ev.registration_url:
-            parts.append(f"报名: {ev.registration_url}")
-        parts.append(f"来源: {ev.source_url}")
-        return "\n".join(parts)
+        """委托 sinks/ics_writer.py 生成 .ics 文件。"""
+        return _ics_write(self._events, OUTPUT_ICS_PATH)
 
     # ── Phase 8: 钉钉精简卡片推送 ────────────────────────
 
     def push_to_dingtalk(self) -> None:
+        """委托 sinks/dingtalk_push.py 执行钉钉推送。"""
         webhook = os.environ.get("DINGTALK_WEBHOOK_RADAR", "")
-        if not webhook:
-            logger.info("[Phase 8] DINGTALK_WEBHOOK_RADAR 未配置，跳过推送。")
-            return
-        if not self._events:
-            logger.info("[Phase 8] 无事件，静默阻断推送。")
-            return
-
-        # 按 exec_value_score 降序，最多推送 Top 10
-        top_events = sorted(self._events, key=lambda e: e.exec_value_score, reverse=True)[:10]
-
-        # 此时才做 Google News URL 解密（仅针对入选事件，控制请求量）
-        for ev in top_events:
-            if ev.registration_url and "news.google.com" in ev.registration_url:
-                ev.registration_url = resolve_news_url(ev.registration_url)
-            if "news.google.com" in ev.source_url:
-                ev.source_url = resolve_news_url(ev.source_url)
-
-        lines = [f"## 🌍 ESG 全球会议预警周报 ({self._run_ts[:10]})\n"]
-        lines.append(f"> 本周扫描 {len(self._events)} 场活动，以下为高管优先关注清单：\n")
-
-        for i, ev in enumerate(top_events, 1):
-            date_range = ev.start_date if ev.start_date == ev.end_date else f"{ev.start_date} ~ {ev.end_date}"
-            location = ev.city or ev.format
-            reg_link = f"[报名]({ev.registration_url})" if ev.registration_url else "链接待确认"
-            score_stars = "★" * ev.exec_value_score + "☆" * (5 - ev.exec_value_score)
-
-            lines.append(
-                f"**{i}. {ev.name}**  \n"
-                f"📅 {date_range} | 📍 {location} | 🏛 {ev.organizer}  \n"
-                f"⭐ 高管价值: {score_stars} | {ev.exec_value_rationale}  \n"
-                f"🔗 {reg_link}\n"
-            )
-
         notion_db_id = os.environ.get("NOTION_DATABASE_ID", "")
-        notion_link = (
-            f"https://www.notion.so/{notion_db_id.replace('-', '')}"
-            if notion_db_id else "#"
-        )
-        lines.append(f"\n> 📓 完整活动库: [Notion 数据库]({notion_link})")
-
-        content = "\n".join(lines)
-        # 钉钉 markdown 消息限 20000 字节
-        if len(content.encode("utf-8")) > 19000:
-            content = content[:6000] + "\n\n> ⚠️ 内容过长，已截断。完整列表见 Notion。"
-
-        payload = {
-            "msgtype": "markdown",
-            "markdown": {
-                "title": f"ESG 会议预警 {self._run_ts[:10]}",
-                "text": content,
-            },
-        }
-        try:
-            resp = requests.post(
-                webhook,
-                headers={"Content-Type": "application/json"},
-                data=json.dumps(payload),
-                timeout=10,
-            )
-            logger.info(f"[Phase 8] 钉钉推送完成: {resp.text[:100]}")
-        except Exception as exc:
-            logger.error(f"[Phase 8] 钉钉推送失败: {exc}")
+        _dingtalk_push(self._events, webhook, notion_db_id, self._run_ts)
 
     # ── 主入口 ────────────────────────────────────────────
 
@@ -2145,10 +1518,7 @@ class EventRadarAgent:
         t0 = time.monotonic()
         logger.info("══ ESG Event Radar v1.3 | 周频扫描启动 ══")
 
-        # Phase 0 (新): 上游供料摄入层 — sourcing_engine 抓取 + 脱壳
-        self._run_phase0_ingestion()
-
-        # Phase 0 (原): 加载源清单
+        # Phase 0: 加载源清单
         self._load_sources()
 
         # Phase 1a: HTML Calendar 爬虫（先跑，为 RSS 补充 Tier 1 数据）
