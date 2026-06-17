@@ -1269,12 +1269,23 @@ class EventRadarAgent:
     def _deduplicate_events(self) -> None:
         """合并来自不同语言/来源的同一活动。
 
-        策略（v2.0 — 时空锚点碰撞消解）：
-        策略A（绝对主策略）：standard_name_en 完全一致（忽略大小写）
-            + start_date 相差 ≤3 天 → 合并。
-        策略B（三维时空退避）：city 字段均非空且一致（忽略大小写）
-            + start_date 相差 ≤1 天
+        策略（v3.0 — 宽窗口 + 名称高似去重）：
+
+        策略A（名称精确匹配·宽日期）：
+            standard_name_en 完全一致（忽略大小写）
+            + 同年同月 或 日期差 ≤30天 或 任一方日期未知 → 合并。
+            会议公告常被不同媒体在不同时间报道，日期漂移可长达数周。
+
+        策略B（空间锚点·中窗口）：
+            city 字段均非空且一致（忽略大小写）
+            + start_date 相差 ≤7 天
             + 名称 Jaccard 相似度 ≥0.35 → 合并。
+
+        策略C（名称高似·无日期约束）：
+            standard_name_en 经 _tokenize_name 后 Jaccard ≥0.60
+            + 同年同月（或双方日期均 unknown）→ 合并。
+            捕捉轻微命名差异但属于同一活动的情况。
+
         每个聚类保留信息最完整的一条，合并互补标签。
         """
         if len(self._events) <= 1:
@@ -1307,35 +1318,40 @@ class EventRadarAgent:
             if rx != ry:
                 parent[rx] = ry
 
-        # ── 策略A: standard_name_en 精确匹配（忽略大小写）+ 日期 ±3 天 ──
+        def _same_month(d1: date_type, d2: date_type) -> bool:
+            return d1.year == d2.year and d1.month == d2.month
+
+        # ── 策略A: standard_name_en 精确匹配（忽略大小写）+ 宽日期窗口 ──
         for i in range(n):
             for j in range(i + 1, n):
                 if find(i) == find(j):
                     continue
                 ev_a, ev_b = self._events[i], self._events[j]
 
-                # 日期窗口 ±3 天
-                date_a = parsed_dates.get(i)
-                date_b = parsed_dates.get(j)
-                if date_a is not None and date_b is not None:
-                    if abs((date_a - date_b).days) > 3:
-                        continue
-                elif date_a is None and date_b is None:
-                    pass  # 双方日期未知，通过
-                else:
-                    continue  # 一方未知一方已知，不通
-
                 # standard_name_en 忽略大小写完全一致
                 key_a = (ev_a.standard_name_en or "").strip().lower()
                 key_b = (ev_b.standard_name_en or "").strip().lower()
-                if key_a and key_b and key_a == key_b:
-                    union(i, j)
-                    logger.debug(
-                        f"  [策略A 精确去重] std_en='{key_a}' | "
-                        f"{ev_a.name[:50]} <-> {ev_b.name[:50]}"
-                    )
+                if not (key_a and key_b and key_a == key_b):
+                    continue
 
-        # ── 策略B: 三维时空退避 — city + 日期 ±1 天 + Jaccard ≥0.35 ──
+                # 日期容差：同年同月 / 日期差 ≤30天 / 任一方 unknown → 通过
+                date_a = parsed_dates.get(i)
+                date_b = parsed_dates.get(j)
+                if date_a is not None and date_b is not None:
+                    if not (_same_month(date_a, date_b)
+                            or abs((date_a - date_b).days) <= 30):
+                        continue
+                # date_a is None or date_b is None → 通过（unknown 亦合并）
+
+                union(i, j)
+                day_diff = (abs((date_a - date_b).days)
+                            if date_a and date_b else "?")
+                logger.debug(
+                    f"  [策略A 精确去重] std_en='{key_a}' diff={day_diff}d | "
+                    f"{ev_a.name[:50]} <-> {ev_b.name[:50]}"
+                )
+
+        # ── 策略B: 空间锚点 — city + 日期 ±7 天 + Jaccard ≥0.35 ──
         for i in range(n):
             for j in range(i + 1, n):
                 if find(i) == find(j):
@@ -1348,12 +1364,12 @@ class EventRadarAgent:
                 if not city_a or not city_b or city_a != city_b:
                     continue
 
-                # 时间校验：start_date 相差 ≤1 天
+                # 时间校验：start_date 相差 ≤7 天
                 date_a = parsed_dates.get(i)
                 date_b = parsed_dates.get(j)
                 if date_a is None or date_b is None:
                     continue
-                if abs((date_a - date_b).days) > 1:
+                if abs((date_a - date_b).days) > 7:
                     continue
 
                 # 文本弱校验：standard_name_en 经 _tokenize_name 后 Jaccard ≥0.35
@@ -1363,10 +1379,37 @@ class EventRadarAgent:
                 if jaccard >= 0.35:
                     union(i, j)
                     logger.debug(
-                        f"  [策略B 时空退避] city='{city_a}' jaccard={jaccard:.2f} "
+                        f"  [策略B 空间锚点] city='{city_a}' jaccard={jaccard:.2f} "
                         f"diff={abs((date_a - date_b).days)}d | "
                         f"{ev_a.name[:50]} <-> {ev_b.name[:50]}"
                     )
+
+        # ── 策略C: 名称高似·无日期约束 — Jaccard ≥0.60 + 同年同月 ──
+        for i in range(n):
+            for j in range(i + 1, n):
+                if find(i) == find(j):
+                    continue
+                ev_a, ev_b = self._events[i], self._events[j]
+
+                tokens_a = self._tokenize_name(ev_a.standard_name_en or "")
+                tokens_b = self._tokenize_name(ev_b.standard_name_en or "")
+                jaccard = self._jaccard_similarity(tokens_a, tokens_b)
+                if jaccard < 0.60:
+                    continue
+
+                # 月份校验：同年同月 或 双方均 unknown
+                date_a = parsed_dates.get(i)
+                date_b = parsed_dates.get(j)
+                if date_a is not None and date_b is not None:
+                    if not _same_month(date_a, date_b):
+                        continue
+                # 任一方 unknown → 通过
+
+                union(i, j)
+                logger.debug(
+                    f"  [策略C 名称高似] jaccard={jaccard:.2f} | "
+                    f"{ev_a.name[:50]} <-> {ev_b.name[:50]}"
+                )
 
         # 将 Union-Find 结果转换为聚类
         clusters_map: dict[int, list[int]] = defaultdict(list)
