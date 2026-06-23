@@ -1,6 +1,6 @@
 # ESG Event Radar · 全球 ESG 活动雷达
 
-[![Event Radar Weekly Sync](https://github.com/ahhhhmen/esg_event_radar/actions/workflows/run.yml/badge.svg)](https://github.com/ahhhhmen/esg_event_radar/actions/workflows/run.yml)
+[![Event Radar Weekly Sync](https://github.com/ahhhhmen/esg-event-radar/actions/workflows/run.yml/badge.svg)](https://github.com/ahhhhmen/esg-event-radar/actions/workflows/run.yml)
 
 A multilingual intelligence agent that monitors global ESG, sustainability, and responsible-sourcing events. Scrapes news feeds and organizational calendars, extracts structured event data via LLM, scores each event by executive relevance, and syncs results to [Notion](https://www.notion.so/) with a calendar subscription file.
 
@@ -51,8 +51,8 @@ sources.yaml   ←  feeds & calender URLs
 ### 1. Clone & configure
 
 ```bash
-git clone https://github.com/ahhhhmen/esg_event_radar.git
-cd esg_event_radar
+git clone https://github.com/ahhhhmen/esg-event-radar.git
+cd esg-event-radar
 cp .env.example .env
 ```
 

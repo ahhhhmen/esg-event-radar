@@ -52,7 +52,7 @@ def write_ics(events: list[EventItem], output_path: Path) -> str | None:
         output_path: .ics 文件输出路径
     """
     cal = Calendar()
-    cal.add("prodid", "-//ESG Event Radar//esg_event_radar//EN")
+    cal.add("prodid", "-//ESG Event Radar//esg-event-radar//EN")
     cal.add("version", "2.0")
     cal.add("calscale", "GREGORIAN")
     cal.add("method", "PUBLISH")

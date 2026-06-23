@@ -35,7 +35,7 @@ CONFIG_PATH = os.path.join(
 GOOGLE_NEWS_RSS_BASE = "https://news.google.com/rss/search?q="
 USER_AGENT = (
     "Mozilla/5.0 (compatible; ESG-EventRadar/1.0; "
-    "+https://github.com/ahhhhmen/esg_event_radar)"
+    "+https://github.com/ahhhhmen/esg-event-radar)"
 )
 REQUEST_TIMEOUT = 30  # 秒
 
