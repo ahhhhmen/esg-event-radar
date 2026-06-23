@@ -52,14 +52,10 @@ import yaml
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from icalendar import Calendar, Event as ICalEvent, vText
-from openai import OpenAI
-from tenacity import (
-    retry,
-    stop_after_attempt,
-    wait_random_exponential,
-    retry_if_exception_type,
-    before_sleep_log,
+from radar_infra.llm import (
+    DeepSeekProvider, CachedLLMClient, create_llm_retry_decorator,
 )
+from radar_infra.support import RunMetrics, MetricsStore
 
 load_dotenv()
 
@@ -101,8 +97,6 @@ OUTPUT_ICS_PATH = _OUTPUT_DIR / "esg_events.ics"
 # 钉钉系统报警 Webhook — 仅在 DINGTALK_WEBHOOK_RADAR 环境变量有值时生效
 DINGTALK_WEBHOOK_URL: str = os.environ.get("DINGTALK_WEBHOOK_RADAR", "")
 
-# DeepSeek API（OpenAI-compatible endpoint）
-DEEPSEEK_BASE_URL = "https://api.deepseek.com/v1"
 DEEPSEEK_MODEL = "deepseek-chat"
 
 # LLM batch 窗口：每批最多多少条 RSS 摘要送 LLM 处理
@@ -341,7 +335,10 @@ class EventRadarAgent:
         api_key = os.environ.get("DEEPSEEK_API_KEY", "")
         if not api_key:
             logger.warning("DEEPSEEK_API_KEY 未设置，LLM 提取阶段将跳过。")
-        self._llm = OpenAI(api_key=api_key or "placeholder", base_url=DEEPSEEK_BASE_URL)
+            self._llm = None
+        else:
+            provider = DeepSeekProvider(api_key=api_key)
+            self._llm = CachedLLMClient(provider)
 
         self._scoring_criteria: str = ""
         if SCORING_CRITERIA_PATH.exists():
@@ -748,24 +745,16 @@ class EventRadarAgent:
         ]
         logger.info(f"[Phase 4] LLM 提取: {len(self._raw_items)} 条 → {len(batches)} 批 (并发×3)")
 
-        @retry(
-            wait=wait_random_exponential(multiplier=1, max=30),
-            stop=stop_after_attempt(3),
-            retry=retry_if_exception_type((
-                Exception,  # 捕获所有异常（含 openai.APIConnectionError / RateLimitError / Timeout）
-            )),
-            before_sleep=before_sleep_log(logger, logging.WARNING),
-            reraise=False,  # 重试耗尽后返回 None，不中断批次处理
-        )
+        @create_llm_retry_decorator(max_attempts=3)
         def _call_llm_with_retry(prompt: str, batch_idx: int) -> list[dict] | None:
-            """带 tenacity 指数退避的 LLM 调用。3 次重试后返回 None。"""
-            resp = self._llm.chat.completions.create(
+            """带 tenacity 指数退避的 LLM 调用（基于 radar_infra retry）。"""
+            raw_json = self._llm.chat_completion(
+                task_type="event_extraction",
                 model=DEEPSEEK_MODEL,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.1,
                 max_tokens=8192,
             )
-            raw_json = resp.choices[0].message.content
             if raw_json is None:
                 logger.error(f"  批次 {batch_idx} LLM 返回空内容")
                 return None
@@ -1620,6 +1609,23 @@ class EventRadarAgent:
 
         elapsed = time.monotonic() - t0
         logger.info(f"══ 完成。耗时 {elapsed:.1f}s | 事件数: {len(self._events)} ══")
+
+        # 运行指标收集
+        try:
+            metrics = RunMetrics(
+                timestamp=datetime.now(timezone.utc).isoformat(),
+                mode="weekly",
+                elapsed_seconds=elapsed,
+                total_raw_items=len(self._raw_items),
+                after_dedup=len(self._events),
+                final_report_items=len(self._events),
+            )
+            MetricsStore(str(Path(__file__).parent / "metrics.jsonl")).append(metrics)
+        except Exception:
+            pass
+
+        if self._llm:
+            self._llm.print_stats()
 
         # 调试：打印本次提取的事件清单
         if self._events:

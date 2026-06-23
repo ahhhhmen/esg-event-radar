@@ -1,26 +1,8 @@
-# ESG Event Radar — Python dependencies
-# 
-# 所有依赖均为纯 Python（无 C 扩展），可直接在 python:3.12-slim 上运行
-
-# 环境变量
 python-dotenv>=1.0.0
-
-# HTTP & RSS
 requests>=2.31.0
 feedparser>=6.0.12
 beautifulsoup4>=4.12.0
-
-# YAML 配置
 PyYAML>=6.0
-
-# LLM（OpenAI-compatible 接口，对接 DeepSeek）
-openai>=1.65.4
-
-# 数据模型
 pydantic>=2.10.6
-
-# 日历生成（Phase 7）
 icalendar>=5.0.0
-
-# 重试与退避（指数退避 + 抖动）
-tenacity>=8.0
+radar-infra @ git+https://github.com/ahhhhmen/radar-infra.git
